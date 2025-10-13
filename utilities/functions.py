@@ -42,29 +42,21 @@ def add_lag_features(df):
     df.fillna(0, inplace=True)
     return df
 
-def add_technical_indicators(df):
-    """
-    Add technical indicators like moving averages, exponential moving averages, volatility, and rate of change.
-    """
+def add_technical_indicators(df, ma_window=3, vol_window=5):
     if 'funding_rate' not in df.columns or 'mark_price' not in df.columns:
-        raise KeyError("'funding_rate' or 'mark_price' column is missing in the DataFrame. Check input data.")
+        raise KeyError("'funding_rate' or 'mark_price' missing.")
 
-    # Moving averages
-    df['funding_rate_ma3'] = df['funding_rate'].rolling(window=3).mean()
+    df[f'funding_rate_ma{ma_window}'] = df['funding_rate'].rolling(window=ma_window).mean()
     df['funding_rate_ma5'] = df['funding_rate'].rolling(window=5).mean()
-
-    # Exponential moving averages
-    df['funding_rate_ema3'] = df['funding_rate'].ewm(span=3, adjust=False).mean()
+    
+    df[f'funding_rate_ema{ma_window}'] = df['funding_rate'].ewm(span=ma_window, adjust=False).mean()
     df['funding_rate_ema5'] = df['funding_rate'].ewm(span=5, adjust=False).mean()
 
-    # Volatility (Standard Deviation)
-    df['volatility_5min'] = df['mark_price'].rolling(window=5).std()
+    df['volatility_5h'] = df['mark_price'].rolling(window=vol_window).std()
 
-    # Rate of Change (ROC)
     df['funding_rate_roc1'] = df['funding_rate'].pct_change(periods=1)
     df['funding_rate_roc3'] = df['funding_rate'].pct_change(periods=3)
     df['open_interest_roc'] = df['open_interest'].pct_change(periods=1)
-
     return df
 
 def add_interaction_terms(df):
@@ -127,16 +119,27 @@ def add_model1_direction(df):
     df['model1_direction_pred'] = model1.predict(X_scaled)
     return df
 
-def add_model2_volatility(df, steps=5):
+def add_model2_volatility(df, model2_result):
     """
-    Load Model 2 (GARCH Model) and add forecasted volatility as features.
-    Steps represent how far ahead we forecast, but we use h.1 for simplicity.
+    Instead of forecasting 5 steps at the end, 
+    we retrieve the entire in-sample or one-step-ahead 
+    forecast for each time index used during GARCH training.
     """
-    model2_result = load_garch_model(MODEL2_GARCH_PATH)
-    volatility_forecast = model2_result.forecast(horizon=steps)
-    # Take the first step forecasted variance
-    h1_variance = volatility_forecast.variance.iloc[-1, 0]
-    df['model2_volatility_h1'] = h1_variance
+    # Suppose your GARCH model was fitted on an aligned index
+    # 'in_sample' or 'one_step_forecast' approach:
+    garch_forecast = model2_result.forecast(reindex=False)  # reindex to match the original
+    # garch_forecast.variance is a DataFrame with the same index used in training
+
+    # Ensure the indices align with df. If not, you may need to reindex or merge
+    volatility_series = garch_forecast.variance.iloc[:, 0]
+    # Now each timestamp has a forecasted variance
+
+    # Merge or align with df:
+    # If your df has the same datetime index as garch_forecast,
+    # you can do something like:
+    df['model2_volatility_h1'] = volatility_series.reindex(df.index, fill_value=np.nan)
+
+    # Then fill or drop NaN as needed
     return df
 
 # ===========================================

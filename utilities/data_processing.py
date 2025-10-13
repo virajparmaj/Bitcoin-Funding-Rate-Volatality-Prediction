@@ -1,8 +1,5 @@
-# utilities/data_processing.py
-
 import pandas as pd
 import numpy as np
-import os
 
 from utilities.functions import (
     add_lag_features,
@@ -29,9 +26,6 @@ def load_data(filepath, do_preview=True):
         return None
 
 def preprocess_data(df, handle_timestamps=True):
-    """
-    Preprocess the data by handling timestamps, sorting, and cleaning missing or infinite values.
-    """
     df = df.copy()
 
     if handle_timestamps and 'timestamp' in df.columns:
@@ -43,13 +37,16 @@ def preprocess_data(df, handle_timestamps=True):
     elif handle_timestamps:
         print("'timestamp' column is missing. Skipping timestamp processing.")
 
-    # Handle infinite and missing values
+    # Replace infinities with NaN first, to handle them consistently
     df.replace([np.inf, -np.inf], np.nan, inplace=True)
-    df.fillna(0, inplace=True)
 
-    # Reset index after processing
+    # Forward fill so each missing value is replaced by the last valid one
+    # If forward fill fails, fallback to 0 or leave it.
+    df.ffill(inplace=True)
+    df.bfill(inplace=True)
+
+    # Reset index
     df.reset_index(drop=True, inplace=True)
-
     return df
 
 # ===========================================
@@ -71,10 +68,17 @@ def create_features(df):
     df['month_sin'] = np.sin(2 * np.pi * df['month'] / 12)
     df['month_cos'] = np.cos(2 * np.pi * df['month'] / 12)
 
-    # Create target variable 'direction'
+    # Create a future funding rate column
     df['future_funding_rate'] = df['funding_rate'].shift(-1)
+
+    # Binary direction
     df['direction'] = (df['future_funding_rate'] > df['funding_rate']).astype(int)
-    df.drop(columns=['future_funding_rate'], inplace=True)
+
+    keep_future_rate=False
+        
+    if not keep_future_rate:
+        # By default, you remove 'future_funding_rate' if you're only doing Model 1
+        df.drop(columns=['future_funding_rate'], inplace=True)
 
     return df
 
@@ -82,7 +86,9 @@ def create_features(df):
 # Processing Pipeline
 # ===========================================
 
-def process_pipeline(filepath, rescale=False, scaling_factor=1e6, handle_outliers=False, winsorize=False, winsorize_limits=(0.05, 0.05)):
+def process_pipeline(filepath, rescale=False, scaling_factor=1e6,
+                     handle_outliers=False, winsorize=False, winsorize_limits=(0.05, 0.05),
+                     fill_method='ffill', keep_future_rate=False, drop_all_na=True):
     """
     Complete processing pipeline for loading, preprocessing, and feature creation.
     Includes options for rescaling and outlier removal.
@@ -113,9 +119,10 @@ def process_pipeline(filepath, rescale=False, scaling_factor=1e6, handle_outlier
         ("Rescaling 'funding_rate'", lambda df: df.assign(funding_rate=rescale_series(df['funding_rate'], scaling_factor)) if rescale else df),
         ("Removing outliers from 'funding_rate'", lambda df: df.assign(funding_rate=remove_outliers(df['funding_rate'])) if handle_outliers else df),
         ("Adding lag features", add_lag_features),
-        ("Adding technical indicators", add_technical_indicators),
+        ("Adding technical indicators", lambda df: add_technical_indicators(df, ma_window=3, vol_window=5)),
         ("Adding interaction terms", add_interaction_terms),
-        ("Creating features and target variable", create_features),
+        ("Creating features and target variable",
+        lambda d: create_features(d, keep_future_rate=keep_future_rate)),
     ]
     
     for step_name, step_function in pipeline_steps:
@@ -128,9 +135,12 @@ def process_pipeline(filepath, rescale=False, scaling_factor=1e6, handle_outlier
             print(f"Error during {step_name.lower()}: {e}")
             return None
 
-    # Drop rows with missing values due to lagging/rolling operations
-    df.dropna(inplace=True)
-    print(f"Final dataset shape after dropping NaNs: {df.shape}")
-
-    print("Pipeline completed successfully.")
+    if drop_all_na:
+        # Drop only rows missing crucial columns
+        essential_cols = ['funding_rate', 'direction']  # or whatever you need
+        df.dropna(subset=essential_cols, inplace=True)
+        print(f"Dropped rows with NaN in essential columns. Remaining shape: {df.shape}")
+    else:
+        print("Skipping global dropna(). Some columns may still have NaN.")
+    
     return df
