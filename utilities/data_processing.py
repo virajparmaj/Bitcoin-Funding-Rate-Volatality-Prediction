@@ -1,20 +1,38 @@
-import pandas as pd
+"""
+Data processing utilities for the Bitcoin Funding Rate Volatility Prediction project.
+"""
+
+from pathlib import Path
+from typing import Optional, Tuple
+
 import numpy as np
+import pandas as pd
 
 from utilities.functions import (
+    add_interaction_terms,
     add_lag_features,
     add_technical_indicators,
-    add_interaction_terms,
     remove_outliers,
     rescale_series,
-    winsorize_series
+    winsorize_series,
 )
 
 # ===========================================
 # Data Loading and Preprocessing
 # ===========================================
 
-def load_data(filepath, do_preview=True):
+
+def load_data(filepath: Path, do_preview: bool = True) -> Optional[pd.DataFrame]:
+    """
+    Load data from a CSV file.
+    
+    Args:
+        filepath: Path to the CSV file
+        do_preview: Whether to print a preview of the data
+        
+    Returns:
+        Loaded DataFrame or None if error occurs
+    """
     try:
         df = pd.read_csv(filepath)
         if do_preview:
@@ -25,7 +43,18 @@ def load_data(filepath, do_preview=True):
         print(f"Error loading data: {e}")
         return None
 
-def preprocess_data(df, handle_timestamps=True):
+
+def preprocess_data(df: pd.DataFrame, handle_timestamps: bool = True) -> pd.DataFrame:
+    """
+    Preprocess the DataFrame by handling timestamps, infinities, and missing values.
+    
+    Args:
+        df: Input DataFrame
+        handle_timestamps: Whether to process timestamp column
+        
+    Returns:
+        Preprocessed DataFrame
+    """
     df = df.copy()
 
     if handle_timestamps and 'timestamp' in df.columns:
@@ -53,9 +82,16 @@ def preprocess_data(df, handle_timestamps=True):
 # Feature Engineering
 # ===========================================
 
-def create_features(df):
+def create_features(df: pd.DataFrame, keep_future_rate: bool = False) -> pd.DataFrame:
     """
     Create additional features and the target variable.
+    
+    Args:
+        df: Input DataFrame
+        keep_future_rate: Whether to keep the future_funding_rate column
+        
+    Returns:
+        DataFrame with additional features
     """
     # Time-based and cyclical features
     df['hour'] = df['timestamp'].dt.hour
@@ -74,8 +110,6 @@ def create_features(df):
     # Binary direction
     df['direction'] = (df['future_funding_rate'] > df['funding_rate']).astype(int)
 
-    keep_future_rate=False
-        
     if not keep_future_rate:
         # By default, you remove 'future_funding_rate' if you're only doing Model 1
         df.drop(columns=['future_funding_rate'], inplace=True)
@@ -86,16 +120,40 @@ def create_features(df):
 # Processing Pipeline
 # ===========================================
 
-def process_pipeline(filepath, rescale=False, scaling_factor=1e6,
-                     handle_outliers=False, winsorize=False, winsorize_limits=(0.05, 0.05),
-                     fill_method='ffill', keep_future_rate=False, drop_all_na=True):
+def process_pipeline(
+    filepath: Path,
+    rescale: bool = False,
+    scaling_factor: float = 1e6,
+    handle_outliers: bool = False,
+    winsorize: bool = False,
+    winsorize_limits: Tuple[float, float] = (0.05, 0.05),
+    fill_method: str = 'ffill',
+    keep_future_rate: bool = False,
+    drop_all_na: bool = True,
+) -> Optional[pd.DataFrame]:
     """
     Complete processing pipeline for loading, preprocessing, and feature creation.
     Includes options for rescaling and outlier removal.
+    
+    Args:
+        filepath: Path to the data file
+        rescale: Whether to rescale the funding_rate
+        scaling_factor: Factor for rescaling
+        handle_outliers: Whether to remove outliers
+        winsorize: Whether to winsorize the data
+        winsorize_limits: Limits for winsorization
+        fill_method: Method for filling missing values
+        keep_future_rate: Whether to keep future_funding_rate column
+        drop_all_na: Whether to drop rows with NaN values
+        
+    Returns:
+        Processed DataFrame or None if error occurs
     """
     try:
         print("Loading the dataset...")
         df = load_data(filepath)
+        if df is None:
+            raise ValueError("Failed to load data")
         print(f"Dataset loaded successfully. Shape: {df.shape}")
         print(df.head())  # Preview the initial data
     except Exception as e:

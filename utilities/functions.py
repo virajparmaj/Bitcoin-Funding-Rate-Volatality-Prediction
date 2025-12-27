@@ -1,15 +1,27 @@
-import pandas as pd
+"""
+Feature engineering and utility functions for the Bitcoin Funding Rate Volatility Prediction project.
+"""
+
+from typing import Dict, List, Optional, Tuple, Union
+
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import warnings
-from sklearn.metrics import accuracy_score, roc_auc_score, classification_report, confusion_matrix, f1_score
-from sklearn.model_selection import GridSearchCV
+from imblearn.over_sampling import SMOTE
+from scipy import stats
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from imblearn.over_sampling import SMOTE
-import matplotlib.pyplot as plt
-import joblib
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    roc_auc_score,
+)
+from sklearn.model_selection import GridSearchCV
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from scipy import stats
+
 from config import MODEL1_RF_PATH, MODEL2_GARCH_PATH, SCALER1_RF_PATH
 from utilities.model_utils import load_model, load_garch_model
 
@@ -17,9 +29,19 @@ from utilities.model_utils import load_model, load_garch_model
 # Feature Engineering Functions
 # ===========================================
 
-def add_lag_features(df):
+
+def add_lag_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     Add lag features to capture temporal trends.
+    
+    Args:
+        df: Input DataFrame
+        
+    Returns:
+        DataFrame with lag features added
+        
+    Raises:
+        KeyError: If 'funding_rate' column is missing
     """
     if 'funding_rate' not in df.columns:
         raise KeyError("'funding_rate' column is missing. Check the input data.")
@@ -42,7 +64,21 @@ def add_lag_features(df):
     df.fillna(0, inplace=True)
     return df
 
-def add_technical_indicators(df, ma_window=3, vol_window=5):
+def add_technical_indicators(df: pd.DataFrame, ma_window: int = 3, vol_window: int = 5) -> pd.DataFrame:
+    """
+    Add technical indicators to the DataFrame.
+    
+    Args:
+        df: Input DataFrame
+        ma_window: Window size for moving average
+        vol_window: Window size for volatility calculation
+        
+    Returns:
+        DataFrame with technical indicators added
+        
+    Raises:
+        KeyError: If required columns are missing
+    """
     if 'funding_rate' not in df.columns or 'mark_price' not in df.columns:
         raise KeyError("'funding_rate' or 'mark_price' missing.")
 
@@ -56,12 +92,26 @@ def add_technical_indicators(df, ma_window=3, vol_window=5):
 
     df['funding_rate_roc1'] = df['funding_rate'].pct_change(periods=1)
     df['funding_rate_roc3'] = df['funding_rate'].pct_change(periods=3)
-    df['open_interest_roc'] = df['open_interest'].pct_change(periods=1)
+    
+    if 'open_interest' in df.columns:
+        df['open_interest_roc'] = df['open_interest'].pct_change(periods=1)
+    else:
+        df['open_interest_roc'] = np.nan
+        
     return df
 
-def add_interaction_terms(df):
+def add_interaction_terms(df: pd.DataFrame) -> pd.DataFrame:
     """
     Add interaction terms to capture relationships between features.
+    
+    Args:
+        df: Input DataFrame
+        
+    Returns:
+        DataFrame with interaction terms added
+        
+    Raises:
+        KeyError: If required columns are missing
     """
     if 'funding_rate_lag1' not in df.columns or 'funding_rate_lag2' not in df.columns:
         raise KeyError("'funding_rate_lag1' or 'funding_rate_lag2' columns are missing. Ensure lag features are added first.")
@@ -75,9 +125,6 @@ def add_interaction_terms(df):
     interaction2 = df['funding_rate_ma3'] / (df['funding_rate_lag1'].replace(0, np.nan) + 1e-6)
     interaction2 = interaction2.replace([np.inf, -np.inf], np.nan)
     interaction2 = interaction2.fillna(0)
-    df['interaction2'] = interaction2
-
-    # Assign the processed interaction2 back to the DataFrame
     df['interaction2'] = interaction2
 
     if 'mark_price_lag1' in df.columns and 'funding_rate_ma3' in df.columns:
@@ -146,18 +193,23 @@ def add_model2_volatility(df, model2_result):
 # Data Sampling and Balancing
 # ===========================================
 
-def apply_smote(X_train, y_train, sampling_strategy=1.0, random_state=42):
+def apply_smote(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    sampling_strategy: Union[float, Dict] = 1.0,
+    random_state: int = 42,
+) -> Tuple[pd.DataFrame, pd.Series]:
     """
     Apply SMOTE to balance the classes in the training data.
 
-    Parameters:
-        X_train (pd.DataFrame): Training features.
-        y_train (pd.Series): Training target variable.
-        sampling_strategy (float or dict): Sampling strategy for SMOTE.
-        random_state (int): Random seed for reproducibility.
+    Args:
+        X_train: Training features
+        y_train: Training target variable
+        sampling_strategy: Sampling strategy for SMOTE
+        random_state: Random seed for reproducibility
 
     Returns:
-        X_resampled, y_resampled: Balanced training data.
+        Tuple of (X_resampled, y_resampled): Balanced training data
     """
     smote = SMOTE(sampling_strategy=sampling_strategy, random_state=random_state)
     X_resampled, y_resampled = smote.fit_resample(X_train, y_train)

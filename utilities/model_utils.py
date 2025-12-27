@@ -1,42 +1,100 @@
+"""
+Model utilities for training, evaluation, and persistence.
+"""
+
 import os
+from pathlib import Path
+from typing import Any, Dict, Optional, Tuple, Union
+
 import joblib
-import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
-    roc_auc_score,
     classification_report,
     confusion_matrix,
-    f1_score
+    f1_score,
+    roc_auc_score,
 )
 
 # ===========================================
 # Model Training
 # ===========================================
 
-def train_classification_model(model, X_train, y_train):
-    print("Training the model...")
+
+def train_classification_model(
+    model: Any,
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    verbose: bool = True,
+) -> Any:
+    """
+    Train a classification model.
+    
+    Args:
+        model: Scikit-learn compatible model
+        X_train: Training features
+        y_train: Training target
+        verbose: Whether to print training progress
+        
+    Returns:
+        Trained model
+    """
+    if verbose:
+        print("Training the model...")
+    
     model.fit(X_train, y_train)
-    print("Model training completed.")
+    
+    if verbose:
+        print("Model training completed.")
+    
     return model
 
 # ===========================================
 # Model Evaluation
 # ===========================================
 
-def evaluate_classification_model(model, X_test, y_test, y_proba=None, threshold=0.5):
+def evaluate_classification_model(
+    model: Any,
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+    y_proba: Optional[np.ndarray] = None,
+    threshold: float = 0.5,
+    verbose: bool = True,
+) -> Dict[str, float]:
     """
     Evaluate the classification model's performance.
+    
+    Args:
+        model: Trained model
+        X_test: Test features
+        y_test: Test target
+        y_proba: Predicted probabilities (optional)
+        threshold: Classification threshold
+        verbose: Whether to print evaluation metrics
+        
+    Returns:
+        Dictionary of evaluation metrics
     """
     if y_proba is None:
         y_proba = model.predict_proba(X_test)[:, 1]
     y_pred = (y_proba >= threshold).astype(int)
 
-    print("Accuracy:", accuracy_score(y_test, y_pred))
-    print("F1 Score:", f1_score(y_test, y_pred))
-    print("ROC AUC Score:", roc_auc_score(y_test, y_proba))
-    print("Classification Report:\n", classification_report(y_test, y_pred))
-    print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    metrics = {
+        'accuracy': accuracy_score(y_test, y_pred),
+        'f1_score': f1_score(y_test, y_pred),
+        'roc_auc': roc_auc_score(y_test, y_proba),
+    }
+    
+    if verbose:
+        print("Accuracy:", metrics['accuracy'])
+        print("F1 Score:", metrics['f1_score'])
+        print("ROC AUC Score:", metrics['roc_auc'])
+        print("Classification Report:\n", classification_report(y_test, y_pred))
+        print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    
+    return metrics
     
 def fit_and_evaluate_model(model_name, model):
     """
@@ -61,17 +119,29 @@ def fit_and_evaluate_model(model_name, model):
 # Model Persistence (Save/Load)
 # ===========================================
 
-def save_model(model, filepath):
+def save_model(model: Any, filepath: Union[str, Path]) -> None:
     """
     Save the trained model to a file.
+    
+    Args:
+        model: Trained model to save
+        filepath: Path to save the model
     """
+    filepath = Path(filepath)
     # Ensure the directory exists
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    filepath.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, filepath)
 
-def load_model(filepath):
+
+def load_model(filepath: Union[str, Path]) -> Any:
     """
     Load a model from a file.
+    
+    Args:
+        filepath: Path to the saved model
+        
+    Returns:
+        Loaded model
     """
     return joblib.load(filepath)
 
