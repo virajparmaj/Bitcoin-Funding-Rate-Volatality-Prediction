@@ -1,6 +1,85 @@
-__pycache__
-datasets
-venv
-models.DS_Store
+# ===========================================
+# Secrets and credentials
+# ===========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.yaml
+
+# ===========================================
+# AI assistant / agent artefacts
+# ===========================================
+# Local tool configuration and session state. These are personal to whoever ran the
+# tool and must not reach a shared branch.
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
+.cursor/
+.cursorrules
+.cursorignore
+.windsurfrules
+.aider*
+.continue/
+.codeium/
+.gemini/
+.github/copilot-instructions.md
+
+# Prompts, build briefs, and agent working notes
+*_PROMPT.md
+*_prompt.md
+prompts/
+.agent/
+.agents/
+scratchpad/
+.scratch/
+
+# ===========================================
+# Logs and run output
+# ===========================================
+logs/
+*.log
+
+# ===========================================
+# Data and generated artefacts
+# ===========================================
+# NOTE: `data/` and `notes/` are intentionally unanchored, so they match at any depth
+# (this is also what keeps v2/data out of the repo). Files tracked before these rules
+# existed — e.g. data/normalized_datasets/binance_btc_perp.csv — remain tracked;
+# .gitignore only affects untracked files.
 data/
 notes/
+datasets
+
+# ===========================================
+# Python
+# ===========================================
+__pycache__
+*.py[cod]
+venv
+.venv
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+
+# ===========================================
+# Editor and OS
+# ===========================================
+# Was previously written as `models.DS_Store`, which matched only a literal file of
+# that name — so .DS_Store was never actually ignored. models/ is tracked and must
+# stay tracked, so the two entries are separated correctly here.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
