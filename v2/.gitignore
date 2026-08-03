@@ -1,0 +1,17 @@
+# Virtual environment
+.venv/
+
+# Derived data — regenerate from notebooks 01/02, never commit.
+# No rule is needed here: the ROOT .gitignore has an unanchored `data/` pattern, which
+# git matches at any depth, so v2/data is already excluded. A `!data/.gitkeep` negation
+# would NOT work — git does not descend into an excluded directory to find it. The
+# directory is therefore created on demand by config.ensure_dir().
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+.ruff_cache/
