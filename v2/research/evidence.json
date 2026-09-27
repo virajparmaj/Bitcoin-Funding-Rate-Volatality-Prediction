@@ -1,0 +1,72 @@
+{
+  "purpose": "Artifact verification; not clean prospective validation or a settlement backtest",
+  "input_sha256": {
+    "data/normalized_datasets/binance_btc_perp.csv": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24",
+    "results/predictions_RFR.csv": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e",
+    "results/predictions_SARIMAX.csv": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6"
+  },
+  "raw_shape": [
+    42179,
+    11
+  ],
+  "arrival_start": "2020-01-01 00:59:57.141727+00:00",
+  "arrival_end": "2024-10-17 23:59:59.736682+00:00",
+  "synthetic_end": "2024-10-23 10:00:00+00:00",
+  "funding_event_ids": 5256,
+  "event_ids_with_multiple_distinct_rates": 3664,
+  "event_ids_with_one_distinct_rate": 1592,
+  "varying_event_share": 0.6971080669710806,
+  "first_to_last_event_rate_abs_change_mean_bp": 0.6224733066971081,
+  "one_bp_rate_share_all_rows": 0.40996704521207233,
+  "null_counts": {
+    "exchange": 1,
+    "symbol": 1,
+    "local_timestamp": 1,
+    "funding_timestamp": 132,
+    "funding_rate": 132,
+    "predicted_funding_rate": 42179,
+    "open_interest": 3326,
+    "last_price": 3,
+    "index_price": 5470,
+    "mark_price": 132,
+    "timestamp": 0
+  },
+  "drift_first_hours": -0.9992060352777778,
+  "drift_last_hours": 130.0000731438889,
+  "arrival_negative_differences": 0,
+  "arrival_adjacent_gaps_over_90min": 0,
+  "arrival_gap_seconds_quantiles": {
+    "0.0": 0.223102,
+    "0.001": 0.50016495,
+    "0.01": 3598.027618,
+    "0.5": 3599.9999055,
+    "0.99": 3601.767409,
+    "1.0": 3701.855579
+  },
+  "note_on_gaps": "Adjacent differences omit pairs containing the one missing arrival timestamp; flooring near-hour-end arrivals also creates bin collisions and must not be interpreted as exact duplicate messages.",
+  "backfilled_cells_by_column": {
+    "index_price": 5351,
+    "open_interest": 3180
+  },
+  "rows_zeroed_by_legacy_outlier_path": 1118,
+  "zeroed_mean_abs_true_bp": 12.44109525939177,
+  "rf_alignment_total_rows": 7797,
+  "rf_alignment_rows_with_both_raw_values": 7793,
+  "rf_current_max_abs_discrepancy": 3.0075768264747893e-16,
+  "rf_next_max_abs_discrepancy": 0.0,
+  "rf_real_test_start": "2023-11-28 04:59:58.453550+00:00",
+  "rf_real_test_end": "2024-10-17 22:59:59.032326+00:00",
+  "rf_excess_mse_vs_current_rate_pct": 25.615750695287876,
+  "rf_excess_mae_vs_current_rate_pct": 49.0364359667397,
+  "rf_skill_vs_current_rate": -0.25615750695287876,
+  "rf_constant_test_columns": {
+    "model1_direction_pred": 1,
+    "model2_volatility_h1": 1,
+    "predicted_funding_rate": 1,
+    "local_timestamp": 1
+  },
+  "sarimax_n": 7622,
+  "sarimax_r2": -4.807223264553311,
+  "sarimax_mae_bp_assuming_1e6_scaling": 1.7870594557404191,
+  "sarimax_units_note": "1e6 scaling is supported by notebook cell 17; saved file does not contain a units manifest."
+}
