@@ -1,0 +1,41 @@
+[
+  {
+    "month": "2020-01",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-01.zip",
+    "status": "verified",
+    "bytes": 825,
+    "sha256": "7f81b2f3694d13779e7e896b69d60cd61e9444d7b9f9e90df761935e1c1b76e2",
+    "header": "calc_time,funding_interval_hours,last_funding_rate",
+    "rows": 93,
+    "sample": [
+      "1577836800000,8,-0.00012359",
+      "1577865600000,8,-0.00012383"
+    ]
+  },
+  {
+    "month": "2022-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-06.zip",
+    "status": "verified",
+    "bytes": 966,
+    "sha256": "0cd0708f8903829eb46f98cf60f4b2516c986e1ccddf6620a5912b48e16baf93",
+    "header": "calc_time,funding_interval_hours,last_funding_rate",
+    "rows": 90,
+    "sample": [
+      "1654041600000,8,0.00010000",
+      "1654070400011,8,0.00010000"
+    ]
+  },
+  {
+    "month": "2024-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-03.zip",
+    "status": "verified",
+    "bytes": 939,
+    "sha256": "711dcaf2a341aedfd06447b4117b540f60adb0784c5e64a313c718e4cf092bc3",
+    "header": "calc_time,funding_interval_hours,last_funding_rate",
+    "rows": 93,
+    "sample": [
+      "1709251200000,8,0.00053322",
+      "1709280000000,8,0.00064824"
+    ]
+  }
+]

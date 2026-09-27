@@ -1,0 +1,127 @@
+{
+  "status": "planning feasibility only; no model fit or significance test",
+  "input_sha256": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24",
+  "usable_event_groups": 5256,
+  "coverage": [
+    {
+      "horizon_hours": 1,
+      "max_age_minutes": 30,
+      "n": 4871,
+      "median_age_minutes": 0.007586300000000001
+    },
+    {
+      "horizon_hours": 1,
+      "max_age_minutes": 60,
+      "n": 4931,
+      "median_age_minutes": 0.0077021500000000005
+    },
+    {
+      "horizon_hours": 1,
+      "max_age_minutes": 65,
+      "n": 5256,
+      "median_age_minutes": 0.008952366666666666
+    },
+    {
+      "horizon_hours": 2,
+      "max_age_minutes": 30,
+      "n": 4877,
+      "median_age_minutes": 0.00757715
+    },
+    {
+      "horizon_hours": 2,
+      "max_age_minutes": 60,
+      "n": 4943,
+      "median_age_minutes": 0.007691916666666667
+    },
+    {
+      "horizon_hours": 2,
+      "max_age_minutes": 65,
+      "n": 5256,
+      "median_age_minutes": 0.008999
+    },
+    {
+      "horizon_hours": 4,
+      "max_age_minutes": 30,
+      "n": 4869,
+      "median_age_minutes": 0.0070375
+    },
+    {
+      "horizon_hours": 4,
+      "max_age_minutes": 60,
+      "n": 4925,
+      "median_age_minutes": 0.007146416666666667
+    },
+    {
+      "horizon_hours": 4,
+      "max_age_minutes": 65,
+      "n": 5256,
+      "median_age_minutes": 0.0079056
+    },
+    {
+      "horizon_hours": 6,
+      "max_age_minutes": 30,
+      "n": 4892,
+      "median_age_minutes": 0.007612975
+    },
+    {
+      "horizon_hours": 6,
+      "max_age_minutes": 60,
+      "n": 4938,
+      "median_age_minutes": 0.007694316666666668
+    },
+    {
+      "horizon_hours": 6,
+      "max_age_minutes": 65,
+      "n": 5256,
+      "median_age_minutes": 0.008774241666666667
+    }
+  ],
+  "common_events_all_four_horizons_at_65min": 5256,
+  "common_events_by_year": {
+    "2020": 1097,
+    "2021": 1095,
+    "2022": 1095,
+    "2023": 1095,
+    "2024": 874
+  },
+  "archive_sample_comparisons": [
+    {
+      "month": "2020-01",
+      "archive_rows": 93,
+      "matched_pre_event_indications": 92,
+      "calc_time_offset_seconds_min": 0.0,
+      "calc_time_offset_seconds_max": 0.002,
+      "nonzero_calc_time_offsets": 14,
+      "terminal_proxy_mae_bp": 0.004456521739130413,
+      "terminal_proxy_max_abs_error_bp": 0.057899999999999834,
+      "terminal_proxy_errors_over_001bp": 14,
+      "terminal_proxy_median_age_minutes": 0.04685299166666666
+    },
+    {
+      "month": "2022-06",
+      "archive_rows": 90,
+      "matched_pre_event_indications": 90,
+      "calc_time_offset_seconds_min": 0.0,
+      "calc_time_offset_seconds_max": 0.025,
+      "nonzero_calc_time_offsets": 61,
+      "terminal_proxy_mae_bp": 0.006198888888888889,
+      "terminal_proxy_max_abs_error_bp": 0.15730000000000002,
+      "terminal_proxy_errors_over_001bp": 9,
+      "terminal_proxy_median_age_minutes": 0.005901691666666667
+    },
+    {
+      "month": "2024-03",
+      "archive_rows": 93,
+      "matched_pre_event_indications": 93,
+      "calc_time_offset_seconds_min": 0.0,
+      "calc_time_offset_seconds_max": 0.004,
+      "nonzero_calc_time_offsets": 11,
+      "terminal_proxy_mae_bp": 0.010780645161290313,
+      "terminal_proxy_max_abs_error_bp": 0.3210999999999996,
+      "terminal_proxy_errors_over_001bp": 24,
+      "terminal_proxy_median_age_minutes": 0.015079133333333333
+    }
+  ],
+  "label_match_rule": "Nearest hour <=60s, unique and 8h-aligned; diagnostic only. Retain calc_time and scheduled event separately in the final implementation.",
+  "availability_caveat": "Recorded row arrival is a conservative proxy conditional on valid upstream aggregation; field-level provenance remains unverified."
+}

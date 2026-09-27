@@ -1,0 +1,29 @@
+# Decision log and changes from the earlier assessment
+
+Date: 25 September 2026. This log records planning decisions, not completed forecast experiments.
+
+| Decision | Evidence / reason | Consequence |
+|---|---|---|
+| Keep one contract and simple residual models | Existing data/model families suffice for a focused comparison | Avoid unnecessary new architectures and feeds |
+| Current indication is the primary baseline | Verified target shift and Tardis field semantics | Replace the older-lag headline comparison |
+| Obtain actual labels before training | Sample terminal indications differ from archived settlements | Final ticker rows cannot serve as exact outcomes |
+| Public archive route is feasible | Three month ZIP/checksum pairs verified | No initial paid ticker repull is required merely to obtain labels |
+| Preserve scheduled event and archive calc time separately | Sample offsets reach 25 ms | Exact-time equality is insufficient; matching must be explicit and audited |
+| Include the final 18 October 2024 event | Features end just before its settlement | Earlier “through 17 October” wording needs an explicit event cutoff |
+| Provisional max age 65 minutes; 30/60 sensitivities | All 5,256 IDs feasible; stricter coverage differs | Report effective lead time and coverage, not nominal horizon alone |
+| Ridge at four hours is the primary comparison | Prevent test-driven model/horizon selection | RF and other horizons are declared secondary tests |
+| Include a low-cost state/time analysis | Strengthens empirical specificity with existing predictions | Required when claiming state dependence |
+| Add label-proxy rescoring, E3b | Sample labels differ and saved predictions can be reused | Measure whether the distinction changes errors/rankings without training extra models |
+| Do not frame auditing or lead-time comparison as an invention | New audit preprint and practitioner guide overlap | Claim a measured residual-information result only |
+| Treat evaluation as retrospective | Original sample already inspected | Later untouched replication is recommended |
+| Full model implementation deferred to planned work | User requested research strengthening and an implementation plan | Only diagnostics, feasibility probes and documentation executed here |
+
+## Older build-prompt interpretations that must not govern new implementation
+
+`V2_BUILD_PROMPT.md` and the original v2 README preserve earlier interpretations that are now contradicted or unsupported: reconstructing current q is not automatically future-target leakage; null following-event estimates do not remove the upcoming indication; dropping days is not established as the clock-drift explanation; ties need not vanish at settlement; constants and time-to-event features are not automatically invalid; HAR-RV is not a settled-level baseline without a variance target; eight settlement lags are not one day; fee/MAE ratios are not profitability tests.
+
+The original files remain unchanged as historical context. This package proposes corrected scientific requirements for the future additive build. Its public-source feasibility requests are read-only research checks, not the older prompt's proposed paid/cross-exchange acquisition phase.
+
+## Outstanding uncertainties
+
+Closest Inan full text; full-period official label coverage; historical funding-rule changes; raw-message provenance of hourly aggregation; exact historical label publication delay; redistribution rights; clean residual forecast performance and its precision. No date, readiness promise or model score should be invented to close these gaps.

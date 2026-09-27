@@ -1,0 +1,33 @@
+{
+  "prepared_date": "2026-09-25",
+  "purpose": "Research planning, repository diagnostics and three-month label feasibility; no new forecast model trained",
+  "python": "3.11.14",
+  "packages": {
+    "numpy": "2.1.2",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "matplotlib": "3.9.2",
+    "pytest": "8.3.3"
+  },
+  "executed_checks": [
+    {
+      "command": "v2/.venv/bin/python -m pytest -q -c v2/pyproject.toml v2/tests",
+      "result": "14 passed"
+    },
+    {
+      "command": "v2/.venv/bin/python v2/paper_plan/evidence/check_feasibility.py",
+      "result": "passed all embedded assertions; original dataset hash unchanged"
+    },
+    {
+      "command": "public archive ZIP and CHECKSUM retrieval",
+      "result": "3/3 matched; URLs and hashes in archive_probe.json"
+    }
+  ],
+  "source_sha256": {
+    "data/normalized_datasets/binance_btc_perp.csv": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24",
+    "results/predictions_RFR.csv": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e",
+    "results/predictions_SARIMAX.csv": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6",
+    "v2/research/reproduce_evidence.py": "d0e18ab5d4f2b8ae34f68f5b9d429757906dac70ac151c612687ac05445d6878",
+    "v2/paper_plan/evidence/check_feasibility.py": "2edfa247120464ef884fd69452ef451fb0aac83e548d5e9b77576d5986dfc781"
+  }
+}
