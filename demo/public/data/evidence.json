@@ -1,0 +1,554 @@
+{
+  "schema_version": 1,
+  "purpose": "Local presentation of existing saved artifacts; no fresh training, clean prospective validation, settlement backtest or profitability claim.",
+  "input_sha256": {
+    "data/normalized_datasets/binance_btc_perp.csv": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24",
+    "results/predictions_RFR.csv": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e",
+    "results/predictions_SARIMAX.csv": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6",
+    "v2/research/evidence.json": "c00fa8ba2bc8f3cf74be0fb52470ae8a35a4a185f2d3c51bcca39d0d1261e72d",
+    "v2/research/saved_prediction_scores.csv": "afb249d2d7e663760928ada241d6f63ba15a37636249a0b6a20010a4954efaaf",
+    "v2/research/reproduce_evidence.py": "d0e18ab5d4f2b8ae34f68f5b9d429757906dac70ac151c612687ac05445d6878",
+    "v2/research/research_assessment.md": "178207488a9c0cf7f30a42d3fe7178feb7c0b804f2182ab7bd3839f024018be5",
+    "utilities/functions.py": "8c1eee3e8cd89acbd6e18e1b76a06ff0a902511950afe6855b265c52224200fe",
+    "utilities/data_processing.py": "5e89a13ae425565bfa602569ab8b01fb5a37e7b513b03c867b8929da40216957",
+    "utilities/data_import.py": "5dd50ffc71e11373b657bd3b200dd9aeee12fb0ee6cdcdb24ec84c68337764ab",
+    "notebooks/model_development.ipynb": "e794cac0cc0e74d1b57f2ecc2faee26e04d3dc81d03e4607030262349bc30c0f",
+    "dgieser3/research.ipynb": "0bf9e863132285f06606a18fb0ed84b23c06be729ef9ac94b485616fdf9fd1e4"
+  },
+  "dataset": {
+    "source": "data/normalized_datasets/binance_btc_perp.csv",
+    "row_count": 42179,
+    "column_count": 11,
+    "exchanges": [
+      "binance-futures"
+    ],
+    "symbols": [
+      "BTCUSDT"
+    ],
+    "arrival_start_utc": "2020-01-01T00:59:57.141727Z",
+    "arrival_end_utc": "2024-10-17T23:59:59.736682Z",
+    "synthetic_start_utc": "2020-01-01T00:00:00.000000Z",
+    "synthetic_end_utc": "2024-10-23T10:00:00.000000Z",
+    "funding_event_count": 5256,
+    "events_with_multiple_distinct_rates": 3664,
+    "varying_event_share": 0.6971080669710806,
+    "one_bp_count": 17292,
+    "one_bp_share_all_rows": 0.40996704521207233,
+    "arrival_valid_count": 42178,
+    "adjacent_gaps_over_90min": 0,
+    "adjacent_negative_gaps": 0,
+    "synthetic_minus_arrival_first_hours": -0.9992060352777777,
+    "synthetic_minus_arrival_last_hours": 130.0000731438889,
+    "calendar_day_count": 1752,
+    "calendar_missing_days": 0,
+    "columns": [
+      {
+        "name": "exchange",
+        "group": "Identifiers",
+        "unit": "text",
+        "missing_count": 1,
+        "valid_count": 42178,
+        "missing_pct": 0.002370848052348325,
+        "definition": "Provider exchange identifier.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "symbol",
+        "group": "Identifiers",
+        "unit": "text",
+        "missing_count": 1,
+        "valid_count": 42178,
+        "missing_pct": 0.002370848052348325,
+        "definition": "Provider instrument identifier.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "local_timestamp",
+        "group": "Time",
+        "unit": "microseconds since Unix epoch",
+        "missing_count": 1,
+        "valid_count": 42178,
+        "missing_pct": 0.002370848052348325,
+        "definition": "Message-arrival time; valid values define raw calendar charts.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "funding_timestamp",
+        "group": "Time",
+        "unit": "microseconds since Unix epoch",
+        "missing_count": 132,
+        "valid_count": 42047,
+        "missing_pct": 0.3129519429099789,
+        "definition": "Upcoming funding-event identifier; not an independently verified settlement label.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "funding_rate",
+        "group": "Funding",
+        "unit": "native decimal rate",
+        "missing_count": 132,
+        "valid_count": 42047,
+        "missing_pct": 0.3129519429099789,
+        "definition": "Observed ticker funding indication, not an authoritative settled payment.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "predicted_funding_rate",
+        "group": "Funding",
+        "unit": "native decimal rate",
+        "missing_count": 42179,
+        "valid_count": 0,
+        "missing_pct": 100.0,
+        "definition": "Provider field, entirely missing here; not this project's model prediction.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "open_interest",
+        "group": "Market",
+        "unit": "provider-native units (unit not verified locally)",
+        "missing_count": 3326,
+        "valid_count": 38853,
+        "missing_pct": 7.885440622110529,
+        "definition": "Reported open interest; absolute units are not certified by a local units manifest.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "last_price",
+        "group": "Market",
+        "unit": "USDT per BTC",
+        "missing_count": 3,
+        "valid_count": 42176,
+        "missing_pct": 0.007112544157044975,
+        "definition": "Last traded price field; selection differs by experiment.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "index_price",
+        "group": "Market",
+        "unit": "USDT per BTC",
+        "missing_count": 5470,
+        "valid_count": 36709,
+        "missing_pct": 12.968538846345337,
+        "definition": "Underlying index-price field.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "mark_price",
+        "group": "Market",
+        "unit": "USDT per BTC",
+        "missing_count": 132,
+        "valid_count": 42047,
+        "missing_pct": 0.3129519429099789,
+        "definition": "Mark-price field used by current feature helpers.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      },
+      {
+        "name": "timestamp",
+        "group": "Time",
+        "unit": "microseconds since Unix epoch",
+        "missing_count": 0,
+        "valid_count": 42179,
+        "missing_pct": 0.0,
+        "definition": "Synthetic row grid; unsuitable as verified market UTC.",
+        "source": "raw",
+        "derivation": "Count nonempty source CSV values; no filling or cleaning."
+      }
+    ],
+    "preview": [
+      {
+        "row_index": 0,
+        "exchange": "binance-futures",
+        "symbol": "BTCUSDT",
+        "local_timestamp": 1577840397141727.0,
+        "funding_timestamp": 1577865600000000.0,
+        "funding_rate": -0.00016114,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": 7171.55,
+        "index_price": null,
+        "mark_price": 7176.91884654,
+        "timestamp": 1577836800000000.0
+      },
+      {
+        "row_index": 1,
+        "exchange": "binance-futures",
+        "symbol": "BTCUSDT",
+        "local_timestamp": 1577843997149464.0,
+        "funding_timestamp": 1577865600000000.0,
+        "funding_rate": -0.00017337,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": 7208.32,
+        "index_price": null,
+        "mark_price": 7213.22786516,
+        "timestamp": 1577840400000000.0
+      },
+      {
+        "row_index": 2,
+        "exchange": "binance-futures",
+        "symbol": "BTCUSDT",
+        "local_timestamp": 1577847597143299.0,
+        "funding_timestamp": 1577865600000000.0,
+        "funding_rate": -0.00018286,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": 7237.49,
+        "index_price": null,
+        "mark_price": 7239.76251386,
+        "timestamp": 1577844000000000.0
+      },
+      {
+        "row_index": 3,
+        "exchange": "binance-futures",
+        "symbol": "BTCUSDT",
+        "local_timestamp": 1577851197153990.0,
+        "funding_timestamp": 1577865600000000.0,
+        "funding_rate": -0.00019127,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": 7221.55,
+        "index_price": null,
+        "mark_price": 7224.73832905,
+        "timestamp": 1577847600000000.0
+      },
+      {
+        "row_index": 4,
+        "exchange": "binance-futures",
+        "symbol": "BTCUSDT",
+        "local_timestamp": 1577854797148218.0,
+        "funding_timestamp": 1577865600000000.0,
+        "funding_rate": -0.00018662,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": 7214.0,
+        "index_price": null,
+        "mark_price": 7219.01328124,
+        "timestamp": 1577851200000000.0
+      },
+      {
+        "row_index": 3360,
+        "exchange": "binance-futures",
+        "symbol": "BTCUSDT",
+        "local_timestamp": 1589932800424898.0,
+        "funding_timestamp": null,
+        "funding_rate": null,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": 9773.64,
+        "index_price": null,
+        "mark_price": null,
+        "timestamp": 1589932800000000.0
+      },
+      {
+        "row_index": 12141,
+        "exchange": null,
+        "symbol": null,
+        "local_timestamp": null,
+        "funding_timestamp": null,
+        "funding_rate": null,
+        "predicted_funding_rate": null,
+        "open_interest": null,
+        "last_price": null,
+        "index_price": null,
+        "mark_price": null,
+        "timestamp": 1621544400000000.0
+      }
+    ],
+    "caveats": [
+      "Nominally hourly derivative-ticker observations; rows are not independent funding payments.",
+      "Use valid local_timestamp for calendar charts. Synthetic timestamp is a row grid, not verified market UTC.",
+      "Funding-event IDs do not certify realized settlement labels; funding_rate is an evolving ticker indication.",
+      "predicted_funding_rate is wholly unavailable and is unrelated to this project's model predictions.",
+      "Adjacent gap checks omit pairs containing the missing arrival timestamp; near-hour boundaries can create calendar-bin collisions."
+    ]
+  },
+  "rf": {
+    "n": 7797,
+    "metrics": [
+      {
+        "n": 7797,
+        "r2": 0.9800763715812736,
+        "mae_native": 9.434715916378122e-06,
+        "rmse_native": 1.943991824684829e-05,
+        "mse_native": 3.779104214441451e-10,
+        "mae_bp": 0.09434715916378122,
+        "rmse_bp": 0.1943991824684829,
+        "id": "current",
+        "label": "Current-rate persistence",
+        "source": "results/predictions_RFR.csv",
+        "sources": [
+          "rf",
+          "rf-target",
+          "research-scores"
+        ],
+        "task": "Model 3: next-observation funding-rate regression",
+        "target": "funding_rate[t+1], stored as Actual",
+        "units": {
+          "r2": "unitless",
+          "mae_native": "decimal rate",
+          "mse_native": "decimal rate squared",
+          "mae_bp": "basis points",
+          "rmse_bp": "basis points"
+        },
+        "evaluation": "Arithmetic on all saved RF pairs. Later diagnostic comparison; no training or new holdout.",
+        "status": "Recomputed from saved predictions"
+      },
+      {
+        "n": 7797,
+        "r2": 0.974972784596052,
+        "mae_native": 1.4061164345376707e-05,
+        "rmse_native": 2.1787955683204092e-05,
+        "mse_native": 4.747150128532655e-10,
+        "mae_bp": 0.14061164345376706,
+        "rmse_bp": 0.21787955683204094,
+        "id": "predicted",
+        "label": "Saved Random Forest",
+        "source": "results/predictions_RFR.csv",
+        "sources": [
+          "rf",
+          "rf-target",
+          "research-scores"
+        ],
+        "task": "Model 3: next-observation funding-rate regression",
+        "target": "funding_rate[t+1], stored as Actual",
+        "units": {
+          "r2": "unitless",
+          "mae_native": "decimal rate",
+          "mse_native": "decimal rate squared",
+          "mae_bp": "basis points",
+          "rmse_bp": "basis points"
+        },
+        "evaluation": "Arithmetic on all saved RF pairs. Later diagnostic comparison; no training or new holdout.",
+        "status": "Recomputed from saved predictions"
+      },
+      {
+        "n": 7797,
+        "r2": 0.9557584995514965,
+        "mae_native": 1.453881184021638e-05,
+        "rmse_native": 2.896844219906659e-05,
+        "mse_native": 8.39170643440662e-10,
+        "mae_bp": 0.1453881184021638,
+        "rmse_bp": 0.2896844219906659,
+        "id": "ema3",
+        "label": "EMA3",
+        "source": "results/predictions_RFR.csv",
+        "sources": [
+          "rf",
+          "rf-target",
+          "research-scores"
+        ],
+        "task": "Model 3: next-observation funding-rate regression",
+        "target": "funding_rate[t+1], stored as Actual",
+        "units": {
+          "r2": "unitless",
+          "mae_native": "decimal rate",
+          "mse_native": "decimal rate squared",
+          "mae_bp": "basis points",
+          "rmse_bp": "basis points"
+        },
+        "evaluation": "Arithmetic on all saved RF pairs. Later diagnostic comparison; no training or new holdout.",
+        "status": "Recomputed from saved predictions"
+      },
+      {
+        "n": 7797,
+        "r2": 0.9369578792281781,
+        "mae_native": 1.7089542131589073e-05,
+        "rmse_native": 3.458005063006025e-05,
+        "mse_native": 1.19577990157753e-09,
+        "mae_bp": 0.17089542131589072,
+        "rmse_bp": 0.3458005063006025,
+        "id": "lag1",
+        "label": "Older lag1 observation",
+        "source": "results/predictions_RFR.csv",
+        "sources": [
+          "rf",
+          "rf-target",
+          "research-scores"
+        ],
+        "task": "Model 3: next-observation funding-rate regression",
+        "target": "funding_rate[t+1], stored as Actual",
+        "units": {
+          "r2": "unitless",
+          "mae_native": "decimal rate",
+          "mse_native": "decimal rate squared",
+          "mae_bp": "basis points",
+          "rmse_bp": "basis points"
+        },
+        "evaluation": "Arithmetic on all saved RF pairs. Later diagnostic comparison; no training or new holdout.",
+        "status": "Recomputed from saved predictions"
+      }
+    ],
+    "comparison": {
+      "excess_mse_pct": 25.61575069541395,
+      "excess_mae_pct": 49.03643596695198,
+      "skill_vs_current": -0.2561575069541395,
+      "n": 7797,
+      "status": "Recomputed from saved predictions",
+      "source": "results/predictions_RFR.csv",
+      "task": "Paired RF / current-rate diagnostic",
+      "target": "next observed funding indication",
+      "units": "percent excess error; unitless squared-error skill",
+      "evaluation": "All 7,797 identical saved RF rows; no retraining."
+    },
+    "constant_columns": {
+      "model1_direction_pred": {
+        "distinct_count": 1,
+        "values": [
+          1.0
+        ]
+      },
+      "model2_volatility_h1": {
+        "distinct_count": 1,
+        "values": [
+          1.6093525920932338e-10
+        ]
+      },
+      "predicted_funding_rate": {
+        "distinct_count": 1,
+        "values": [
+          0.0
+        ]
+      },
+      "local_timestamp": {
+        "distinct_count": 1,
+        "values": [
+          1000000000.0
+        ]
+      }
+    },
+    "alignment": {
+      "total_rows": 7797,
+      "rows_with_both_raw_values": 7793,
+      "current_max_abs_discrepancy": 1.0842021724855044e-18,
+      "next_max_abs_discrepancy": 0.0,
+      "linked_arrival_start_utc": "2023-11-28T04:59:58.453550Z",
+      "linked_arrival_end_utc": "2024-10-17T22:59:59.032326Z",
+      "method": "Synthetic timestamp used only as a unique row-identity join key; compare reconstruction with raw current and Actual with raw next. Four rows lack a raw value; no saved prediction is removed from scoring.",
+      "chart_axis": "Zero-based saved row index, never synthetic timestamp labeled as UTC."
+    }
+  },
+  "sarimax": {
+    "n": 7622,
+    "r2": -4.807223264553311,
+    "mae_saved_units": 178.70594557404192,
+    "rmse_saved_units": 312.12929322673665,
+    "mse_saved_units": 97424.69569022214,
+    "mae_bp_assuming_scale": 1.7870594557404191,
+    "rmse_bp_assuming_scale": 3.1212929322673664,
+    "assumed_scaling_factor": 1000000.0,
+    "scale_note": "Notebook JSON cell 17 sets rescale=True, scaling_factor=1e6; saved CSV has no units manifest. Conditional bp conversion is saved-unit error / 1,000,000 × 10,000.",
+    "source": "results/predictions_SARIMAX.csv",
+    "sources": [
+      "sarimax",
+      "sarimax-setup"
+    ],
+    "status": "Recomputed from saved predictions",
+    "task": "Model 3: SARIMAX block prediction diagnostic",
+    "target": "future_funding_rate = funding_rate.shift(-1), with experiment scaling",
+    "units": {
+      "r2": "unitless",
+      "mae_saved_units": "saved target units",
+      "rmse_saved_units": "saved target units",
+      "mse_saved_units": "saved target units squared"
+    },
+    "evaluation": "All 7,622 saved pairs; test-period exogenous features, block prediction, no sequential target-state updating shown. Sample and setup differ from RF: not a matched comparison."
+  },
+  "sources": [
+    {
+      "id": "raw",
+      "path": "data/normalized_datasets/binance_btc_perp.csv",
+      "locator": "CSV header and all 42,179 rows",
+      "excerpt": "exchange,symbol,local_timestamp,funding_timestamp,funding_rate,predicted_funding_rate,open_interest,last_price,index_price,mark_price,timestamp",
+      "sha256": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24"
+    },
+    {
+      "id": "rf",
+      "path": "results/predictions_RFR.csv",
+      "locator": "Actual, Predicted and funding-history columns; all saved rows",
+      "excerpt": "index,timestamp,local_timestamp,funding_timestamp,predicted_funding_rate,open_interest,last_price,index_price,mark_price,funding_rate_lag1,funding_rate_lag2,open_interest_lag1,mark_price_lag1,funding_rate_ma3,funding_rate_ma5,funding_rate_ema3,funding_rate_ema5,volatility_5min,funding_rate_roc1,funding_rate_roc3,open_interest_roc,interaction1,interaction2,interaction3,hour,day,month,hour_sin,hour_cos,day_sin,day_cos,month_sin,month_cos,model1_direction_pred,model2_volatility_h1,Actual,Predicted",
+      "sha256": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e"
+    },
+    {
+      "id": "sarimax",
+      "path": "results/predictions_SARIMAX.csv",
+      "locator": "Actual and Predicted; all saved rows",
+      "excerpt": "local_timestamp,funding_timestamp,predicted_funding_rate,open_interest,last_price,index_price,mark_price,timestamp,funding_rate_lag1,funding_rate_lag2,open_interest_lag1,mark_price_lag1,funding_rate_ma3,funding_rate_ma5,funding_rate_ema3,funding_rate_ema5,volatility_5min,funding_rate_roc1,funding_rate_roc3,open_interest_roc,interaction1,interaction2,interaction3,hour,day,month,hour_sin,hour_cos,day_sin,day_cos,month_sin,month_cos,model1_direction_pred,model2_volatility_h1,Actual,Predicted",
+      "sha256": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6"
+    },
+    {
+      "id": "rf-target",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell index 14 (zero based)",
+      "excerpt": "# Extract funding_rate_series and check stationarity\nfunding_rate_series = df['funding_rate'].dropna()\nadf_result = adfuller(funding_rate_series)\nprint('ADF Statistic:', adf_result[0])\nprint('p-value:', adf_result[1])\nif adf_result[1] > 0.05:\n    print(\"Series non-stationary, differencing if needed.\")\n    funding_rate_series = funding_rate_series.diff().dropna()\n\n# Plot ACF/PACF if needed\nplot_acf_pacf(funding_rate_series, lags=50)\n\n# Add Model 1 direction predictions\ndf = add_model1_direction(df)\n\n# Add Model 2 volatility forecast\ndf = add_model2_volatility(df, steps=5)\n\n# For Model 3, we aim to predict `future_funding_rate` (one step ahead)\ndf['future_funding_rate'] = df['funding_rate'].shift(-1)\ndf.dropna(inplace=True)\n\n# Features for Model 3:\nfeatures = [c for c in df.columns if c not in ['funding_rate', 'future_funding_rate', 'direction']]\nX = df[features]\ny = df['future_funding_rate']\n\n# Split into training and test sets\nsplit_idx = int(0.8 * len(df))\nX_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]\ny_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]\n\n# Final cleanup before training Model 3\nX_train = X_train.replace([np.inf, -np.inf], np.nan).fillna(0)\nX_train = X_train.clip(-1e9, 1e9)\nX_train = X_train.astype(np.float64)\n\nX_test = X_test.replace([np.inf, -np.inf], np.nan).fillna(0)\nX_test = X_test.clip(-1e9, 1e9)\nX_test = X_test.astype(np.float64)\n\nprint(\"After cleanup:\")\nprint(\"X_train describe:\\n\", X_train.describe())\nprint(\"X_test describe:\\n\", X_test.describe())\n\n# Train a RandomForestRegressor for Model 3\nfrom sklearn.ensemble import RandomForestRegressor\nm3_model = RandomForestRegressor(random_state=RANDOM_STATE, n_estimators=100)\nm3_model.fit(X_train, y_train)\nprint(\"\\nModel 3 training completed.\")\n\n# Evaluate Model 3\ny_pred = m3_model.predict(X_test)\nfrom sklearn.metrics import mean_squared_error, r2_score\nmse = mean_squared_error(y_test, y_pred)\nr2 = r2_score(y_test, y_pred)\nprint(f\"\\nModel 3 Evaluation:\")\nprint(f\"MSE: {mse:.4f}\")\nprint(f\"R²: {r2:.4f}\")\n\n# Save Model 3\nsave_model(m3_model, MODEL3_RFR_PATH)\nprint(f\"Model 3 saved to {MODEL3_RFR_PATH}\")\n\n# Plot Feature Importance for Model 3\nplot_feature_importance(m3_model, X_train.columns, model_type='tree')\n\n# ------------------------------------------------------\n# Export predictions (Actual vs. Predicted) to CSV\n# ------------------------------------------------------\nresults_df = X_test.copy()\nresults_df['Actual'] = y_test\nresults_df['Predicted'] = y_pred\n\n# If 'timestamp' was the index, let's bring it back as a column\nresults_df.reset_index(inplace=True)\n\nresults_df.reset_index(inplace=True)\nresults_df.to_csv(PREDICTIONS_RFR_CSV, index=False)\nprint(f\"Predictions and actual values saved to {PREDICTIONS_RFR_CSV}\")\n\n# Interpretation:\n# Model 3 uses model1_direction_pred and model2_volatility_h1 as additional features.\n# Further optimization: Try ARIMAX/SARIMAX or LSTM with direction & volatility as exogenous inputs.\n",
+      "sha256": "e794cac0cc0e74d1b57f2ecc2faee26e04d3dc81d03e4607030262349bc30c0f"
+    },
+    {
+      "id": "sarimax-setup",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell index 17 (zero based)",
+      "excerpt": "from sklearn.metrics import mean_squared_error, r2_score\nfrom statsmodels.tsa.statespace.sarimax import SARIMAX\nfrom statsmodels.tsa.stattools import adfuller\nfrom statsmodels.stats.diagnostic import acorr_ljungbox\n\nprint(\"\\n--- Model 3 (SARIMAX) Improved Configuration ---\\n\")\n\n# Process data pipeline\ndf = process_pipeline(\n    BINANCE_BTC_PERP_CSV,\n    rescale=True,\n    scaling_factor=1e6,\n    handle_outliers=True\n)\n\n# Use integer indexing (no datetime/frequency)\ndf.reset_index(drop=True, inplace=True)\n\n# Extract funding rate series\nfunding_rate_series = df['funding_rate'].dropna()\n\n# Stationarity Check\nadf_result = adfuller(funding_rate_series)\nprint('ADF Statistic:', adf_result[0])\nprint('p-value:', adf_result[1])\nif adf_result[1] > 0.05:\n    print(\"Series is non-stationary. Applying first differencing...\")\n    funding_rate_series = funding_rate_series.diff().dropna()\nelse:\n    print(\"Series is stationary.\")\n\n# Visualize ACF and PACF for the differenced series\nprint(\"\\nPlotting ACF and PACF after differencing...\\n\")\nplot_acf_pacf(funding_rate_series, lags=50)\n\n# Add exogenous features from Model 1 and Model 2\ndf = add_model1_direction(df)\ndf = add_model2_volatility(df, steps=5)\n\n# Shift the target variable to create labels\ndf['future_funding_rate'] = df['funding_rate'].shift(-1)\ndf.dropna(inplace=True)\n\n# Separate features and target\nfeatures = [c for c in df.columns if c not in ['funding_rate', 'future_funding_rate', 'direction']]\nX = df[features]\ny = df['future_funding_rate']\n\n# Train-test split\nsplit_idx = int(0.8 * len(df))\nX_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]\ny_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]\n\n# Preprocess data: Ensure numeric and handle infinities\nX_train = X_train.apply(pd.to_numeric, errors='coerce').fillna(0)\nX_test = X_test.apply(pd.to_numeric, errors='coerce').fillna(0)\nX_train = X_train.replace([np.inf, -np.inf], 0.0)\nX_test = X_test.replace([np.inf, -np.inf], 0.0)\n\nnumeric_columns = X_train.select_dtypes(include=[np.number]).columns\nX_train[numeric_columns] = X_train[numeric_columns].clip(-1e5, 1e5).astype(np.float64)\nX_test[numeric_columns] = X_test[numeric_columns].clip(-1e5, 1e5).astype(np.float64)\n\n# Display summary statistics\nprint(\"After preprocessing:\")\nprint(\"X_train describe:\\n\", X_train.describe())\nprint(\"X_test describe:\\n\", X_test.describe())\n\n# SARIMAX Model Configuration\norder = (3, 1, 3)  # Updated configuration for better performance\nseasonal_order = (0, 0, 0, 0)  # No seasonal components\n\nprint(\"\\nFitting SARIMAX model with improved configuration...\")\nsarimax_model = SARIMAX(\n    endog=y_train,\n    exog=X_train,\n    order=order,\n    seasonal_order=seasonal_order,\n    enforce_stationarity=True,\n    enforce_invertibility=True,\n    trend=None  # Adding constant trend\n)\n\nsarimax_result = sarimax_model.fit(disp=False, maxiter=500, method='powell')\nprint(\"SARIMAX model training completed.\")\n\n# Predict using test set\nstart = split_idx\nend = split_idx + len(y_test) - 1\ny_pred = sarimax_result.predict(start=start, end=end, exog=X_test)\ny_pred = np.array(y_pred)\n\n# Ensure no NaN or infinite values in predictions\nif np.isnan(y_pred).any() or np.isinf(y_pred).any():\n    print(\"Predictions contain NaN or infinite values. Replacing with 0.0 for MSE/R² calculation.\")\n    y_pred = np.nan_to_num(y_pred, nan=0.0, posinf=0.0, neginf=0.0)\n\n# Calculate Metrics\nmse = mean_squared_error(y_test, y_pred)\nr2 = r2_score(y_test, y_pred)\nprint(f\"\\nModel 3 (SARIMAX) Evaluation:\")\nprint(f\"MSE: {mse:.4f}\")\nprint(f\"R²: {r2:.4f}\")\n\n# Residual Analysis\nprint(\"\\nResidual Analysis...\")\nresiduals = sarimax_result.resid\nstandardized_residuals = residuals / np.std(residuals)\nplt.figure(figsize=(10, 4))\nplt.plot(standardized_residuals)\nplt.title('Standardized Residual Analysis')\nplt.xlabel('Time')\nplt.ylabel('Standardized Residuals')\nplt.grid(True)\nplt.show()\n\n# Perform Ljung-Box test for residuals\nprint(\"\\nPerforming Ljung-Box test for residuals...\")\nlb_test = acorr_ljungbox(standardized_residuals, lags=[10], return_df=True)\nprint(lb_test)\n\n# Save the model\nsave_model(sarimax_result, MODEL3_SARIMAX_PATH)\nprint(f\"SARIMAX model saved to {MODEL3_SARIMAX_PATH}\")\n\n# Export predictions and metrics\nresults_df = X_test.copy()\nresults_df['Actual'] = y_test\nresults_df['Predicted'] = y_pred\nprint(\"\\nPredictions and Metrics:\")\nprint(results_df[['Actual', 'Predicted']].head())\n\nmetrics_df = pd.DataFrame({\n    'Metric': ['MSE', 'R²'],\n    'Value': [mse, r2]\n})\nprint(metrics_df.to_string(index=False))\n\nresults_df.to_csv(PREDICTIONS_SARIMAX_CSV, index=False)\nprint(f\"Predictions and actual values saved to {PREDICTIONS_SARIMAX_CSV}\")\n\nprint(metrics_df.to_string(index=False))",
+      "sha256": "e794cac0cc0e74d1b57f2ecc2faee26e04d3dc81d03e4607030262349bc30c0f"
+    },
+    {
+      "id": "synthetic-time",
+      "path": "dgieser3/research.ipynb",
+      "locator": "JSON cell index 2 (zero based)",
+      "excerpt": "def data_save(data):\n    \"\"\"\n    Save the data to a csv and reinstate the timestamp column.\n    We also \"round\" the data to the nearest hour mark so all \n    entries are equally spaced.\n    \"\"\"\n    df = data.copy()\n\n    data_start = datetime(2020, 1, 1)\n\n    df['timestamp'] = (data_start + (df.index * timedelta(hours=1))).astype('int64')\n    df.to_csv(\"../normalized_datasets/binance_btc_perp.csv\", index=False)\n\ndata_save(all_data)",
+      "sha256": "0bf9e863132285f06606a18fb0ed84b23c06be729ef9ac94b485616fdf9fd1e4"
+    },
+    {
+      "id": "feature-helpers",
+      "path": "utilities/functions.py",
+      "locator": "add_lag_features / add_technical_indicators / add_interaction_terms",
+      "excerpt": "def add_lag_features(df: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"\n    Add lag features to capture temporal trends.\n    \n    Args:\n        df: Input DataFrame\n        \n    Returns:\n        DataFrame with lag features added\n        \n    Raises:\n        KeyError: If 'funding_rate' column is missing\n    \"\"\"\n    if 'funding_rate' not in df.columns:\n        raise KeyError(\"'funding_rate' column is missing. Check the input data.\")\n\n    # Lagged funding rate features\n    df['funding_rate_lag1'] = df['funding_rate'].shift(1)\n    df['funding_rate_lag2'] = df['funding_rate'].shift(2)\n\n    if 'open_interest' in df.columns:\n        df['open_interest_lag1'] = df['open_interest'].shift(1)\n    else:\n        df['open_interest_lag1'] = np.nan\n\n    if 'mark_price' in df.columns:\n        df['mark_price_lag1'] = df['mark_price'].shift(1)\n    else:\n        df['mark_price_lag1'] = np.nan\n\n    # Handle missing values from lagging\n    df.fillna(0, inplace=True)\n    return df\n\ndef add_technical_indicators(df: pd.DataFrame, ma_window: int = 3, vol_window: int = 5) -> pd.DataFrame:\n    \"\"\"\n    Add technical indicators to the DataFrame.\n    \n    Args:\n        df: Input DataFrame\n        ma_window: Window size for moving average\n        vol_window: Window size for volatility calculation\n        \n    Returns:\n        DataFrame with technical indicators added\n        \n    Raises:\n        KeyError: If required columns are missing\n    \"\"\"\n    if 'funding_rate' not in df.columns or 'mark_price' not in df.columns:\n        raise KeyError(\"'funding_rate' or 'mark_price' missing.\")\n\n    df[f'funding_rate_ma{ma_window}'] = df['funding_rate'].rolling(window=ma_window).mean()\n    df['funding_rate_ma5'] = df['funding_rate'].rolling(window=5).mean()\n    \n    df[f'funding_rate_ema{ma_window}'] = df['funding_rate'].ewm(span=ma_window, adjust=False).mean()\n    df['funding_rate_ema5'] = df['funding_rate'].ewm(span=5, adjust=False).mean()\n\n    df['volatility_5h'] = df['mark_price'].rolling(window=vol_window).std()\n\n    df['funding_rate_roc1'] = df['funding_rate'].pct_change(periods=1)\n    df['funding_rate_roc3'] = df['funding_rate'].pct_change(periods=3)\n    \n    if 'open_interest' in df.columns:\n        df['open_interest_roc'] = df['open_interest'].pct_change(periods=1)\n    else:\n        df['open_interest_roc'] = np.nan\n        \n    return df\n\ndef add_interaction_terms(df: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"\n    Add interaction terms to capture relationships between features.\n    \n    Args:\n        df: Input DataFrame\n        \n    Returns:\n        DataFrame with interaction terms added\n        \n    Raises:\n        KeyError: If required columns are missing\n    \"\"\"\n    if 'funding_rate_lag1' not in df.columns or 'funding_rate_lag2' not in df.columns:\n        raise KeyError(\"'funding_rate_lag1' or 'funding_rate_lag2' columns are missing. Ensure lag features are added first.\")\n    if 'funding_rate_ma3' not in df.columns:\n        raise KeyError(\"'funding_rate_ma3' column is missing. Ensure technical indicators are added first.\")\n\n    # Interaction Terms\n    df['interaction1'] = df['funding_rate_lag1'] * df['funding_rate_lag2']\n\n    # Handle potential division-by-zero issues for interaction2\n    interaction2 = df['funding_rate_ma3'] / (df['funding_rate_lag1'].replace(0, np.nan) + 1e-6)\n    interaction2 = interaction2.replace([np.inf, -np.inf], np.nan)\n    interaction2 = interaction2.fillna(0)\n    df['interaction2'] = interaction2\n\n    if 'mark_price_lag1' in df.columns and 'funding_rate_ma3' in df.columns:\n        df['interaction3'] = df['mark_price_lag1'] * df['funding_rate_ma3']\n\n    return df\n\n# ===========================================",
+      "sha256": "8c1eee3e8cd89acbd6e18e1b76a06ff0a902511950afe6855b265c52224200fe"
+    },
+    {
+      "id": "research-scores",
+      "path": "v2/research/saved_prediction_scores.csv",
+      "locator": "Complete saved diagnostic score table",
+      "excerpt": "model,n,r2,mae_bp,rmse_bp,mse_native\nRF saved predictions,7797,0.9749727845960803,0.14061164345358756,0.2178795568319176,4.747150128527282e-10\nCurrent rate reconstructed (persistence),7797,0.9800763715812761,0.09434715916379517,0.19439918246847043,3.7791042144409667e-10\nLag1 column (one observation older),7797,0.9369578792281781,0.17089542131589072,0.3458005063006025,1.19577990157753e-09\nEMA3,7797,0.9557584995514963,0.145388118402116,0.28968442199066663,8.391706434406662e-10\n",
+      "sha256": "afb249d2d7e663760928ada241d6f63ba15a37636249a0b6a20010a4954efaaf"
+    },
+    {
+      "id": "research-evidence",
+      "path": "v2/research/evidence.json",
+      "locator": "Saved artifact-verification measurements",
+      "excerpt": "{\n  \"purpose\": \"Artifact verification; not clean prospective validation or a settlement backtest\",\n  \"input_sha256\": {\n    \"data/normalized_datasets/binance_btc_perp.csv\": \"2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24\",\n    \"results/predictions_RFR.csv\": \"216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e\",\n    \"results/predictions_SARIMAX.csv\": \"e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6\"\n  },\n  \"raw_shape\": [\n    42179,\n    11\n  ],\n  \"arrival_start\": \"2020-01-01 00:59:57.141727+00:00\",\n  \"arrival_end\": \"2024-10-17 23:59:59.736682+00:00\",\n  \"synthetic_end\": \"2024-10-23 10:00:00+00:00\",\n  \"funding_event_ids\": 5256,\n  \"event_ids_with_multiple_distinct_rates\": 3664,\n  \"event_ids_with_one_distinct_rate\": 1592,\n  \"varying_event_share\": 0.6971080669710806,\n  \"first_to_last_event_rate_abs_change_mean_bp\": 0.6224733066971081,\n  \"one_bp_rate_share_all_rows\": 0.40996704521207233,\n  \"null_counts\": {\n    \"exchange\": 1,\n    \"symbol\": 1,\n    \"local_timestamp\": 1,\n    \"funding_timestamp\": 132,\n    \"funding_rate\": 132,\n    \"predicted_funding_rate\": 42179,\n    \"open_interest\": 3326,\n    \"last_price\": 3,\n    \"index_price\": 5470,\n    \"mark_price\": 132,\n    \"timestamp\": 0\n  },\n  \"drift_first_hours\": -0.9992060352777778,\n  \"drift_last_hours\": 130.0000731438889,\n  \"arrival_negative_differences\": 0,\n  \"arrival_adjacent_gaps_over_90min\": 0,\n  \"arrival_gap_seconds_quantiles\": {\n    \"0.0\": 0.223102,\n    \"0.001\": 0.50016495,\n    \"0.01\": 3598.027618,\n    \"0.5\": 3599.9999055,\n    \"0.99\": 3601.767409,\n    \"1.0\": 3701.855579\n  },\n  \"note_on_gaps\": \"Adjacent differences omit pairs containing the one missing arrival timestamp; flooring near-hour-end arrivals also creates bin collisions and must not be interpreted as exact duplicate messages.\",\n  \"backfilled_cells_by_column\": {\n    \"index_price\": 5351,\n    \"open_interest\": 3180\n  },\n  \"rows_zeroed_by_legacy_outlier_path\": 1118,\n  \"zeroed_mean_abs_true_bp\": 12.44109525939177,\n  \"rf_alignment_total_rows\": 7797,\n  \"rf_alignment_rows_with_both_raw_values\": 7793,\n  \"rf_current_max_abs_discrepancy\": 3.0075768264747893e-16,\n  \"rf_next_max_abs_discrepancy\": 0.0,\n  \"rf_real_test_start\": \"2023-11-28 04:59:58.453550+00:00\",\n  \"rf_real_test_end\": \"2024-10-17 22:59:59.032326+00:00\",\n  \"rf_excess_mse_vs_current_rate_pct\": 25.615750695287876,\n  \"rf_excess_mae_vs_current_rate_pct\": 49.0364359667397,\n  \"rf_skill_vs_current_rate\": -0.25615750695287876,\n  \"rf_constant_test_columns\": {\n    \"model1_direction_pred\": 1,\n    \"model2_volatility_h1\": 1,\n    \"predicted_funding_rate\": 1,\n    \"local_timestamp\": 1\n  },\n  \"sarimax_n\": 7622,\n  \"sarimax_r2\": -4.807223264553311,\n  \"sarimax_mae_bp_assuming_1e6_scaling\": 1.7870594557404191,\n  \"sarimax_units_note\": \"1e6 scaling is supported by notebook cell 17; saved file does not contain a units manifest.\"\n}\n",
+      "sha256": "c00fa8ba2bc8f3cf74be0fb52470ae8a35a4a185f2d3c51bcca39d0d1261e72d"
+    },
+    {
+      "id": "research-reproduction",
+      "path": "v2/research/reproduce_evidence.py",
+      "locator": "Read-only research diagnostic (not executed by demo export)",
+      "excerpt": "    grouped = raw.groupby(\"funding_timestamp\").funding_rate.agg([\"size\", \"nunique\", \"first\", \"last\"])\n    drift = (synthetic - arrival).dt.total_seconds() / 3600\n    gaps = arrival.diff().dt.total_seconds()\n    preprocessed = legacy.preprocess_v1(raw)\n    zeroed = legacy.zeroed_outlier_mask(preprocessed)\n    backfilled = audit.backfill_audit(raw)\n    recon = 3 * rf.funding_rate_ma3 - rf.funding_rate_lag1 - rf.funding_rate_lag2\n    scores = []\n    for name, prediction in [(\"RF saved predictions\", rf.Predicted),\n                             (\"Current rate reconstructed (persistence)\", recon),\n                             (\"Lag1 column (one observation older)\", rf.funding_rate_lag1),\n                             (\"EMA3\", rf.funding_rate_ema3)]:\n        scores.append({\"model\": name, \"n\": len(rf), \"r2\": r2_score(rf.Actual, prediction),\n                       \"mae_bp\": float(np.mean(abs(rf.Actual - prediction)) * 1e4),\n                       \"rmse_bp\": float(np.sqrt(mean_squared_error(rf.Actual, prediction)) * 1e4),",
+      "sha256": "d0e18ab5d4f2b8ae34f68f5b9d429757906dac70ac151c612687ac05445d6878"
+    }
+  ],
+  "derivations": {
+    "basis_points": "native decimal rate × 10,000",
+    "current": "3 × funding_rate_ma3 − funding_rate_lag1 − funding_rate_lag2",
+    "residual": "Actual − Predicted (native decimal rate)",
+    "mae": "mean(abs(Actual − prediction))",
+    "mse": "mean((Actual − prediction)^2)",
+    "rmse": "sqrt(MSE)",
+    "r2": "1 − sum((Actual − prediction)^2) / sum((Actual − mean(Actual))^2)",
+    "raw_daily": "UTC day of valid local_timestamp; nonmissing field mean plus exact min/max and valid/missing counts. No interpolation, filling, or outlier removal.",
+    "nominal_reference": "24 is a nominal daily row-count reference only, not proof of missing observations; daily bin counts are affected by arrival-time boundaries.",
+    "rf_axis": "All saved rows retained in CSV order, zero-based. source_row_index is the saved index column, not a verified market timestamp."
+  },
+  "publication": {
+    "public_release_cleared": false,
+    "note": "Local demo only. Provider-derived aggregates and saved predictions may carry redistribution restrictions. No redistribution permission is established in this export; review provider rights before public deployment. Full raw CSV is not copied."
+  }
+}

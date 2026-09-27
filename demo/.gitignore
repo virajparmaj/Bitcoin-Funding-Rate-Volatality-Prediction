@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.venv/
+*.tsbuildinfo
+.DS_Store
+# AI image generation prompt notes are local production records, not demo content.
+ARTWORK.md
+# Local browser QA session notes are development records, not demo documentation.
+QA.md
+# Compact evidence belongs to this demo; original provider data stays outside it.
+!public/
+!public/data/
+!public/data/*.json

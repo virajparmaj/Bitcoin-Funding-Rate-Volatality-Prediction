@@ -1,0 +1,20 @@
+import type { Evidence, Research } from './types';
+import { Badge, Note, SectionHeading, SourceLink, fixed, number } from './components/ui';
+import { BitcoinArtwork } from './components/BitcoinArtwork';
+
+export function Findings({ evidence, research }: { evidence: Evidence; research: Research }) {
+  const rf = evidence.rf.metrics.find(metric => metric.id === 'predicted')!;
+  const current = evidence.rf.metrics.find(metric => metric.id === 'current')!;
+  const observations = [
+    { id: 'baseline', title: 'High R² did not establish improvement over persistence', text: `On ${number(evidence.rf.n)} identical saved rows, RF R² is ${fixed(rf.r2)} versus ${fixed(current.r2)} for current-rate persistence. RF has ${fixed(evidence.rf.comparison.excess_mse_pct, 2)}% greater MSE. This supports persistent next-observation behavior on these artifacts, not a general claim about market predictability.`, sourceIds: ['rf', 'rf-target', 'research-scores'] },
+    ...research.findings.filter(finding => finding.id !== 'reproducibility'),
+  ];
+  return <><SectionHeading number="05" title="What the work actually establishes." description="The strongest lesson is about evaluation: define the target, inspect the evidence, and put the model beside the right baseline." />
+    <div className="finding-list">{observations.map((finding, index) => <article className="finding" key={finding.id}><span className="finding-number mono">0{index + 1}</span><div><h2>{finding.title}</h2><p>{finding.text}</p><SourceLink ids={finding.sourceIds}>Supporting evidence</SourceLink></div></article>)}</div>
+    <Note>No verified trading strategy, executable profitability result, or broadly validated market forecast is presented. Prediction errors alone cannot establish the presence or absence of profitable trading.</Note>
+    <details className="disclosure findings-disclosure"><summary>Methodology & reproducibility limitations <span className="mono">{research.limitations.length + 1} ITEMS</span></summary><div className="limitation-grid">{research.limitations.map(limitation => <article key={limitation.id}><h3>{limitation.title}</h3><p>{limitation.text}</p><SourceLink ids={limitation.sourceIds}>Methodology source</SourceLink></article>)}</div><article className="limitation-extra"><h3>Constant integration outputs</h3><p>Direction and conditional-variance test inputs are constant in the saved RF file. Their training contribution is unresolved.</p><SourceLink ids={['saved-integration-values', 'regression-rf']}>Saved integration values</SourceLink></article></details>
+    <details className="disclosure findings-disclosure"><summary>Future work · the proposed v2 study <Badge kind="planned">Planned</Badge></summary><p>Current v2 source files contain the audit and its helpers. Preliminary archive and data-feasibility checks do not establish completed forecasting experiments.</p><div className="plan-grid">{research.plans.map(plan => <article key={plan.id}><Badge kind="planned">{plan.status}</Badge><h3>{plan.title}</h3><p>{plan.text}</p><SourceLink ids={plan.sourceIds}>Study plan</SourceLink></article>)}</div></details>
+    <details className="disclosure findings-disclosure"><summary>Where the project documents disagree</summary>{research.corrections.map(correction => <article className="correction" key={correction.id}><h3>{correction.title}</h3><p className="small">Earlier claim: {correction.staleClaim}</p><p>{correction.correction}</p><SourceLink ids={correction.sourceIds}>Compare source records</SourceLink></article>)}</details>
+    <div className="attribution-note"><BitcoinArtwork className="transition-art" /><div><span className="eyebrow">PROJECT ATTRIBUTION</span><p>This presentation covers STAT 429 group coursework and a later saved-result audit. It does not assign individual ownership of every model or attribute the later audit to the original coursework.</p><SourceLink ids={['group-attribution', 'v2-source-inventory']}>Project record</SourceLink></div></div>
+  </>;
+}

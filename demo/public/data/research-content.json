@@ -1,0 +1,1971 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "method": "Static source inspection and extraction of stored notebook text outputs; no experiments or model loading.",
+    "notebookLocatorConvention": "JSON cell and output indices are zero-based; file line numbers are one-based.",
+    "attribution": "Repository coursework and later evaluation audit; individual model ownership is not inferred.",
+    "inputHashes": {
+      "README.md": "588d667b5ccaf8585adde5f2d38893fc611036afa91c3bc152b0db8eb9e5fdc4",
+      "config.py": "aa15bf421b07ea46c09232880997674736e7564195c5c07b085a5f0639678020",
+      "dgieser3/research.ipynb": "0bf9e863132285f06606a18fb0ed84b23c06be729ef9ac94b485616fdf9fd1e4",
+      "models/model1.py": "870c2dc963e74a67dd14199bcea5556c4513b399bf25a42c528f21435e370315",
+      "notebooks/model_development.ipynb": "e794cac0cc0e74d1b57f2ecc2faee26e04d3dc81d03e4607030262349bc30c0f",
+      "notebooks/stat429_analysis_a.ipynb": "c715063f9ec07feb175de788ce08449a77b41238310b1496039e97f4214ad6c2",
+      "notes/05_feature_engineering.md": "8584745fb4ab497b45c337227a8a8e8190534510362da03887a956cc554793e1",
+      "notes/06_ml_models.md": "c5b8c406e0c038507cb53cf9a2ffe26cd96dfbc1d92c22ffcd17ce6eea09f8f4",
+      "notes/09_results_and_metrics.md": "8c61265bfde8acc157e24a9c8f7420752d1a81ab5548690191eaae2bb9fa791b",
+      "results/predictions_RFR.csv": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e",
+      "results/predictions_SARIMAX.csv": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6",
+      "utilities/data_import.py": "5dd50ffc71e11373b657bd3b200dd9aeee12fb0ee6cdcdb24ec84c68337764ab",
+      "utilities/data_processing.py": "5e89a13ae425565bfa602569ab8b01fb5a37e7b513b03c867b8929da40216957",
+      "utilities/functions.py": "8c1eee3e8cd89acbd6e18e1b76a06ff0a902511950afe6855b265c52224200fe",
+      "utilities/model_utils.py": "5180f4f8b484e31b56230e889aaa5a84c48c9997a5415edbd581683e9e4ff41c",
+      "v2/README.md": "583537166cd6e38e5857908fcb6713fa99041f7fd108864ee7d825669ed84ade",
+      "v2/notebooks/00_audit_v1.ipynb": "a70e6fc472b7e57acbcd9528043686f5cf7b2b13cd91c1ebadd189ea49ab9e2e",
+      "v2/paper_plan/02_verified_findings.md": "520355091e4f19b5699eeaf840f81bd35f3063816044f1d5c1f391fd37568266",
+      "v2/paper_plan/05_data_contract_and_feasibility.md": "31d45e91335152d08ec611ba3edcbadb81fba4f3fad8413dc06d86f45248ca42",
+      "v2/paper_plan/07_implementation_plan.md": "5d7f8118a221f8bb8a1d7b2bc9b33dd1e9312e3ee05b50956c0ed737010b1d5d",
+      "v2/paper_plan/09_results_ledger.md": "81013710c23a94e7e4898fc01f604051fd500156b4e05a959f41504840e1ad0d",
+      "v2/paper_plan/13_execution_backlog.md": "9855a47f6ad6ff95f93ca7871160281fb5624c620e2c6154918f4b68116622be",
+      "v2/research/research_assessment.md": "178207488a9c0cf7f30a42d3fe7178feb7c0b804f2182ab7bd3839f024018be5",
+      "v2/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "v2/src/audit.py": "09c6a2acb2ca35db7d1ad43416461d74b5598e8dd7f59148323825e06ccca80b",
+      "v2/src/config.py": "47f97439ec39102afebd44ae83dfaf7817bf96eb2483cf78d9c447e780e240da",
+      "v2/src/legacy.py": "ca3a9aba18f5a1b7c445ae319b3cee0eb6f5be6d620c1845e9b145199de35038"
+    }
+  },
+  "tasks": [
+    {
+      "id": "analysis-a",
+      "title": "Exploratory analysis",
+      "subtitle": "Contemporaneous funding-rate regression",
+      "target": "funding_rate[t] — the current observed funding indication",
+      "units": "Native funding rate; MSE in rate²; R² unitless",
+      "inputs": [
+        "Open interest and mark price",
+        "Calendar variables from local_timestamp",
+        "24-row funding standard deviation in LR2 and RF"
+      ],
+      "models": [
+        "Linear Regression 1",
+        "Linear Regression 2",
+        "Random Forest Regressor",
+        "ARIMA(5,1,0) full-series fit"
+      ],
+      "split": "Regression: shuffled 80/20 train_test_split, random_state=42. ARIMA: fit to the available full series.",
+      "preprocessing": [
+        "Preprocessed data; stored initial output shows missing values filled.",
+        "The regression design matrix drops missing feature rows.",
+        "Time series, histogram, correlations, rolling summaries, ADF, ACF and PACF are included."
+      ],
+      "limitations": [
+        "Predicts the current response; this is not verified future forecasting.",
+        "The 24-row std contains the current response in LR2 and RF.",
+        "Shuffling ignores chronological separation.",
+        "Printed regression 'next five' values reuse the last five test inputs.",
+        "Stored outputs reflect historical execution; current helpers and saved execution history differ."
+      ],
+      "status": "Stored execution output",
+      "sourceIds": [
+        "analysis-features",
+        "analysis-split",
+        "analysis-lr1-output",
+        "analysis-lr2-output",
+        "analysis-rf-output",
+        "analysis-arima-code"
+      ]
+    },
+    {
+      "id": "model-1",
+      "title": "Model 1 · Direction",
+      "subtitle": "Next-observation classification",
+      "target": "direction[t] = 1 if funding_rate[t+1] > funding_rate[t], otherwise 0",
+      "units": "Class 1: increase; class 0: unchanged or decrease",
+      "inputs": [
+        "Funding lags, rolling means and EMA3",
+        "Mark price and its lag",
+        "RF also selects open-interest history, rate-of-change and interactions"
+      ],
+      "models": [
+        "Logistic Regression",
+        "Random Forest Classifier"
+      ],
+      "split": "Chronological 80/20 holdout in notebook code; ordinary five-fold GridSearchCV for tuning.",
+      "preprocessing": [
+        "Feature generation runs before the holdout split.",
+        "Notebook RF setup enables funding rescaling by 10^6 and outlier handling; logistic cell calls pipeline defaults.",
+        "StandardScaler is fitted on training data before GridSearchCV; preprocessing is not refitted inside each CV fold.",
+        "Nonfinite RF features are replaced with zero; logistic preprocessing forward/backfills."
+      ],
+      "limitations": [
+        "No saved classification predictions or usable execution metrics were found in the inspected training cells.",
+        "Reported RF accuracy and F1 conflict between notebook narrative and project notes.",
+        "Ordinary CV is not a demonstrated walk-forward evaluation.",
+        "The current target helper assigns the final unknown next-row comparison to class 0. The standalone model1.py path separately drops its missing future target.",
+        "volatility_5min is requested while the current helper creates volatility_5h."
+      ],
+      "status": "Implemented, result unavailable",
+      "sourceIds": [
+        "classifier-rf",
+        "classifier-logistic",
+        "classifier-reported",
+        "notes-classification",
+        "tuning",
+        "target-calendar",
+        "standalone-model1"
+      ]
+    },
+    {
+      "id": "model-2",
+      "title": "Model 2 · Conditional variance",
+      "subtitle": "GARCH-family fitting",
+      "target": "Conditional variance of the funding-rate series; terminal forecast at five observation steps",
+      "units": "Conditional variance in squared rate units; standard deviation is its square root",
+      "inputs": [
+        "funding_rate series from process_pipeline defaults",
+        "Autoregressive mean terms for AR(1) and AR(2) variants"
+      ],
+      "models": [
+        "GARCH(1,1)",
+        "EGARCH(1,1)",
+        "GJR-GARCH variants",
+        "Normal, Student-t and GED innovation alternatives"
+      ],
+      "split": "Full-series fitting and in-sample AIC/BIC comparison; no verified out-of-sample variance evaluation.",
+      "preprocessing": [
+        "Current default pipeline forward/backfills and constructs features.",
+        "ADF code conditionally differences the series.",
+        "Selects the minimum-AIC fitted model and prints terminal conditional variances; plot takes their square roots."
+      ],
+      "limitations": [
+        "GJR-GARCH(1,1) with AR(2) mean is selected in narrative only; the fitting cell has no stored output.",
+        "AIC/BIC compare in-sample fit with complexity penalties; they do not measure future variance accuracy.",
+        "The fitting code uses funding_rate, without a Model 1 direction input.",
+        "Absolute parameter magnitudes are not feature importance.",
+        "Narrative variance values are not independently verified."
+      ],
+      "status": "Implemented, result unavailable",
+      "sourceIds": [
+        "garch",
+        "garch-reported",
+        "notes-garch",
+        "variance-integration"
+      ]
+    },
+    {
+      "id": "model-3",
+      "title": "Model 3 · Funding level",
+      "subtitle": "Next-observation funding-rate regression",
+      "target": "future_funding_rate[t] = funding_rate[t+1]",
+      "units": "RF saved values: native funding rate; native rate × 10,000 = bp. SARIMAX path rescales funding by 10^6.",
+      "inputs": [
+        "Funding lags, smoothers, changes, interactions and calendar features",
+        "Market and time fields selected by exclusion",
+        "Intended direction and conditional-variance outputs"
+      ],
+      "models": [
+        "Random Forest Regressor",
+        "SARIMAX(3,1,3) with exogenous features"
+      ],
+      "split": "Chronological 80/20 split in source. RF and SARIMAX saved outputs cover different samples; SARIMAX predicts the holdout in one block.",
+      "preprocessing": [
+        "Target shift and missing-row removal precede the split.",
+        "RF replaces nonfinite values with zero and clips features to ±10^9.",
+        "SARIMAX rescales funding by 10^6, enables outlier handling, and clips features to ±10^5.",
+        "Current helper interfaces disagree with notebook integration calls."
+      ],
+      "limitations": [
+        "Saved predictions establish artifact-level scores, not a successful current end-to-end training run.",
+        "Constant saved integration columns do not establish a contribution during training.",
+        "The current-rate identity reconstructs an observable predictor, not the unknown next-row target.",
+        "Retrospective persistence diagnostics are later comparisons, not original fitted models.",
+        "SARIMAX's block forecast, units and sample differ from the RF comparison."
+      ],
+      "status": "Recomputed from saved predictions",
+      "sourceIds": [
+        "regression-rf",
+        "regression-sarimax",
+        "direction-integration",
+        "variance-integration",
+        "pipeline-stored-error",
+        "saved-header-rf",
+        "saved-header-sarimax",
+        "saved-integration-values"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "funding_rate_lag1",
+      "name": "funding_rate_lag1",
+      "group": "Funding history",
+      "formula": "funding_rate.shift(1)",
+      "purpose": "Represent recent funding history.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_lag_features",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Lookback is in rows, not independently verified hours. Lag creation fills all missing cells with zero."
+      ],
+      "sourceIds": [
+        "lag-definitions",
+        "classifier-rf",
+        "classifier-logistic",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_lag2",
+      "name": "funding_rate_lag2",
+      "group": "Funding history",
+      "formula": "funding_rate.shift(2)",
+      "purpose": "Represent recent funding history.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_lag_features",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Lookback is in rows, not independently verified hours. Lag creation fills all missing cells with zero."
+      ],
+      "sourceIds": [
+        "lag-definitions",
+        "classifier-rf",
+        "classifier-logistic",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_ma3",
+      "name": "funding_rate_ma3",
+      "group": "Smoothed funding",
+      "formula": "funding_rate.rolling(3).mean()",
+      "purpose": "Summarize the current and recent funding observations.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Includes the current funding indication; not inherently a future-target leak for a next-row target."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "classifier-rf",
+        "classifier-logistic",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_ema3",
+      "name": "funding_rate_ema3",
+      "group": "Smoothed funding",
+      "formula": "funding_rate.ewm(span=3, adjust=False).mean()",
+      "purpose": "Smooth history with more weight on recent observations.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [],
+      "sourceIds": [
+        "technical-definitions",
+        "classifier-rf",
+        "classifier-logistic",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_ma5",
+      "name": "funding_rate_ma5",
+      "group": "Smoothed funding",
+      "formula": "funding_rate.rolling(5).mean()",
+      "purpose": "Summarize the current and recent funding observations.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Includes the current funding indication; not inherently a future-target leak for a next-row target."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "classifier-rf",
+        "classifier-logistic",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_ema5",
+      "name": "funding_rate_ema5",
+      "group": "Smoothed funding",
+      "formula": "funding_rate.ewm(span=5, adjust=False).mean()",
+      "purpose": "Smooth history with more weight on recent observations.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [],
+      "sourceIds": [
+        "technical-definitions",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_roc1",
+      "name": "funding_rate_roc1",
+      "group": "Funding changes",
+      "formula": "funding_rate.pct_change(periods=1)",
+      "purpose": "Represent proportional funding changes.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Zero or near-zero denominators can create infinities or unstable ratios; later zero-filling/clipping changes their meaning."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "funding_rate_roc3",
+      "name": "funding_rate_roc3",
+      "group": "Funding changes",
+      "formula": "funding_rate.pct_change(periods=3)",
+      "purpose": "Represent proportional funding changes.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Zero or near-zero denominators can create infinities or unstable ratios; later zero-filling/clipping changes their meaning."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "open_interest",
+      "name": "open_interest",
+      "group": "Market state",
+      "formula": "Observed ticker field; selected and transformed by experiment",
+      "purpose": "Provide market-state context.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "Raw input field",
+      "selectedBy": [
+        "Analysis A · LR1",
+        "Analysis A · LR2",
+        "Analysis A · RF",
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Hourly resample .last() can select last nonmissing fields asynchronously; exact original message provenance is unavailable."
+      ],
+      "sourceIds": [
+        "config-input",
+        "import-sampling",
+        "classifier-rf",
+        "analysis-features",
+        "analysis-lr1-code",
+        "analysis-lr2-code",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "mark_price",
+      "name": "mark_price",
+      "group": "Market state",
+      "formula": "Observed ticker field; selected and transformed by experiment",
+      "purpose": "Provide market-state context.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "Raw input field",
+      "selectedBy": [
+        "Analysis A · LR1",
+        "Analysis A · LR2",
+        "Analysis A · RF",
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Hourly resample .last() can select last nonmissing fields asynchronously; exact original message provenance is unavailable."
+      ],
+      "sourceIds": [
+        "config-input",
+        "import-sampling",
+        "classifier-rf",
+        "classifier-logistic",
+        "analysis-features",
+        "analysis-lr1-code",
+        "analysis-lr2-code",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "last_price",
+      "name": "last_price",
+      "group": "Market state",
+      "formula": "Observed ticker field; selected and transformed by experiment",
+      "purpose": "Provide market-state context.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "Raw input field",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Hourly resample .last() can select last nonmissing fields asynchronously; exact original message provenance is unavailable."
+      ],
+      "sourceIds": [
+        "config-input",
+        "import-sampling",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "index_price",
+      "name": "index_price",
+      "group": "Market state",
+      "formula": "Observed ticker field; selected and transformed by experiment",
+      "purpose": "Provide market-state context.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "Raw input field",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Hourly resample .last() can select last nonmissing fields asynchronously; exact original message provenance is unavailable."
+      ],
+      "sourceIds": [
+        "config-input",
+        "import-sampling",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "open_interest_lag1",
+      "name": "open_interest_lag1",
+      "group": "Market state",
+      "formula": "open_interest.shift(1)",
+      "purpose": "Represent the preceding market-state observation.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_lag_features",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [],
+      "sourceIds": [
+        "lag-definitions",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "mark_price_lag1",
+      "name": "mark_price_lag1",
+      "group": "Market state",
+      "formula": "mark_price.shift(1)",
+      "purpose": "Represent the preceding market-state observation.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_lag_features",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 1 · Logistic",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [],
+      "sourceIds": [
+        "lag-definitions",
+        "classifier-rf",
+        "classifier-logistic",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "open_interest_roc",
+      "name": "open_interest_roc",
+      "group": "Market state",
+      "formula": "open_interest.pct_change(periods=1)",
+      "purpose": "Represent proportional open-interest changes.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Zero-denominator and missing-data cleanup apply."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "volatility_5h",
+      "name": "volatility_5h",
+      "group": "Price variability",
+      "formula": "mark_price.rolling(window=5).std()",
+      "purpose": "Summarize dispersion of five mark-price levels.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_technical_indicators",
+      "selectedBy": [],
+      "savedIn": [],
+      "limitations": [
+        "Standard deviation of price levels, not returns or funding rates. Window means five rows; helper name does not verify a regular hourly clock.",
+        "This name is absent from saved prediction headers; legacy paths request volatility_5min. Model 3's all-column selector would include the current helper column if execution reached that stage; current end-to-end execution is unverified."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "regression-rf",
+        "regression-sarimax"
+      ]
+    },
+    {
+      "id": "volatility_5min",
+      "name": "volatility_5min",
+      "group": "Price variability",
+      "formula": "Legacy feature name; current helper emits volatility_5h instead",
+      "purpose": "Legacy price-variability input selected by notebook/integration.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "Historical implementation not recovered; present in notebook selectors and saved outputs",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "The name is not evidence of five-minute data. Do not silently equate historical implementation with the current helper."
+      ],
+      "sourceIds": [
+        "technical-definitions",
+        "direction-integration",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "std",
+      "name": "std",
+      "group": "Funding variability",
+      "formula": "funding_rate.rolling(window=24).std()",
+      "purpose": "Summarize 24 funding observations including the current response.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "notebooks/stat429_analysis_a.ipynb · JSON cell 22",
+      "selectedBy": [
+        "Analysis A · LR2",
+        "Analysis A · RF"
+      ],
+      "savedIn": [],
+      "limitations": [
+        "Contains funding_rate[t], the contemporaneous target of Analysis A. No measured forecasting contribution follows."
+      ],
+      "sourceIds": [
+        "analysis-features",
+        "analysis-lr1-code",
+        "analysis-lr2-code"
+      ]
+    },
+    {
+      "id": "interaction1",
+      "name": "interaction1",
+      "group": "Interactions",
+      "formula": "funding_rate_lag1 × funding_rate_lag2",
+      "purpose": "Represent a nonlinear relation between recent funding levels.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_interaction_terms",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Purpose is a design rationale; no causal or ablation contribution was measured."
+      ],
+      "sourceIds": [
+        "interaction-definitions",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "interaction2",
+      "name": "interaction2",
+      "group": "Interactions",
+      "formula": "MA3 / (lag1.replace(0, NaN) + 1e-6); infinities → NaN → 0",
+      "purpose": "Represent relative smoothed-to-lagged funding, with explicit cleanup.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_interaction_terms",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Purpose is a design rationale; no causal or ablation contribution was measured."
+      ],
+      "sourceIds": [
+        "interaction-definitions",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "interaction3",
+      "name": "interaction3",
+      "group": "Interactions",
+      "formula": "mark_price_lag1 × funding_rate_ma3",
+      "purpose": "Represent a funding/price cross-term.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_interaction_terms",
+      "selectedBy": [
+        "Model 1 · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Purpose is a design rationale; no causal or ablation contribution was measured."
+      ],
+      "sourceIds": [
+        "interaction-definitions",
+        "classifier-rf",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "hour",
+      "name": "hour",
+      "group": "Calendar",
+      "formula": "timestamp.dt.hour",
+      "purpose": "Represent calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features; Analysis A uses local_timestamp",
+      "selectedBy": [
+        "Analysis A · LR1",
+        "Analysis A · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Model-development calendar uses synthetic timestamp; Analysis A extracts from local_timestamp."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "analysis-features",
+        "synthetic-clock",
+        "analysis-lr1-code",
+        "analysis-lr2-code",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "hour_sin",
+      "name": "hour_sin",
+      "group": "Calendar",
+      "formula": "sin(2π × hour / 24)",
+      "purpose": "Encode cyclical calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Synthetic time provenance applies; day is day-of-month with fixed period 31."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "synthetic-clock",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "hour_cos",
+      "name": "hour_cos",
+      "group": "Calendar",
+      "formula": "cos(2π × hour / 24)",
+      "purpose": "Encode cyclical calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Synthetic time provenance applies; day is day-of-month with fixed period 31."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "synthetic-clock",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "day",
+      "name": "day",
+      "group": "Calendar",
+      "formula": "timestamp.dt.day (day of month)",
+      "purpose": "Represent calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features; Analysis A uses local_timestamp",
+      "selectedBy": [
+        "Analysis A · LR1",
+        "Analysis A · LR2",
+        "Analysis A · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Model-development calendar uses synthetic timestamp; Analysis A extracts from local_timestamp."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "analysis-features",
+        "synthetic-clock",
+        "analysis-lr1-code",
+        "analysis-lr2-code",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "day_sin",
+      "name": "day_sin",
+      "group": "Calendar",
+      "formula": "sin(2π × day / 31)",
+      "purpose": "Encode cyclical calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Synthetic time provenance applies; day is day-of-month with fixed period 31."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "synthetic-clock",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "day_cos",
+      "name": "day_cos",
+      "group": "Calendar",
+      "formula": "cos(2π × day / 31)",
+      "purpose": "Encode cyclical calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Synthetic time provenance applies; day is day-of-month with fixed period 31."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "synthetic-clock",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "month",
+      "name": "month",
+      "group": "Calendar",
+      "formula": "timestamp.dt.month",
+      "purpose": "Represent calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features; Analysis A uses local_timestamp",
+      "selectedBy": [
+        "Analysis A · LR1",
+        "Analysis A · LR2",
+        "Analysis A · RF",
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Model-development calendar uses synthetic timestamp; Analysis A extracts from local_timestamp."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "analysis-features",
+        "synthetic-clock",
+        "analysis-lr1-code",
+        "analysis-lr2-code",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "month_sin",
+      "name": "month_sin",
+      "group": "Calendar",
+      "formula": "sin(2π × month / 12)",
+      "purpose": "Encode cyclical calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Synthetic time provenance applies; day is day-of-month with fixed period 31."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "synthetic-clock",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "month_cos",
+      "name": "month_cos",
+      "group": "Calendar",
+      "formula": "cos(2π × month / 12)",
+      "purpose": "Encode cyclical calendar position.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/data_processing.py · create_features",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Synthetic time provenance applies; day is day-of-month with fixed period 31."
+      ],
+      "sourceIds": [
+        "target-calendar",
+        "synthetic-clock",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax"
+      ]
+    },
+    {
+      "id": "model1_direction_pred",
+      "name": "model1_direction_pred",
+      "group": "Intended model outputs",
+      "formula": "loaded Model 1 RF.predict(scaler.transform(selected features))",
+      "purpose": "Intended integration of direction into Model 3.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_model1_direction",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Constant in saved RF test rows; this does not establish its effects during training. No verified integration gain."
+      ],
+      "sourceIds": [
+        "direction-integration",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax",
+        "saved-integration-values"
+      ]
+    },
+    {
+      "id": "model2_volatility_h1",
+      "name": "model2_volatility_h1",
+      "group": "Intended model outputs",
+      "formula": "model2_result.forecast(reindex=False).variance.iloc[:,0], reindexed to df",
+      "purpose": "Intended integration of conditional variance into Model 3.",
+      "purposeStatus": "Design rationale; not a measured contribution",
+      "engineeredIn": "utilities/functions.py · add_model2_volatility",
+      "selectedBy": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "savedIn": [
+        "Model 3 · RF",
+        "Model 3 · SARIMAX"
+      ],
+      "limitations": [
+        "Variance, not standard deviation. Constant in saved RF test rows; no verified integration gain.",
+        "Notebook calls steps=5, but the current helper requires model2_result."
+      ],
+      "sourceIds": [
+        "variance-integration",
+        "regression-rf",
+        "regression-sarimax",
+        "saved-header-rf",
+        "saved-header-sarimax",
+        "saved-integration-values"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "analysis-lr1",
+      "taskId": "analysis-a",
+      "model": "Linear Regression 1",
+      "status": "Stored execution output",
+      "target": "Current funding_rate[t]",
+      "units": "R²: unitless; MSE: native funding-rate²",
+      "sampleCount": null,
+      "sampleCountNote": "Test count is not printed in the stored metric cell. The stored initial frame has 42,179 rows; 24-row rolling std and the 80/20 split imply 8,432 test rows if executed sequentially as shown. This count was not independently reproduced.",
+      "evaluation": "Shuffled 80/20 split; random_state=42; historical notebook output, not a fresh run.",
+      "values": {
+        "r2": 0.1320387323525064,
+        "mse": 5.358119195397392e-08
+      },
+      "sourceIds": [
+        "analysis-lr1-output",
+        "analysis-lr1-code",
+        "analysis-features",
+        "analysis-split",
+        "analysis-preprocessed"
+      ]
+    },
+    {
+      "id": "analysis-lr2",
+      "taskId": "analysis-a",
+      "model": "Linear Regression 2",
+      "status": "Stored execution output",
+      "target": "Current funding_rate[t]",
+      "units": "R²: unitless; MSE: native funding-rate²",
+      "sampleCount": null,
+      "sampleCountNote": "Test count is not printed in the stored metric cell. The stored initial frame has 42,179 rows; 24-row rolling std and the 80/20 split imply 8,432 test rows if executed sequentially as shown. This count was not independently reproduced.",
+      "evaluation": "Shuffled 80/20 split; random_state=42; historical notebook output, not a fresh run.",
+      "values": {
+        "r2": 0.2838485031310216,
+        "mse": 4.420963498275209e-08
+      },
+      "sourceIds": [
+        "analysis-lr2-output",
+        "analysis-lr2-code",
+        "analysis-features",
+        "analysis-split",
+        "analysis-preprocessed"
+      ]
+    },
+    {
+      "id": "analysis-rf",
+      "taskId": "analysis-a",
+      "model": "Random Forest Regressor",
+      "status": "Stored execution output",
+      "target": "Current funding_rate[t]",
+      "units": "R²: unitless; MSE: native funding-rate²",
+      "sampleCount": null,
+      "sampleCountNote": "Test count is not printed in the stored metric cell. The stored initial frame has 42,179 rows; 24-row rolling std and the 80/20 split imply 8,432 test rows if executed sequentially as shown. This count was not independently reproduced.",
+      "evaluation": "Shuffled 80/20 split; random_state=42; historical notebook output, not a fresh run.",
+      "values": {
+        "r2": 0.9362584465106524,
+        "mse": 3.934908780220261e-09
+      },
+      "sourceIds": [
+        "analysis-rf-output",
+        "analysis-rf-code",
+        "analysis-features",
+        "analysis-split",
+        "analysis-preprocessed"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "separate-targets",
+      "title": "One dataset, distinct questions",
+      "text": "Exploration predicts the current indication; classifiers predict a next-row increase; GARCH fits conditional variance; Model 3 predicts the next observed rate. Their scores answer different questions.",
+      "status": "Confirmed from executable definitions",
+      "sourceIds": [
+        "analysis-features",
+        "target-calendar",
+        "garch",
+        "regression-rf"
+      ]
+    },
+    {
+      "id": "feature-work",
+      "title": "Real feature engineering, explicit scope",
+      "text": "The implementation creates lags, smoothers, proportional changes, interactions and cyclical calendar encodings. Experiment selections differ, and design rationales are not measured feature contributions.",
+      "status": "Confirmed from executable definitions",
+      "sourceIds": [
+        "lag-definitions",
+        "technical-definitions",
+        "interaction-definitions",
+        "target-calendar",
+        "classifier-rf",
+        "classifier-logistic"
+      ]
+    },
+    {
+      "id": "evaluation-design",
+      "title": "Evaluation design changes the claim",
+      "text": "Analysis A combines a shuffled split with a current-rate target and a target-containing variability feature. Its stored regression scores are exploratory evidence, not verified future forecasts.",
+      "status": "Stored execution output",
+      "sourceIds": [
+        "analysis-features",
+        "analysis-split",
+        "analysis-rf-output"
+      ]
+    },
+    {
+      "id": "integration",
+      "title": "An intended stack, an unresolved contribution",
+      "text": "Model 3 attempts to add direction and conditional variance. Both columns are constant in its saved RF test data; no verified integration improvement is available, and training effects cannot be inferred from test constants.",
+      "status": "Recomputed from saved predictions",
+      "sourceIds": [
+        "regression-rf",
+        "saved-integration-values"
+      ]
+    },
+    {
+      "id": "reproducibility",
+      "title": "Saved artifacts need separate interpretation",
+      "text": "Notebook outputs, current helper interfaces and narrative results disagree. The later audit adds useful saved-result checks, while settlement forecasting and clean walk-forward model comparisons remain planned.",
+      "status": "Current repository inspection",
+      "sourceIds": [
+        "pipeline-stored-error",
+        "variance-integration",
+        "notes-classification",
+        "v2-pending-results",
+        "v2-source-inventory"
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "id": "splits",
+      "title": "Splits and tuning",
+      "text": "Analysis A shuffles the holdout. Model 1 and Model 3 use chronological holdouts in source, but classifier tuning uses ordinary five-fold GridSearchCV, after train-wide scaling. Neither establishes a clean walk-forward protocol.",
+      "sourceIds": [
+        "analysis-split",
+        "classifier-rf",
+        "classifier-logistic",
+        "tuning",
+        "regression-rf"
+      ]
+    },
+    {
+      "id": "preprocessing",
+      "title": "Future-aware fills and zero replacement",
+      "text": "Current preprocessing forward-fills then backward-fills the full frame before splitting. The lag helper fills all missing values with zero. In the legacy outlier path, a shortened funding series is reassigned, creating missing cells that later become zero. These changes can alter labels and feature meaning.",
+      "sourceIds": [
+        "preprocess",
+        "pipeline-sequence",
+        "lag-definitions",
+        "outlier-definition"
+      ]
+    },
+    {
+      "id": "target-boundary",
+      "title": "The final direction label",
+      "text": "The target helper evaluates a missing final future observation as false, then casts it to class 0. It does not itself drop that unknown target. The standalone logistic script has a separate dropna step, so target validity depends on the execution path.",
+      "sourceIds": [
+        "target-calendar",
+        "standalone-model1"
+      ]
+    },
+    {
+      "id": "timestamp",
+      "title": "Time and sampling provenance",
+      "text": "Ingestion resamples derivative tickers nominally hourly; a later notebook overwrites timestamp with a synthetic hourly grid. Observation lookbacks are row counts, and a synthetic axis must not be relabeled as verified UTC arrival time.",
+      "sourceIds": [
+        "import-sampling",
+        "synthetic-clock",
+        "config-input"
+      ]
+    },
+    {
+      "id": "interfaces",
+      "title": "Current helper and notebook mismatch",
+      "text": "The current helper creates volatility_5h, but notebook/integration code expects volatility_5min. Model 3 calls add_model2_volatility(df, steps=5), while the current helper requires a fitted model result. Saved predictions are not proof that this checkout trains end to end.",
+      "sourceIds": [
+        "technical-definitions",
+        "direction-integration",
+        "variance-integration",
+        "regression-rf",
+        "regression-sarimax"
+      ]
+    },
+    {
+      "id": "stored-error",
+      "title": "Stored history is not a current rerun",
+      "text": "The saved setup output reports an unexpected keep_future_rate argument and then a NoneType error. The current create_features signature now accepts that argument. The error documents historical execution state; it does not verify that the same error occurs now.",
+      "sourceIds": [
+        "pipeline-stored-error",
+        "target-calendar",
+        "pipeline"
+      ]
+    },
+    {
+      "id": "garch",
+      "title": "Variance fitting versus forecast accuracy",
+      "text": "GARCH AIC/BIC are in-sample selection criteria. The reported selected model and terminal variance forecast lack stored execution output here, and no usable out-of-sample variance score is verified. Absolute parameter values should not be shown as feature importance.",
+      "sourceIds": [
+        "garch",
+        "garch-reported"
+      ]
+    },
+    {
+      "id": "metric-conflicts",
+      "title": "Conflicting reported classification scores",
+      "text": "The notebook and notes report different tuned RF accuracy and F1 values. Keep them in optional historical detail; there is no verified classification leaderboard, ROC curve or confusion matrix to reconstruct from summaries.",
+      "sourceIds": [
+        "classifier-reported",
+        "notes-classification"
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Prediction errors do not establish profits",
+      "text": "No verified strategy, executable backtest or trading-profit result is available in the inspected work. An error comparison cannot prove the existence or absence of profitable trading, and the older audit's fee-to-error comparison is not an economic validation.",
+      "sourceIds": [
+        "old-audit-economics",
+        "v2-pending-results",
+        "v2-backlog"
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "id": "settlement-labels",
+      "title": "Validate settlement labels",
+      "status": "Planned",
+      "text": "Build complete official settlement-label coverage, event reconciliation and an availability-aware origin panel. Existing archive samples are feasibility checks, not completed full-period forecasts.",
+      "sourceIds": [
+        "v2-feasibility",
+        "v2-planned-modules",
+        "v2-pending-results"
+      ]
+    },
+    {
+      "id": "lead-time",
+      "title": "Forecast at defined lead times",
+      "status": "Planned",
+      "text": "Compare current indications, settled-history baselines and residual ridge/RF models at fixed lead times on matched events.",
+      "sourceIds": [
+        "v2-planned-modules",
+        "v2-pending-results"
+      ]
+    },
+    {
+      "id": "walk-forward",
+      "title": "Use chronological evaluation",
+      "status": "Planned",
+      "text": "Implement expanding monthly splits, causal feature availability, validation-only selection and controlled delay/feature ablations.",
+      "sourceIds": [
+        "v2-planned-modules",
+        "v2-pending-results"
+      ]
+    },
+    {
+      "id": "uncertainty",
+      "title": "Measure uncertainty and robustness",
+      "status": "Planned",
+      "text": "Add paired gain intervals, dependence-aware testing, tail/window/seed sensitivity and untouched-time or external validation.",
+      "sourceIds": [
+        "v2-pending-results",
+        "v2-backlog"
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Evaluate a defined trading policy",
+      "status": "Planned",
+      "text": "Only after forecasting validation, test a specified policy with actual cash flows, execution assumptions, turnover and costs. No economic result is claimed here.",
+      "sourceIds": [
+        "v2-backlog",
+        "v2-readme-status"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "notes-present",
+      "title": "The project notes are present",
+      "staleClaim": "The newer research assessment and copied verified-findings document describe notes/ as absent.",
+      "correction": "notes/05_feature_engineering.md, notes/06_ml_models.md and notes/09_results_and_metrics.md exist in this checkout and were read. Their narrative claims still require artifact-level verification.",
+      "sourceIds": [
+        "assessment-stale-context",
+        "paper-stale-context",
+        "notes-features",
+        "notes-models",
+        "notes-classification"
+      ]
+    },
+    {
+      "id": "identity",
+      "title": "Current-rate reconstruction is a baseline",
+      "staleClaim": "The older v2 README/audit calls 3×MA3−lag1−lag2 a reconstruction of Model 3's target.",
+      "correction": "The identity reconstructs funding_rate[t]. Model 3 explicitly targets funding_rate[t+1]. It supplies an observable current-rate persistence predictor; the identity alone does not establish future-target leakage.",
+      "sourceIds": [
+        "v2-readme-claims",
+        "old-audit-identity",
+        "technical-definitions",
+        "lag-definitions",
+        "regression-rf"
+      ]
+    },
+    {
+      "id": "garch-dependency",
+      "title": "No implemented direction-to-GARCH edge",
+      "staleClaim": "Notebook narrative describes direction feeding Model 2.",
+      "correction": "The GARCH fitting cell extracts funding_rate and passes that series to arch_model. It does not consume Model 1 predictions.",
+      "sourceIds": [
+        "garch",
+        "direction-integration"
+      ]
+    },
+    {
+      "id": "analysis-metrics",
+      "title": "Stored outputs take precedence over summaries",
+      "staleClaim": "Analysis A markdown and project notes quote different Linear/RF scores and an RF MSE that does not match the stored execution output.",
+      "correction": "The primary table uses exact metrics parsed from notebook outputs. LR2 retains a stored output despite a null execution_count; no new fitting was performed.",
+      "sourceIds": [
+        "analysis-lr1-output",
+        "analysis-lr2-output",
+        "analysis-rf-output",
+        "analysis-conflicting-summary",
+        "notes-analysis"
+      ]
+    },
+    {
+      "id": "v2-implementation",
+      "title": "The corrected study remains a plan",
+      "staleClaim": "Some v2 README prose describes baseline, validation and walk-forward modules in the present tense.",
+      "correction": "The actual Python sources are __init__.py, config.py, legacy.py and audit.py. The paper-plan results ledger marks new experiments pending. Preliminary data-feasibility files do not change that status.",
+      "sourceIds": [
+        "v2-source-inventory",
+        "v2-readme-status",
+        "v2-planned-modules",
+        "v2-pending-results",
+        "v2-feasibility"
+      ]
+    }
+  ],
+  "historical": [
+    {
+      "id": "classification-narrative",
+      "taskId": "model-1",
+      "title": "Conflicting reported classification results",
+      "status": "Reported in project notes",
+      "sampleCount": null,
+      "text": "Notebook narrative reports Logistic Regression accuracy 80.26% and F1 65.89%; tuned RF accuracy 78.75% and F1 71.27%. Notes instead report tuned RF accuracy 77.38%, F1 71.42% and ROC AUC 0.8718. These are conflicting narrative claims, not verified comparable runs.",
+      "target": "Next-observation increase versus unchanged/decrease",
+      "units": "Accuracy/F1 percentages; ROC AUC unitless",
+      "evaluation": "Narrative only; exact result-to-run mapping not verified.",
+      "sourceIds": [
+        "classifier-reported",
+        "notes-classification"
+      ]
+    },
+    {
+      "id": "garch-narrative",
+      "taskId": "model-2",
+      "title": "Reported GJR-GARCH selection",
+      "status": "Reported in project notes",
+      "sampleCount": null,
+      "text": "The notebook narrative selects GJR-GARCH(1,1) with an AR(2) mean and describes rising terminal five-step conditional variance. Its numerical AIC/BIC and forecast claims are not promoted to verified results because the fitting cell contains no stored output.",
+      "target": "Funding-rate conditional variance",
+      "units": "Variance is squared funding-rate units",
+      "evaluation": "Reported in-sample model selection; no verified out-of-sample variance score.",
+      "sourceIds": [
+        "garch",
+        "garch-reported"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "analysis-preprocessed",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 1, output 0, execution_count=1",
+      "excerpt": "Data loaded. Preview:\n          exchange   symbol  local_timestamp  funding_timestamp  funding_rate  \\\n0  binance-futures  BTCUSDT     1.577840e+15       1.577866e+15     -0.000161   \n1  binance-futures  BTCUSDT     1.577844e+15       1.577866e+15     -0.000173   \n2  binance-futures  BTCUSDT     1.577848e+15       1.577866e+15     -0.000183   \n3  binance-futures  BTCUSDT     1.577851e+15       1.577866e+15     -0.000191   \n4  binance-futures  BTCUSDT     1.577855e+15       1.577866e+15     -0.000187   \n\n   predicted_funding_rate  open_interest  last_price  index_price  \\\n0                     NaN            NaN     7171.55          NaN   \n1                     NaN            NaN     7208.32          NaN   \n2                     NaN            NaN     7237.49          NaN   \n3                     NaN            NaN     7221.55          NaN   \n4                     NaN            NaN     7214.00          NaN   \n\n    mark_price         timestamp  \n0  7176.918847  1577836800000000  \n1  7213.227865  1577840400000000  \n2  7239.762514  1577844000000000  \n3  7224.738329  1577847600000000  \n4  7219.013281  1577851200000000  \n          exchange   symbol  local_timestamp  funding_timestamp  funding_rate  \\\n0  binance-futures  BTCUSDT     1.577840e+15       1.577866e+15     -0.000161   \n1  binance-futures  BTCUSDT     1.577844e+15       1.577866e+15     -0.000173   \n2  binance-futures  BTCUSDT     1.577848e+15       1.577866e+15     -0.000183   \n3  binance-futures  BTCUSDT     1.577851e+15       1.577866e+15     -0.000191   \n4  binance-futures  BTCUSDT     1.577855e+15       1.577866e+15     -0.000187   \n\n   predicted_funding_rate  open_interest  last_price  index_price  \\\n0                     0.0            0.0     7171.55          0.0   \n1                     0.0            0.0     7208.32          0.0   \n2                     0.0            0.0     7237.49          0.0   \n3                     0.0            0.0     7221.55          0.0   \n4                     0.0            0.0     7214.00          0.0   \n\n    mark_price                 timestamp  \n0  7176.918847 2020-01-01 00:00:00+00:00  \n1  7213.227865 2020-01-01 01:00:00+00:00  \n2  7239.762514 2020-01-01 02:00:00+00:00  \n3  7224.738329 2020-01-01 03:00:00+00:00  \n4  7219.013281 2020-01-01 04:00:00+00:00  \n<class 'pandas.core.frame.DataFrame'>\nRangeIndex: 42179 entries, 0 to 42178\nData columns (total 11 columns):\n #   Column                  Non-Null Count  Dtype              \n---  ------                  --------------  -----              \n 0   exchange                42179 non-null  object             \n 1   symbol                  42179 non-null  object             \n 2   local_timestamp         42179 non-null  float64            \n 3   funding_timestamp       42179 non-null  float64            \n 4   funding_rate            42179 non-null  float64            \n 5   predicted_funding_rate  42179 non-null  float64            \n 6   open_interest           42179 non-null  float64            \n 7   last_price              42179 non-null  float64            \n 8   index_price             42179 non-null  float64            \n 9   mark_price              42179 non-null  float64            \n 10  timestamp               42179 non-null  datetime64[ns, UTC]\ndtypes: datetime64[ns, UTC](1), float64(8), object(2)\nmemory usage: 3.5+ MB\nNone\nexchange                  0\nsymbol                    0\nlocal_timestamp           0\nfunding_timestamp         0\nfunding_rate              0\npredicted_funding_rate    0\nopen_interest             0\nlast_price                0\nindex_price               0\nmark_price                0\ntimestamp                 0\ndtype: int64\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-features",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 22 (code)",
+      "excerpt": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\n\n# Convert 'local_timestamp' to a datetime object\ndata['local_timestamp'] = pd.to_datetime(data['local_timestamp'], unit='us')\n\n# Feature Engineering: Dropping irrelevant variables and addressing multicollinearity\ndata['local_timestamp'] = pd.to_datetime(data['local_timestamp'], unit='us')\ndata['hour'] = data['local_timestamp'].dt.hour\ndata['day'] = data['local_timestamp'].dt.day\ndata['month'] = data['local_timestamp'].dt.month\n\n# Rolling volatility over a 1-day period.\ndata['std'] = data['funding_rate'].rolling(window=24).std()\n\n# Selecting relevant features:\n# 1. 'open_interest' - Strong negative correlation with 'funding_rate', making it a useful predictor.\n# 2. 'mark_price' - Chosen among the highly correlated price features to avoid multicollinearity.\n# 3. 'hour', 'day', 'month' - Time-based features to capture potential temporal patterns in funding rates.\nX = data[['open_interest', 'mark_price', 'hour', 'day', 'month', 'std']].dropna()\ny = data['funding_rate'].dropna()\n\n# Drop rows with NaN values from both X and y to ensure consistent lengths\nX = X.dropna()\ny = y[X.index]\n\n# Split the data into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-split",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 25 (code)",
+      "excerpt": "from sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error, r2_score\nfrom statsmodels.tsa.arima.model import ARIMA\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.ensemble import RandomForestRegressor\n\n# Split the data into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-lr1-code",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 27 (code)",
+      "excerpt": "from utilities import plot_acf_pacf\nimportlib.reload(utilities)\n\n# Linear Regression Model\ndef run_linear_regression(columns):\n    X_train_lr1 = X_train[columns]\n    X_test_lr1 = X_test[columns]\n\n    linear_model = LinearRegression()\n    linear_model.fit(X_train_lr1, y_train)\n    y_pred_linear = linear_model.predict(X_test_lr1)\n\n    # Evaluate Linear Regression\n    print(\"Plotting ACF and PACF...\")\n    plot_acf_pacf(y_pred_linear - y_test, lags=50)\n\n    print(\"Linear Regression - MSE:\", mean_squared_error(y_test, y_pred_linear))\n    print(\"Linear Regression - R²:\", r2_score(y_test, y_pred_linear))\n\n    # Forecast next 5 values using Linear Regression (using the last 5 inputs from X_test)\n    next_5_values = linear_model.predict(X_test_lr1[-5:])\n    print(\"Next 5 Forecasted Values (Linear Regression):\", next_5_values)\n    return linear_model\n\nlr_1_cols = ['open_interest', 'mark_price', 'hour', 'day', 'month']\nlr1 = run_linear_regression(lr_1_cols)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-lr1-output",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 27, output 2, execution_count=10",
+      "excerpt": "Linear Regression - MSE: 5.358119195397392e-08\nLinear Regression - R²: 0.1320387323525064\nNext 5 Forecasted Values (Linear Regression): [ 1.24739138e-04 -7.71569142e-06  4.37992722e-05  6.49044586e-05\n  2.66203755e-04]\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-lr2-code",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 28 (code)",
+      "excerpt": "lr_2_cols = ['open_interest', 'mark_price', 'std', 'day', 'month']\nlr2 = run_linear_regression(lr_2_cols)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-lr2-output",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 28, output 2, execution_count=None",
+      "excerpt": "Linear Regression - MSE: 4.420963498275209e-08\nLinear Regression - R²: 0.2838485031310216\nNext 5 Forecasted Values (Linear Regression): [3.22269576e-04 9.90909897e-06 4.54002371e-05 1.73651603e-05\n 2.45556592e-04]\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-rf-code",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 30 (code)",
+      "excerpt": "# Random Forest Model\nrf_model = RandomForestRegressor(n_estimators=100, random_state=42)\nrf_model.fit(X_train, y_train)\ny_pred_rf = rf_model.predict(X_test)\n\n# Evaluate Random Forest\nprint(\"Plotting ACF and PACF...\")\nplot_acf_pacf(y_pred_rf - y_test, lags=50)\n\nprint(\"Random Forest - MSE:\", mean_squared_error(y_test, y_pred_rf))\nprint(\"Random Forest - R²:\", r2_score(y_test, y_pred_rf))\n\n# Forecast next 5 values using Random Forest (using the last 5 inputs from X_test)\nnext_5_values_rf = rf_model.predict(X_test[-5:])\nprint(\"Next 5 Forecasted Values (Random Forest):\", next_5_values_rf)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-rf-output",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 30, output 2, execution_count=16",
+      "excerpt": "Random Forest - MSE: 3.934908780220261e-09\nRandom Forest - R²: 0.9362584465106524\nNext 5 Forecasted Values (Random Forest): [6.0502650e-04 5.5357400e-05 3.6105400e-05 9.9999874e-05 1.3236790e-04]\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-adf-code",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 13 (code)",
+      "excerpt": "from statsmodels.tsa.stattools import adfuller\nimport matplotlib.pyplot as plt\n\n# Perform Augmented Dickey-Fuller Test\nadf_result = adfuller(data['funding_rate'].dropna())\nprint(f\"ADF Statistic: {adf_result[0]:.3f}\")\nprint(f\"p-value: {adf_result[1]:.3e}\")\nprint(\"Critical Values:\", adf_result[4])\nprint(\"Stationary\" if adf_result[1] < 0.05 else \"Not Stationary\")\n\n# Plot Rolling Mean and Standard Deviation for Validation\nrolling_mean = data['funding_rate'].rolling(window=365).mean()\nrolling_std = data['funding_rate'].rolling(window=365).std()\n\nplt.figure(figsize=(10, 6))\nplt.plot(data['funding_rate'], label='Funding Rate', alpha=0.6)\nplt.plot(rolling_mean, color='red', label='Rolling Mean', linewidth=1.5)\nplt.plot(rolling_std, color='black', label='Rolling Std Dev', linewidth=1.5)\nplt.title('Funding Rate with Rolling Mean & Std Dev')\nplt.legend()\nplt.show()\n",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-adf-output",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 13, output 0, execution_count=5",
+      "excerpt": "ADF Statistic: -9.672\np-value: 1.273e-16\nCritical Values: {'1%': np.float64(-3.430505241383374), '5%': np.float64(-2.86160861322059), '10%': np.float64(-2.5668065205972774)}\nStationary\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-arima-code",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 32 (code)",
+      "excerpt": "# Train ARIMA Model\narima_model = ARIMA(data['funding_rate'].dropna(), order=(5, 1, 0))\narima_fit = arima_model.fit()\nprint(arima_fit.summary())\n\n# Forecast next 5 values using ARIMA\nforecast_arima = arima_fit.forecast(steps=5)\nprint(\"Next 5 Forecasted Values (ARIMA):\", forecast_arima)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "analysis-arima-warning",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 32, output 0, execution_count=13",
+      "excerpt": "c:\\Users\\dpgie\\OneDrive\\Documents\\Illinois\\Semester 5\\STAT 429\\stat429_env\\lib\\site-packages\\statsmodels\\base\\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals\n  warnings.warn(\"Maximum Likelihood optimization failed to \"\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-arima-output",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 32, output 1, execution_count=13",
+      "excerpt": "                               SARIMAX Results                                \n==============================================================================\nDep. Variable:           funding_rate   No. Observations:                42179\nModel:                 ARIMA(5, 1, 0)   Log Likelihood              362861.113\nDate:                Sun, 08 Dec 2024   AIC                        -725710.226\nTime:                        19:53:31   BIC                        -725658.328\nSample:                             0   HQIC                       -725693.840\n                              - 42179                                         \nCovariance Type:                  opg                                         \n==============================================================================\n                 coef    std err          z      P>|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nar.L1          0.1824   1.07e-21    1.7e+20      0.000       0.182       0.182\nar.L2          0.1254   4.67e-22   2.68e+20      0.000       0.125       0.125\nar.L3          0.0269   3.18e-22   8.47e+19      0.000       0.027       0.027\nar.L4         -0.0504   3.65e-22  -1.38e+20      0.000      -0.050      -0.050\nar.L5         -0.0901   7.61e-22  -1.18e+20      0.000      -0.090      -0.090\nsigma2      1.719e-09   1.38e-12   1244.551      0.000    1.72e-09    1.72e-09\n===================================================================================\nLjung-Box (L1) (Q):                  22.57   Jarque-Bera (JB):         378975469.62\nProb(Q):                              0.00   Prob(JB):                         0.00\nHeteroskedasticity (H):               0.05   Skew:                             1.38\nProb(H) (two-sided):                  0.00   Kurtosis:                       467.37\n===================================================================================\n\nWarnings:\n[1] Covariance matrix calculated using the outer product of gradients (complex-step).\n[2] Covariance matrix is singular or near-singular, with condition number 3.81e+35. Standard errors may be unstable.\nNext 5 Forecasted Values (ARIMA): 42179    0.0001\n42180    0.0001\n42181    0.0001\n42182    0.0001\n42183    0.0001\nName: predicted_mean, dtype: float64\n",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "analysis-conflicting-summary",
+      "path": "notebooks/stat429_analysis_a.ipynb",
+      "locator": "JSON cell 33 (markdown)",
+      "excerpt": "### Linear Regression\n- High MSE of **4.46e-08** and low R² of **0.191**, indicating poor performance in capturing the relationship between features and the funding rate.\n- Forecasted values remain close to zero, reflecting the model’s inability to handle complex patterns or non-linear relationships in the data.\n\n### Random Forest\n- Significantly better performance with a very low MSE of **3.03e-09** and a high R² of **0.945**, showing strong predictive capability.\n- Captures non-linear relationships and interactions effectively, making it the most reliable model for this dataset.\n- Forecasted values are more consistent and aligned with data trends, proving robustness.\n\n### ARIMA\n- **Convergence Issues**: Encountered warnings during training, suggesting challenges in parameter optimization or model misspecification (`ARIMA(5,1,0)`).\n\n- **Model Performance**: Captures linear dependencies but struggles with non-linear trends and volatility, resulting in lower accuracy compared to Random Forest.\n\n- **Diagnostics**: Residuals show no significant autocorrelation (Ljung-Box Q-test) but exhibit non-normality and high kurtosis, indicating unmodeled patterns.\n\n- **Future Scope**: Consider **SARIMAX** for external regressors or hybrid models like ARIMA-Random Forest to better handle non-linear dynamics.\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "pipeline",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 1 (code)",
+      "excerpt": "import os\nimport sys\nimport time\nimport joblib\nimport warnings\nwarnings.filterwarnings('ignore')\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nSKIP_CELL = True\n\n# absolute path of the project's root directory\nproject_root = os.path.abspath(os.path.join(os.getcwd(), '..'))\n\n# project root directory to sys.path\nif project_root not in sys.path:\n    sys.path.append(project_root)\n\n# Import data processing functions\nfrom utilities.data_processing import (\n    load_data, \n    preprocess_data, \n    create_features, \n    process_pipeline,\n)\n\n# Import feature engineering and data balancing utilities\nfrom utilities.functions import (\n    add_lag_features,\n    add_technical_indicators,\n    add_interaction_terms,\n    add_model1_direction,\n    add_model2_volatility,\n    plot_acf_pacf,\n    perform_ljung_box_test,\n    remove_outliers,\n    rescale_series,\n    winsorize_series\n    )\n\n# Import model-related utilities\nfrom utilities.model_utils import (\n    train_classification_model,\n    evaluate_classification_model,\n    save_model,\n    load_model,\n    save_garch_model,\n    load_garch_model,\n    perform_hyperparameter_tuning,\n    plot_feature_importance,\n    fit_and_evaluate_model\n)\n\n# Import configurations\nfrom config import (\n    BINANCE_BTC_PERP_CSV,\n    PREDICTIONS_RFR_CSV,\n    PREDICTIONS_SARIMAX_CSV,\n    RANDOM_STATE,\n    MODEL1_RF_PATH,\n    SCALER1_RF_PATH,\n    MODEL2_GARCH_PATH,\n    MODEL3_RFR_PATH,\n    MODEL3_SARIMAX_PATH\n)\n\nfrom sklearn.preprocessing import StandardScaler\n\n# Call process_pipeline only once to get the fully processed df\ndf = process_pipeline(\n    BINANCE_BTC_PERP_CSV,\n    rescale=True,\n    scaling_factor=1e6,\n    handle_outliers=True,\n    keep_future_rate=True\n)\n\n# Set index\ndf.set_index('timestamp', inplace=True)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "classifier-rf",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 5 (code)",
+      "excerpt": "from sklearn.ensemble import RandomForestClassifier\n\nif df is not None and not df.empty:\n    try:\n        print(\"Data after pipeline processing:\")\n        print(df.head())\n\n        # Define features and target directly from the pipeline output\n        feature_columns = [\n            'funding_rate_lag1', 'funding_rate_lag2',\n            'funding_rate_ma3', 'funding_rate_ma5', 'funding_rate_ema3',\n            'open_interest', 'open_interest_lag1', 'open_interest_roc',\n            'mark_price', 'mark_price_lag1', 'volatility_5min',\n            'funding_rate_roc1', 'funding_rate_roc3', 'interaction2', 'interaction3'\n        ]\n\n        X = df[feature_columns]\n        y = df['direction']\n\n        print(\"Splitting the data...\")\n        split_index = int(0.8 * len(X))\n        X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]\n        y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]\n\n        if not X_train.empty and not X_test.empty:\n            print(\"Starting preprocessing for Random Forest...\")\n            start_time = time.time()\n\n            # Handle NaNs and infinities (just in case)\n            X_train_rf = X_train.replace([np.inf, -np.inf], np.nan).fillna(0)\n            X_test_rf = X_test.replace([np.inf, -np.inf], np.nan).fillna(0)\n\n            # Fit a StandardScaler on training data and transform\n            scaler = StandardScaler()\n            scaler.fit(X_train_rf)\n            X_train_scaled = scaler.transform(X_train_rf)\n            X_test_scaled = scaler.transform(X_test_rf)\n\n            print(f\"Preprocessing for Random Forest completed in {time.time() - start_time:.2f} seconds.\")\n            print(f\"Training data shape for Random Forest: {X_train_scaled.shape}\")\n            print(f\"Test data shape for Random Forest: {X_test_scaled.shape}\")\n\n            # Train initial Random Forest model\n            print(\"Training initial Random Forest model...\")\n            start_time = time.time()\n            rf_model = RandomForestClassifier(n_estimators=50, random_state=42, class_weight='balanced')\n            rf_model.fit(X_train_scaled, y_train)\n            print(f\"Random Forest training completed in {time.time() - start_time:.2f} seconds.\")\n\n            print(\"\\nInitial Model Evaluation:\")\n            evaluate_classification_model(rf_model, X_test_scaled, y_test)\n\n            # Start hyperparameter tuning\n            print(\"Starting hyperparameter tuning...\")\n            start_time = time.time()\n            param_grid = {\n                'n_estimators': [50, 100],\n                'max_depth': [10, 20],\n                'min_samples_split': [2, 5],\n                'min_samples_leaf': [1, 2]\n            }\n            best_rf_model = perform_hyperparameter_tuning(\n                rf_model,\n                param_grid,\n                X_train_scaled,\n                y_train,\n                scoring='roc_auc',\n                verbose=1\n            )\n            print(f\"Hyperparameter tuning completed in {time.time() - start_time:.2f} seconds.\")\n\n            print(\"\\nBest Model Evaluation After Hyperparameter Tuning:\")\n            evaluate_classification_model(best_rf_model, X_test_scaled, y_test)\n\n            # Evaluate with a custom threshold\n            y_proba = best_rf_model.predict_proba(X_test_scaled)[:, 1]\n            custom_threshold = 0.5\n            print(f\"\\nEvaluation with Custom Threshold ({custom_threshold}):\")\n            evaluate_classification_model(best_rf_model, X_test_scaled, y_test, y_proba, threshold=custom_threshold)\n\n            # Plot feature importance\n            print(\"Plotting feature importance...\")\n            plot_feature_importance(best_rf_model, X_train_rf.columns)\n\n            # Save the model and scaler\n            print(\"Saving the model and scaler...\")\n            save_model(best_rf_model, '../models/saved_models/model1_RF.pkl')\n            save_model(scaler, '../models/saved_models/scaler1_RF.pkl')\n            print(\"Model and scaler saved successfully.\")\n\n    except Exception as e:\n        print(f\"Error during Random Forest training and tuning: {e}\")",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "classifier-logistic",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 7 (code)",
+      "excerpt": "if not SKIP_CELL:\n    # Imports\n    from sklearn.linear_model import LogisticRegression\n\n    # Check for dataset existence\n    if not os.path.exists(BINANCE_BTC_PERP_CSV):\n        raise FileNotFoundError(f\"Dataset not found at {BINANCE_BTC_PERP_CSV}\")\n    else:\n        print(f\"Dataset found at {BINANCE_BTC_PERP_CSV}\")\n\n    # Start pipeline execution\n    print(\"Starting pipeline execution...\")\n    df = process_pipeline(BINANCE_BTC_PERP_CSV)\n\n    if df is None or df.empty:\n        print(\"Dataset not processed properly. Check pipeline.\")\n        raise ValueError(\"Processed dataset is empty. Check the pipeline.\")\n\n    print(f\"Shape of DataFrame after processing: {df.shape}\")\n    print(df.head())\n\n    # Splitting the data\n    print(\"Splitting the data...\")\n    feature_columns = [\n        'funding_rate_lag1', 'funding_rate_lag2',\n        'funding_rate_ma5', 'funding_rate_ema3',\n        'mark_price', 'mark_price_lag1',\n        'funding_rate_ma3'\n    ]\n\n    missing_columns = [col for col in feature_columns if col not in df.columns]\n    if missing_columns:\n        print(f\"Missing columns: {missing_columns}\")\n        raise ValueError(f\"The following required columns are missing: {missing_columns}\")\n\n    X = df[feature_columns]\n    y = df['direction']\n\n    print(f\"Feature columns: {feature_columns}\")\n    print(f\"Target variable: {y.name}\")\n\n    split_index = int(0.8 * len(X))\n    X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]\n    y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]\n\n    print(f\"Training data shape: {X_train.shape}\")\n    print(f\"Test data shape: {X_test.shape}\")\n\n    # Preprocessing\n    if not X_train.empty and not X_test.empty:\n        print(\"Starting preprocessing...\")\n        start_time = time.time()\n\n        # Use preprocess_data from data_processing.py\n        X_train = preprocess_data(X_train, handle_timestamps=False)\n        X_test = preprocess_data(X_test, handle_timestamps=False)\n\n        numeric_features = [\n            'funding_rate_lag1', 'funding_rate_lag2',\n            'funding_rate_ma5', 'funding_rate_ema3',\n            'mark_price', 'mark_price_lag1',\n            'funding_rate_ma3'\n        ]\n\n        # Debug preview\n        print(\"Preview of X_train before scaling:\")\n        print(X_train[numeric_features].head())\n\n        # Scaling features\n        scaler = StandardScaler()\n        X_train_scaled = scaler.fit_transform(X_train[numeric_features])\n        X_test_scaled = scaler.transform(X_test[numeric_features])\n\n        # Prepare processed data\n        X_train_prepared = pd.DataFrame(X_train_scaled, columns=numeric_features, index=X_train.index)\n        X_test_prepared = pd.DataFrame(X_test_scaled, columns=numeric_features, index=X_test.index)\n\n        print(f\"Preprocessing completed in {time.time() - start_time:.2f} seconds.\")\n        print(f\"Training data shape after preprocessing: {X_train_prepared.shape}\")\n        print(f\"Test data shape after preprocessing: {X_test_prepared.shape}\")\n\n        # Train Logistic Regression model\n        print(\"Training Logistic Regression model...\")\n        start_time = time.time()\n        logreg_model = LogisticRegression(\n            random_state=42,\n            class_weight='balanced',\n            max_iter=1000,\n            solver='liblinear'\n        )\n        logreg_model.fit(X_train_prepared, y_train)\n        print(f\"Logistic Regression training completed in {time.time() - start_time:.2f} seconds.\")\n\n        # Evaluate initial model\n        print(\"\\nInitial Logistic Regression Model Evaluation:\")\n        evaluate_classification_model(logreg_model, X_test_prepared, y_test)\n\n        # Hyperparameter tuning\n        print(\"Starting hyperparameter tuning...\")\n        start_time = time.time()\n        param_grid_logreg = {\n            'C': [0.01, 0.1, 1, 10, 100],\n            'penalty': ['l1', 'l2'],\n            'solver': ['liblinear']\n        }\n        best_logreg_model = perform_hyperparameter_tuning(\n            LogisticRegression(\n                random_state=42,\n                class_weight='balanced',\n                max_iter=1000\n            ),\n            param_grid_logreg,\n            X_train_prepared,\n            y_train,\n            scoring='f1'\n        )\n        print(f\"Hyperparameter tuning completed in {time.time() - start_time:.2f} seconds.\")\n\n        # Evaluate best model\n        print(\"\\nBest Logistic Regression Model Evaluation After Hyperparameter Tuning:\")\n        evaluate_classification_model(best_logreg_model, X_test_prepared, y_test)\n\n        # Adjust classification threshold\n        y_proba_logreg = best_logreg_model.predict_proba(X_test_prepared)[:, 1]\n        custom_threshold = 0.4\n        print(f\"\\nEvaluation with Custom Threshold ({custom_threshold}):\")\n        evaluate_classification_model(best_logreg_model, X_test_prepared, y_test, y_proba_logreg, threshold=custom_threshold)\n\n        # Plot feature importance\n        print(\"Plotting feature importance...\")\n        plot_feature_importance(best_logreg_model, X_train_prepared.columns, model_type='logistic_regression')\n\n        # Save the Logistic Regression model\n        print(\"Saving the Logistic Regression model...\")\n        save_model(best_logreg_model, '../models/saved_models/model1_LR.pkl')\n        save_model(scaler, '../models/saved_models/scaler1_LR.pkl')\n\n    else:\n        print(\"Training or test datasets are empty. Cannot proceed.\")",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "classifier-reported",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 9 (markdown)",
+      "excerpt": "#### Random Forest Classifier\n\n- **Initial Accuracy**: 75.79%\n- **After Tuning Accuracy**: 78.75% (+3%)\n- **F1 Score After Tuning**: 71.27% (+20%)\n- **Strength**: Captures non-linear interactions effectively.\n\n#### Logistic Regression\n\n- **Accuracy**: 80.26% (unchanged post-tuning)\n- **F1 Score**: 65.89%\n- **Limitation**: Struggles with non-linear relationships.\n\n#### Best Model: Random Forest Classifier\n\n- **Reason**: Higher recall and F1 Score for imbalanced data, making it better suited for this dataset.\n\n#### Improvement Suggestions\n\n1. Add polynomial features or interactions for better representation of the data.\n2. Use **SMOTE** to handle the imbalanced dataset effectively.\n3. Experiment with ensemble models like stacking or boosting for improved performance.\n4. Test **Elastic Net** regularization to optimize Logistic Regression.\n5. Apply stratified K-fold cross-validation to evaluate model robustness.\n\nTRY XGBOOST AND LSTM\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "garch",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 11 (code)",
+      "excerpt": "from arch import arch_model\nfrom statsmodels.tsa.arima.model import ARIMA\nfrom statsmodels.tsa.stattools import adfuller\nfrom statsmodels.stats.diagnostic import acorr_ljungbox\n\n# ===========================================\n# Data Preprocessing and Feature Engineering\n# ===========================================\n\n# Process the data using the pipeline\ndf = process_pipeline(BINANCE_BTC_PERP_CSV)\n\n# Ensure 'timestamp' is set as index for time series analysis\ndf.set_index('timestamp', inplace=True)\n\n# Extract the funding rate series\nfunding_rate_series = df['funding_rate']\n\n# Handle missing values in 'funding_rate'\nfunding_rate_series = funding_rate_series.dropna()\n\n# ===========================================\n# Stationarity Check\n# ===========================================\n\nprint(\"\\nPerforming Augmented Dickey-Fuller (ADF) Test for Stationarity...\\n\")\nadf_result = adfuller(funding_rate_series)\nprint('ADF Statistic:', adf_result[0])\nprint('p-value:', adf_result[1])\n\nif adf_result[1] > 0.05:\n    print(\"The series is non-stationary. Differencing is required.\")\n    funding_rate_series = funding_rate_series.diff().dropna()\n    print(\"Performed first differencing to achieve stationarity.\")\nelse:\n    print(\"The series is stationary.\")\n    \n# ===========================================\n# Plot ACF and PACF\n# ===========================================\n\nprint(\"\\nPlotting ACF and PACF...\\n\")\nplot_acf_pacf(funding_rate_series, lags=50)\n\n# ===========================================\n# Fit GARCH Models\n# ===========================================\n\nprint(\"\\nFitting GARCH Models...\\n\")\n\n# Define models to fit\nmodels_to_fit = [\n    (\"GARCH(1,1) Normal\", arch_model(funding_rate_series, vol='GARCH', p=1, q=1, mean='Zero', dist='normal')),\n    (\"GARCH(1,1) t\", arch_model(funding_rate_series, vol='GARCH', p=1, q=1, mean='Zero', dist='t')),\n    (\"EGARCH(1,1) Normal\", arch_model(funding_rate_series, vol='EGARCH', p=1, q=1, mean='Zero', dist='normal')),\n    (\"GJR-GARCH(1,1) Normal\", arch_model(funding_rate_series, vol='GARCH', p=1, o=1, q=1, mean='Zero', dist='normal')),\n    (\"GJR-GARCH(1,1) AR(1)\", arch_model(funding_rate_series, mean='AR', lags=1, vol='GARCH', p=1, o=1, q=1, dist='normal')),\n    (\"GJR-GARCH(1,1) GED\", arch_model(funding_rate_series, mean='Zero', vol='GARCH', p=1, o=1, q=1, dist='ged')),\n    (\"GJR-GARCH(1,1) AR(2)\", arch_model(funding_rate_series, mean='AR', lags=2, vol='GARCH', p=1, o=1, q=1, dist='normal')),\n    (\"GJR-GARCH(2,1)\", arch_model(funding_rate_series, mean='Zero', vol='GARCH', p=2, o=1, q=1, dist='normal')),\n    (\"EGARCH(1,1) t\", arch_model(funding_rate_series, vol='EGARCH', p=1, q=1, mean='Zero', dist='t')),\n]\n    \n# Fit models and store results\nmodels_results = {}\nfor name, model in models_to_fit:\n    result = fit_and_evaluate_model(name, model)\n    if result is not None:\n        models_results[name] = result\n\n# Check if any models were successfully fitted\nif not models_results:\n    print(\"Error: No models were successfully fitted. Check the data or model configurations.\")\n    raise ValueError(\"No valid models in models_results.\")\n\n# ===========================================\n# Model Selection and Evaluation\n# ===========================================\n\n# Comparing Models Using AIC and BIC\nprint(\"\\nComparing Models Using AIC and BIC...\\n\")\nfor name, result in models_results.items():\n    print(f\"{name} - AIC: {result.aic:.3f}, BIC: {result.bic:.3f}\")\n\n\n# Select the best model based on AIC\nbest_model_name = min(models_results, key=lambda k: models_results[k].aic)\nbest_model_result = models_results[best_model_name]\nprint(f\"\\nSelected Model Based on Lowest AIC: {best_model_name}\\n\")\n\n# ===========================================\n# Feature Importance Plot\n# ===========================================\n\nprint(\"\\nPlotting Feature Importance...\\n\")\n\n# Extract parameter names and values from the GARCH model\nfeature_importance_df = best_model_result.params.abs().sort_values(ascending=False).reset_index()\nfeature_importance_df.columns = ['Feature', 'Importance']\n\n# Plot feature importance\nplt.figure(figsize=(10, 6))\nplt.bar(feature_importance_df['Feature'], feature_importance_df['Importance'], color='blue')\nplt.xticks(rotation=90)\nplt.title('Feature Importance (GARCH Parameters)')\nplt.xlabel('Feature')\nplt.ylabel('Importance')\nplt.tight_layout()\nplt.show()\n\n# ===========================================\n# Residual Analysis\n# ===========================================\n\nprint(\"Analyzing Residuals...\\n\")\n\n# Get standardized residuals\nresiduals = best_model_result.std_resid\n\n# Perform Ljung-Box test on residuals\nprint(\"Performing Ljung-Box Test on Residuals:\")\nperform_ljung_box_test(residuals, lags=10)\n\n# Perform Ljung-Box test on squared residuals\nprint(\"\\nPerforming Ljung-Box Test on Squared Residuals:\")\nperform_ljung_box_test(residuals**2, lags=10)\n\n# Plot standardized residuals\nprint(\"\\nPlotting Standardized Residuals...\")\nplt.figure(figsize=(10, 4))\nplt.plot(residuals)\nplt.title('Standardized Residuals')\nplt.xlabel('Time')\nplt.ylabel('Standardized Residual')\nplt.show()\n\n# Plot conditional volatility\nprint(\"Plotting Conditional Volatility...\")\nplt.figure(figsize=(10, 4))\nplt.plot(best_model_result.conditional_volatility)\nplt.title('Conditional Volatility')\nplt.xlabel('Time')\nplt.ylabel('Volatility')\nplt.show()\n\n# ===========================================\n# Forecasting\n# ===========================================\n\nprint(\"\\nForecasting Future Volatility...\\n\")\n\n# Forecast volatility for the next 5 periods\nforecast_horizon = 5\nvolatility_forecast = best_model_result.forecast(horizon=forecast_horizon)\n\n# Extract forecasted conditional variances\nforecasted_variances = volatility_forecast.variance.iloc[-1]\n\nprint(\"Forecasted Conditional Variances:\")\nprint(forecasted_variances)\n\n# Plot forecasted volatility\nprint(\"\\nPlotting Forecasted Volatility...\")\nplt.figure(figsize=(10, 4))\nplt.plot(np.sqrt(forecasted_variances.values), marker='o')\nplt.title(f'Forecasted Volatility for Next {forecast_horizon} Periods')\nplt.xlabel('Steps Ahead')\nplt.ylabel('Volatility')\nplt.grid(True)\nplt.show()\n\n# ===========================================\n# Saving the Model\n# ===========================================\n\nprint(\"\\nSaving the Best GARCH Model...\\n\")\n\n# Save the best GARCH model\nsave_garch_model(best_model_result, MODEL2_GARCH_PATH)\nprint(f\"GARCH model saved to {MODEL2_GARCH_PATH}\")\n",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "garch-reported",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 12 (markdown)",
+      "excerpt": "### **Detailed Analysis of Results**\n\n#### **1. Model Selection Results:**\n- The **`GJR-GARCH(1,1) AR(2)`** model has the lowest AIC (-732755.679) and BIC (-732695.682), indicating it is the best fit for the data, balancing model accuracy and complexity.\n- AR(2) terms effectively capture dependencies in the funding rate, supported by PACF spikes at lags 1 and 2.\n\n#### **2. Ljung-Box Test Results on Residuals:**\n- Ljung-Box test results return NaN, suggesting potential data issues; this does not invalidate the model but highlights the need for additional diagnostic checks.\n\n#### **3. Residual Analysis (Standardized Residuals):**\n- Residuals are stationary with occasional spikes, reflecting periods of market stress. This confirms the model captures volatility clustering and explains most data variability.\n- High residual spikes during specific periods may indicate external market-driven anomalies not fully modeled.\n\n#### **4. Conditional Volatility:**\n- Conditional volatility shows clusters of market stress followed by periods of stabilization, demonstrating the model's ability to reflect time-varying market risks.\n- Peaks in volatility confirm the model's reliability in identifying high-risk and stable phases in the market.\n\n#### **5. Forecasted Volatility:**\n- Forecasted variances increase steadily over the next five steps:\n  ```\n  h.1: 1.609353e-10\n  h.2: 3.964265e-10\n  h.3: 6.709361e-10\n  h.4: 9.769573e-10\n  h.5: 1.311498e-09\n  ```\n  Indicating rising uncertainty and potential market instability in the near term.\n\n### **Plot-Specific Observations**\n\n#### **1. ACF and PACF Plots:**\n- ACF’s slow decay and PACF’s sharp spikes at lags 1 and 2 confirm the relevance of AR(2) terms in the mean model, supporting the selected configuration.\n\n#### **2. Standardized Residuals Plot:**\n- Residual spikes during market stress align with large movements, confirming the model handles volatility well without leaving patterns in residuals.\n\n#### **3. Conditional Volatility Plot:**\n- Volatility peaks during market stress and declines during stability, validating the model’s ability to capture time-varying risk.\n\n#### **4. Forecasted Volatility Plot:**\n- Increasing forecasted volatility indicates rising market risk over the forecast horizon, aiding in risk preparation and strategy adjustment.\n\n### **Summary of Findings**\n- The **`GJR-GARCH(1,1) AR(2)`** model is optimal for analyzing and forecasting funding rate volatility, successfully identifying risk patterns and forecasting future instability.\n- While residual diagnostics (e.g., Ljung-Box results) may require further exploration, the model demonstrates strong predictive capabilities for managing market risk and informing trading strategies.",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "regression-rf",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 14 (code)",
+      "excerpt": "# Extract funding_rate_series and check stationarity\nfunding_rate_series = df['funding_rate'].dropna()\nadf_result = adfuller(funding_rate_series)\nprint('ADF Statistic:', adf_result[0])\nprint('p-value:', adf_result[1])\nif adf_result[1] > 0.05:\n    print(\"Series non-stationary, differencing if needed.\")\n    funding_rate_series = funding_rate_series.diff().dropna()\n\n# Plot ACF/PACF if needed\nplot_acf_pacf(funding_rate_series, lags=50)\n\n# Add Model 1 direction predictions\ndf = add_model1_direction(df)\n\n# Add Model 2 volatility forecast\ndf = add_model2_volatility(df, steps=5)\n\n# For Model 3, we aim to predict `future_funding_rate` (one step ahead)\ndf['future_funding_rate'] = df['funding_rate'].shift(-1)\ndf.dropna(inplace=True)\n\n# Features for Model 3:\nfeatures = [c for c in df.columns if c not in ['funding_rate', 'future_funding_rate', 'direction']]\nX = df[features]\ny = df['future_funding_rate']\n\n# Split into training and test sets\nsplit_idx = int(0.8 * len(df))\nX_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]\ny_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]\n\n# Final cleanup before training Model 3\nX_train = X_train.replace([np.inf, -np.inf], np.nan).fillna(0)\nX_train = X_train.clip(-1e9, 1e9)\nX_train = X_train.astype(np.float64)\n\nX_test = X_test.replace([np.inf, -np.inf], np.nan).fillna(0)\nX_test = X_test.clip(-1e9, 1e9)\nX_test = X_test.astype(np.float64)\n\nprint(\"After cleanup:\")\nprint(\"X_train describe:\\n\", X_train.describe())\nprint(\"X_test describe:\\n\", X_test.describe())\n\n# Train a RandomForestRegressor for Model 3\nfrom sklearn.ensemble import RandomForestRegressor\nm3_model = RandomForestRegressor(random_state=RANDOM_STATE, n_estimators=100)\nm3_model.fit(X_train, y_train)\nprint(\"\\nModel 3 training completed.\")\n\n# Evaluate Model 3\ny_pred = m3_model.predict(X_test)\nfrom sklearn.metrics import mean_squared_error, r2_score\nmse = mean_squared_error(y_test, y_pred)\nr2 = r2_score(y_test, y_pred)\nprint(f\"\\nModel 3 Evaluation:\")\nprint(f\"MSE: {mse:.4f}\")\nprint(f\"R²: {r2:.4f}\")\n\n# Save Model 3\nsave_model(m3_model, MODEL3_RFR_PATH)\nprint(f\"Model 3 saved to {MODEL3_RFR_PATH}\")\n\n# Plot Feature Importance for Model 3\nplot_feature_importance(m3_model, X_train.columns, model_type='tree')\n\n# ------------------------------------------------------\n# Export predictions (Actual vs. Predicted) to CSV\n# ------------------------------------------------------\nresults_df = X_test.copy()\nresults_df['Actual'] = y_test\nresults_df['Predicted'] = y_pred\n\n# If 'timestamp' was the index, let's bring it back as a column\nresults_df.reset_index(inplace=True)\n\nresults_df.reset_index(inplace=True)\nresults_df.to_csv(PREDICTIONS_RFR_CSV, index=False)\nprint(f\"Predictions and actual values saved to {PREDICTIONS_RFR_CSV}\")\n\n# Interpretation:\n# Model 3 uses model1_direction_pred and model2_volatility_h1 as additional features.\n# Further optimization: Try ARIMAX/SARIMAX or LSTM with direction & volatility as exogenous inputs.\n",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "regression-reported",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 15 (markdown)",
+      "excerpt": "### Analysis and Inference\n\n**Stationarity (ADF Test):**  \n- **ADF Statistic: -8.9826**, **p-value: ~7.24e-15**: The series is strongly stationary or stationarized by differencing. This supports the use of ARIMA-type models.\n\n**ACF/PACF Interpretation:**  \n- **ACF:** High autocorrelation at lag 1 that decays slowly suggests persistent memory in the series.\n- **PACF:** Strong spike at lag 1 indicates an AR(1) or AR(2) structure may suffice. Minimal further significant lags suggest limited benefit from high-order AR terms.\n\n**Data Scaling and Cleanup:**  \n- Extreme values in features (e.g., `funding_rate_roc3`, `interaction3`) were clipped and filled, ensuring numerical stability.\n- After cleanup, no infinities/NaNs remain. Data is numeric and within manageable ranges.\n\n**Model Results (SARIMAX with `(2,1,1)`):**  \n- Achieved near-zero MSE and ~97.5% R².\n- Such exceptional metrics are rare in financial contexts, possibly due to:\n  - Effective capture of short-term patterns.\n  - The chosen scaling and feature engineering simplifying the prediction.\n  - Potential overfitting to the given train/test split.\n\n**Feature Importance (from previous tree-based model):**  \n- `funding_rate_ema3` dominated, indicating short-term historical averages drive predictions. This aligns with ARIMA models focusing on recent past values.\n\n**Future Prospects:**  \n- **Validation:** Use rolling cross-validation to confirm stability and generalization.\n- **Parameter Tuning:** Experiment with different `(p,d,q)` orders or introduce seasonal components `(P,D,Q,m)` if seasonal patterns exist.\n- **Exogenous Data:** Integrate more external features to reduce reliance on single dominant predictors.\n- **Multi-step Forecasting:** Test accuracy beyond one-step-ahead predictions to ensure robustness.\n\nIn summary, the current SARIMAX model shows excellent performance on the given data. However, further validation, careful re-checking of scaling and feature sets, and exploration of alternative parameter sets are recommended to ensure these results are genuine and generalizable.\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "regression-sarimax",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 17 (code)",
+      "excerpt": "from sklearn.metrics import mean_squared_error, r2_score\nfrom statsmodels.tsa.statespace.sarimax import SARIMAX\nfrom statsmodels.tsa.stattools import adfuller\nfrom statsmodels.stats.diagnostic import acorr_ljungbox\n\nprint(\"\\n--- Model 3 (SARIMAX) Improved Configuration ---\\n\")\n\n# Process data pipeline\ndf = process_pipeline(\n    BINANCE_BTC_PERP_CSV,\n    rescale=True,\n    scaling_factor=1e6,\n    handle_outliers=True\n)\n\n# Use integer indexing (no datetime/frequency)\ndf.reset_index(drop=True, inplace=True)\n\n# Extract funding rate series\nfunding_rate_series = df['funding_rate'].dropna()\n\n# Stationarity Check\nadf_result = adfuller(funding_rate_series)\nprint('ADF Statistic:', adf_result[0])\nprint('p-value:', adf_result[1])\nif adf_result[1] > 0.05:\n    print(\"Series is non-stationary. Applying first differencing...\")\n    funding_rate_series = funding_rate_series.diff().dropna()\nelse:\n    print(\"Series is stationary.\")\n\n# Visualize ACF and PACF for the differenced series\nprint(\"\\nPlotting ACF and PACF after differencing...\\n\")\nplot_acf_pacf(funding_rate_series, lags=50)\n\n# Add exogenous features from Model 1 and Model 2\ndf = add_model1_direction(df)\ndf = add_model2_volatility(df, steps=5)\n\n# Shift the target variable to create labels\ndf['future_funding_rate'] = df['funding_rate'].shift(-1)\ndf.dropna(inplace=True)\n\n# Separate features and target\nfeatures = [c for c in df.columns if c not in ['funding_rate', 'future_funding_rate', 'direction']]\nX = df[features]\ny = df['future_funding_rate']\n\n# Train-test split\nsplit_idx = int(0.8 * len(df))\nX_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]\ny_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]\n\n# Preprocess data: Ensure numeric and handle infinities\nX_train = X_train.apply(pd.to_numeric, errors='coerce').fillna(0)\nX_test = X_test.apply(pd.to_numeric, errors='coerce').fillna(0)\nX_train = X_train.replace([np.inf, -np.inf], 0.0)\nX_test = X_test.replace([np.inf, -np.inf], 0.0)\n\nnumeric_columns = X_train.select_dtypes(include=[np.number]).columns\nX_train[numeric_columns] = X_train[numeric_columns].clip(-1e5, 1e5).astype(np.float64)\nX_test[numeric_columns] = X_test[numeric_columns].clip(-1e5, 1e5).astype(np.float64)\n\n# Display summary statistics\nprint(\"After preprocessing:\")\nprint(\"X_train describe:\\n\", X_train.describe())\nprint(\"X_test describe:\\n\", X_test.describe())\n\n# SARIMAX Model Configuration\norder = (3, 1, 3)  # Updated configuration for better performance\nseasonal_order = (0, 0, 0, 0)  # No seasonal components\n\nprint(\"\\nFitting SARIMAX model with improved configuration...\")\nsarimax_model = SARIMAX(\n    endog=y_train,\n    exog=X_train,\n    order=order,\n    seasonal_order=seasonal_order,\n    enforce_stationarity=True,\n    enforce_invertibility=True,\n    trend=None  # Adding constant trend\n)\n\nsarimax_result = sarimax_model.fit(disp=False, maxiter=500, method='powell')\nprint(\"SARIMAX model training completed.\")\n\n# Predict using test set\nstart = split_idx\nend = split_idx + len(y_test) - 1\ny_pred = sarimax_result.predict(start=start, end=end, exog=X_test)\ny_pred = np.array(y_pred)\n\n# Ensure no NaN or infinite values in predictions\nif np.isnan(y_pred).any() or np.isinf(y_pred).any():\n    print(\"Predictions contain NaN or infinite values. Replacing with 0.0 for MSE/R² calculation.\")\n    y_pred = np.nan_to_num(y_pred, nan=0.0, posinf=0.0, neginf=0.0)\n\n# Calculate Metrics\nmse = mean_squared_error(y_test, y_pred)\nr2 = r2_score(y_test, y_pred)\nprint(f\"\\nModel 3 (SARIMAX) Evaluation:\")\nprint(f\"MSE: {mse:.4f}\")\nprint(f\"R²: {r2:.4f}\")\n\n# Residual Analysis\nprint(\"\\nResidual Analysis...\")\nresiduals = sarimax_result.resid\nstandardized_residuals = residuals / np.std(residuals)\nplt.figure(figsize=(10, 4))\nplt.plot(standardized_residuals)\nplt.title('Standardized Residual Analysis')\nplt.xlabel('Time')\nplt.ylabel('Standardized Residuals')\nplt.grid(True)\nplt.show()\n\n# Perform Ljung-Box test for residuals\nprint(\"\\nPerforming Ljung-Box test for residuals...\")\nlb_test = acorr_ljungbox(standardized_residuals, lags=[10], return_df=True)\nprint(lb_test)\n\n# Save the model\nsave_model(sarimax_result, MODEL3_SARIMAX_PATH)\nprint(f\"SARIMAX model saved to {MODEL3_SARIMAX_PATH}\")\n\n# Export predictions and metrics\nresults_df = X_test.copy()\nresults_df['Actual'] = y_test\nresults_df['Predicted'] = y_pred\nprint(\"\\nPredictions and Metrics:\")\nprint(results_df[['Actual', 'Predicted']].head())\n\nmetrics_df = pd.DataFrame({\n    'Metric': ['MSE', 'R²'],\n    'Value': [mse, r2]\n})\nprint(metrics_df.to_string(index=False))\n\nresults_df.to_csv(PREDICTIONS_SARIMAX_CSV, index=False)\nprint(f\"Predictions and actual values saved to {PREDICTIONS_SARIMAX_CSV}\")\n\nprint(metrics_df.to_string(index=False))",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "pipeline-stored-error",
+      "path": "notebooks/model_development.ipynb",
+      "locator": "JSON cell 1, output 1, execution_count=1",
+      "excerpt": "AttributeError: 'NoneType' object has no attribute 'set_index'",
+      "evidenceType": "Stored execution output"
+    },
+    {
+      "id": "synthetic-clock",
+      "path": "dgieser3/research.ipynb",
+      "locator": "JSON cell 2 (code)",
+      "excerpt": "def data_save(data):\n    \"\"\"\n    Save the data to a csv and reinstate the timestamp column.\n    We also \"round\" the data to the nearest hour mark so all \n    entries are equally spaced.\n    \"\"\"\n    df = data.copy()\n\n    data_start = datetime(2020, 1, 1)\n\n    df['timestamp'] = (data_start + (df.index * timedelta(hours=1))).astype('int64')\n    df.to_csv(\"../normalized_datasets/binance_btc_perp.csv\", index=False)\n\ndata_save(all_data)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "preprocess",
+      "path": "utilities/data_processing.py",
+      "locator": "lines 47–79",
+      "excerpt": "def preprocess_data(df: pd.DataFrame, handle_timestamps: bool = True) -> pd.DataFrame:\n    \"\"\"\n    Preprocess the DataFrame by handling timestamps, infinities, and missing values.\n    \n    Args:\n        df: Input DataFrame\n        handle_timestamps: Whether to process timestamp column\n        \n    Returns:\n        Preprocessed DataFrame\n    \"\"\"\n    df = df.copy()\n\n    if handle_timestamps and 'timestamp' in df.columns:\n        try:\n            df['timestamp'] = pd.to_datetime(df['timestamp'], unit='us', utc=True)\n            df.sort_values('timestamp', inplace=True)\n        except Exception as e:\n            print(f\"Error during timestamp processing: {e}\")\n    elif handle_timestamps:\n        print(\"'timestamp' column is missing. Skipping timestamp processing.\")\n\n    # Replace infinities with NaN first, to handle them consistently\n    df.replace([np.inf, -np.inf], np.nan, inplace=True)\n\n    # Forward fill so each missing value is replaced by the last valid one\n    # If forward fill fails, fallback to 0 or leave it.\n    df.ffill(inplace=True)\n    df.bfill(inplace=True)\n\n    # Reset index\n    df.reset_index(drop=True, inplace=True)\n    return df",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "target-calendar",
+      "path": "utilities/data_processing.py",
+      "locator": "lines 85–117",
+      "excerpt": "def create_features(df: pd.DataFrame, keep_future_rate: bool = False) -> pd.DataFrame:\n    \"\"\"\n    Create additional features and the target variable.\n    \n    Args:\n        df: Input DataFrame\n        keep_future_rate: Whether to keep the future_funding_rate column\n        \n    Returns:\n        DataFrame with additional features\n    \"\"\"\n    # Time-based and cyclical features\n    df['hour'] = df['timestamp'].dt.hour\n    df['day'] = df['timestamp'].dt.day\n    df['month'] = df['timestamp'].dt.month\n    df['hour_sin'] = np.sin(2 * np.pi * df['hour'] / 24)\n    df['hour_cos'] = np.cos(2 * np.pi * df['hour'] / 24)\n    df['day_sin'] = np.sin(2 * np.pi * df['day'] / 31)\n    df['day_cos'] = np.cos(2 * np.pi * df['day'] / 31)\n    df['month_sin'] = np.sin(2 * np.pi * df['month'] / 12)\n    df['month_cos'] = np.cos(2 * np.pi * df['month'] / 12)\n\n    # Create a future funding rate column\n    df['future_funding_rate'] = df['funding_rate'].shift(-1)\n\n    # Binary direction\n    df['direction'] = (df['future_funding_rate'] > df['funding_rate']).astype(int)\n\n    if not keep_future_rate:\n        # By default, you remove 'future_funding_rate' if you're only doing Model 1\n        df.drop(columns=['future_funding_rate'], inplace=True)\n\n    return df",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "pipeline-sequence",
+      "path": "utilities/data_processing.py",
+      "locator": "lines 177–209",
+      "excerpt": "        (\"Rescaling 'funding_rate'\", lambda df: df.assign(funding_rate=rescale_series(df['funding_rate'], scaling_factor)) if rescale else df),\n        (\"Removing outliers from 'funding_rate'\", lambda df: df.assign(funding_rate=remove_outliers(df['funding_rate'])) if handle_outliers else df),\n        (\"Adding lag features\", add_lag_features),\n        (\"Adding technical indicators\", lambda df: add_technical_indicators(df, ma_window=3, vol_window=5)),\n        (\"Adding interaction terms\", add_interaction_terms),\n        (\"Creating features and target variable\",\n        lambda d: create_features(d, keep_future_rate=keep_future_rate)),\n    ]\n    \n    for step_name, step_function in pipeline_steps:\n        try:\n            print(f\"{step_name}...\")\n            df = step_function(df)\n            print(f\"{step_name} completed. Shape: {df.shape}\")\n            print(df.head())  # Optional: Preview data after each step\n        except Exception as e:\n            print(f\"Error during {step_name.lower()}: {e}\")\n            return None\n\n    if drop_all_na:\n        # Drop only rows missing crucial columns\n        essential_cols = ['funding_rate', 'direction']  # or whatever you need\n        df.dropna(subset=essential_cols, inplace=True)\n        print(f\"Dropped rows with NaN in essential columns. Remaining shape: {df.shape}\")\n    else:\n        print(\"Skipping global dropna(). Some columns may still have NaN.\")\n    \n    return df",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "lag-definitions",
+      "path": "utilities/functions.py",
+      "locator": "lines 49–64",
+      "excerpt": "    # Lagged funding rate features\n    df['funding_rate_lag1'] = df['funding_rate'].shift(1)\n    df['funding_rate_lag2'] = df['funding_rate'].shift(2)\n\n    if 'open_interest' in df.columns:\n        df['open_interest_lag1'] = df['open_interest'].shift(1)\n    else:\n        df['open_interest_lag1'] = np.nan\n\n    if 'mark_price' in df.columns:\n        df['mark_price_lag1'] = df['mark_price'].shift(1)\n    else:\n        df['mark_price_lag1'] = np.nan\n\n    # Handle missing values from lagging\n    df.fillna(0, inplace=True)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "technical-definitions",
+      "path": "utilities/functions.py",
+      "locator": "lines 85–99",
+      "excerpt": "    df[f'funding_rate_ma{ma_window}'] = df['funding_rate'].rolling(window=ma_window).mean()\n    df['funding_rate_ma5'] = df['funding_rate'].rolling(window=5).mean()\n    \n    df[f'funding_rate_ema{ma_window}'] = df['funding_rate'].ewm(span=ma_window, adjust=False).mean()\n    df['funding_rate_ema5'] = df['funding_rate'].ewm(span=5, adjust=False).mean()\n\n    df['volatility_5h'] = df['mark_price'].rolling(window=vol_window).std()\n\n    df['funding_rate_roc1'] = df['funding_rate'].pct_change(periods=1)\n    df['funding_rate_roc3'] = df['funding_rate'].pct_change(periods=3)\n    \n    if 'open_interest' in df.columns:\n        df['open_interest_roc'] = df['open_interest'].pct_change(periods=1)\n    else:\n        df['open_interest_roc'] = np.nan",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "interaction-definitions",
+      "path": "utilities/functions.py",
+      "locator": "lines 121–131",
+      "excerpt": "    # Interaction Terms\n    df['interaction1'] = df['funding_rate_lag1'] * df['funding_rate_lag2']\n\n    # Handle potential division-by-zero issues for interaction2\n    interaction2 = df['funding_rate_ma3'] / (df['funding_rate_lag1'].replace(0, np.nan) + 1e-6)\n    interaction2 = interaction2.replace([np.inf, -np.inf], np.nan)\n    interaction2 = interaction2.fillna(0)\n    df['interaction2'] = interaction2\n\n    if 'mark_price_lag1' in df.columns and 'funding_rate_ma3' in df.columns:\n        df['interaction3'] = df['mark_price_lag1'] * df['funding_rate_ma3']",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "direction-integration",
+      "path": "utilities/functions.py",
+      "locator": "lines 139–167",
+      "excerpt": "def add_model1_direction(df):\n    # Load model and scaler\n    model1 = load_model(MODEL1_RF_PATH)\n    scaler1 = load_model(SCALER1_RF_PATH) \n\n    model1_feature_columns = [\n        'funding_rate_lag1', 'funding_rate_lag2', 'funding_rate_ma3', 'funding_rate_ma5', 'funding_rate_ema3',\n        'open_interest', 'open_interest_lag1', 'open_interest_roc',\n        'mark_price', 'mark_price_lag1', 'volatility_5min',\n        'funding_rate_roc1', 'funding_rate_roc3', 'interaction2', 'interaction3'\n    ]\n\n    missing_columns = [col for col in model1_feature_columns if col not in df.columns]\n    if missing_columns:\n        raise ValueError(f\"Missing columns for Model 1 prediction: {missing_columns}\")\n\n    X = df[model1_feature_columns]\n\n    # Final cleanup step to remove infinities and NaNs before scaling\n    X = X.replace([np.inf, -np.inf], np.nan).fillna(0)\n    X = X.clip(-1e9, 1e9)\n    print(\"Max values after clipping:\\n\", X.max())\n    print(\"Min values after clipping:\\n\", X.min())\n\n    X_scaled = scaler1.transform(X)\n\n    # Predict direction\n    df['model1_direction_pred'] = model1.predict(X_scaled)\n    return df",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "variance-integration",
+      "path": "utilities/functions.py",
+      "locator": "lines 169–190",
+      "excerpt": "def add_model2_volatility(df, model2_result):\n    \"\"\"\n    Instead of forecasting 5 steps at the end, \n    we retrieve the entire in-sample or one-step-ahead \n    forecast for each time index used during GARCH training.\n    \"\"\"\n    # Suppose your GARCH model was fitted on an aligned index\n    # 'in_sample' or 'one_step_forecast' approach:\n    garch_forecast = model2_result.forecast(reindex=False)  # reindex to match the original\n    # garch_forecast.variance is a DataFrame with the same index used in training\n\n    # Ensure the indices align with df. If not, you may need to reindex or merge\n    volatility_series = garch_forecast.variance.iloc[:, 0]\n    # Now each timestamp has a forecasted variance\n\n    # Merge or align with df:\n    # If your df has the same datetime index as garch_forecast,\n    # you can do something like:\n    df['model2_volatility_h1'] = volatility_series.reindex(df.index, fill_value=np.nan)\n\n    # Then fill or drop NaN as needed\n    return df",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "outlier-definition",
+      "path": "utilities/functions.py",
+      "locator": "lines 252–258",
+      "excerpt": "def remove_outliers(series, z_score_threshold=3):\n    \"\"\"\n    Remove outliers from a pandas Series based on z-score threshold.\n    \"\"\"\n    z_scores = np.abs(stats.zscore(series.dropna()))\n    filtered_indices = np.where(z_scores < z_score_threshold)\n    return series.iloc[filtered_indices].copy()",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "tuning",
+      "path": "utilities/model_utils.py",
+      "locator": "lines 171–193",
+      "excerpt": "def perform_hyperparameter_tuning(estimator, param_grid, X_train, y_train, scoring='roc_auc', random_state=42, verbose=1):\n    \"\"\"\n    Perform hyperparameter tuning using GridSearchCV for any estimator.\n    \"\"\"\n    from sklearn.model_selection import GridSearchCV\n\n    grid_search = GridSearchCV(\n        estimator=estimator,\n        param_grid=param_grid,\n        scoring=scoring,\n        cv=5,\n        n_jobs=-1,\n        verbose=verbose\n    )\n    \n    # Fit the model before accessing best parameters and score\n    grid_search.fit(X_train, y_train)\n\n    # Access attributes after the fit\n    print(f\"Best parameters: {grid_search.best_params_}\")\n    print(f\"Best score: {grid_search.best_score_}\")\n\n    return grid_search.best_estimator_",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "standalone-model1",
+      "path": "models/model1.py",
+      "locator": "lines 21–78",
+      "excerpt": "    # Load and preprocess data\n    df = load_data(data_filepath)\n    df = preprocess_data(df)\n    df = create_features(df)\n\n    # Create the 'direction' target variable\n    df['future_funding_rate'] = df['funding_rate'].shift(-1)\n    df.dropna(subset=['future_funding_rate'], inplace=True)\n    df['direction'] = (df['future_funding_rate'] > df['funding_rate']).astype(int)\n    df.drop(columns=['future_funding_rate'], inplace=True)\n\n    # Define features and target\n    feature_columns = [\n        'open_interest', 'mark_price',\n        'hour_sin', 'hour_cos', 'day_sin', 'day_cos', 'month_sin', 'month_cos'\n    ]\n    X = df[feature_columns]\n    y = df['direction']\n\n    # Handle missing values if any\n    X = X.dropna()\n    y = y.loc[X.index]\n\n    # Split data into training and testing sets without shuffling (time series)\n    split_index = int(0.8 * len(X))\n    X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]\n    y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]\n\n    # Scale numerical features\n    scaler = StandardScaler()\n    X_train_scaled = scaler.fit_transform(X_train[['open_interest', 'mark_price']])\n    X_test_scaled = scaler.transform(X_test[['open_interest', 'mark_price']])\n\n    # Convert scaled features back to DataFrame\n    X_train_scaled_df = pd.DataFrame(X_train_scaled, columns=['open_interest', 'mark_price'], index=X_train.index)\n    X_test_scaled_df = pd.DataFrame(X_test_scaled, columns=['open_interest', 'mark_price'], index=X_test.index)\n\n    # Combine scaled numerical features with cyclical features\n    X_train_prepared = pd.concat(\n        [X_train_scaled_df.reset_index(drop=True), X_train[['hour_sin', 'hour_cos', 'day_sin', 'day_cos', 'month_sin', 'month_cos']].reset_index(drop=True)],\n        axis=1\n    )\n    X_test_prepared = pd.concat(\n        [X_test_scaled_df.reset_index(drop=True), X_test[['hour_sin', 'hour_cos', 'day_sin', 'day_cos', 'month_sin', 'month_cos']].reset_index(drop=True)],\n        axis=1\n    )\n\n    # Initialize and train the Logistic Regression model\n    logreg_model = LogisticRegression(\n        random_state=RANDOM_STATE,\n        class_weight='balanced',\n        max_iter=1000,\n        solver='liblinear'\n    )\n    logreg_model = train_classification_model(logreg_model, X_train_prepared, y_train)\n\n    # Evaluate the model\n    evaluate_classification_model(logreg_model, X_test_prepared, y_test)",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "config-input",
+      "path": "config.py",
+      "locator": "lines 18–45",
+      "excerpt": "# Path to the main dataset\nBINANCE_BTC_PERP_CSV = NORMALIZED_DATA_DIR / 'binance_btc_perp.csv'\n\n# Models directory\nMODELS_DIR = BASE_DIR / 'models'\nSAVED_MODELS_DIR = MODELS_DIR / 'saved_models'\n\n# Model file paths\nMODEL1_RF_PATH = SAVED_MODELS_DIR / 'model1_RF.pkl'\nSCALER1_RF_PATH = SAVED_MODELS_DIR / 'scaler1_RF.pkl'\nMODEL1_LR_PATH = SAVED_MODELS_DIR / 'model1_LR.pkl'\nSCALER1_LR_PATH = SAVED_MODELS_DIR / 'scaler1_LR.pkl'\nMODEL2_GARCH_PATH = SAVED_MODELS_DIR / 'model2_GARCH.pkl'\nMODEL3_RFR_PATH = SAVED_MODELS_DIR / 'model3_RFR.pkl'\nMODEL3_SARIMAX_PATH = SAVED_MODELS_DIR / 'model3_SARIMAX.pkl'\n\n# Instrument specifications\nTARDIS_TYPE = 'derivative_ticker'\nINSTRUMENT = 'btcusdt'\nSTART_DATE = '2020-01-01'\nEND_DATE = '2024-10-18'\nEXCHANGE = 'binance-futures'\n\n# Results directory\nRESULTS_DIR = BASE_DIR / 'results'\nRESULTS_DIR.mkdir(exist_ok=True)\nPREDICTIONS_RFR_CSV = RESULTS_DIR / 'predictions_RFR.csv'\nPREDICTIONS_SARIMAX_CSV = RESULTS_DIR / 'predictions_SARIMAX.csv'",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "import-sampling",
+      "path": "utilities/data_import.py",
+      "locator": "lines 83–110",
+      "excerpt": "        if filename.exists():\n            try:\n                with gzip.open(filename, 'rt') as f:\n                    df = pd.read_csv(f)\n\n                # Convert 'timestamp' to datetime and set it as the index\n                df['timestamp'] = pd.to_datetime(df['timestamp'], unit='us', utc=True)\n                df = df.set_index('timestamp')\n\n                # Resample to hourly frequency and take the last available entry\n                df_hourly = df.resample('H').last()\n\n                # Check if there are 24 data points; if not, skip the date\n                if len(df_hourly) == 24:\n                    dfs.append(df_hourly)\n                    processed_count += 1\n                    logger.debug(f\"[PROCESSED] {date_str}\")\n                else:\n                    skipped_count += 1\n                    logger.warning(f\"Skipping incomplete data for date: {date_str} \"\n                                f\"(found {len(df_hourly)} hourly points, expected 24)\")\n                    \n            except Exception as e:\n                logger.error(f\"Error processing file {filename}: {str(e)}\")\n                skipped_count += 1\n        else:\n            missing_count += 1\n            logger.warning(f\"File not found: {filename}\")",
+      "evidenceType": "Executable definition"
+    },
+    {
+      "id": "group-attribution",
+      "path": "README.md",
+      "locator": "lines 1–10",
+      "excerpt": "# Stat 429 Project\n\n## Group Members:\n- Viraj Parmaj\n- David Gieser\n\n## Important Links:\n1. [Project Info](https://canvas.illinois.edu/courses/47839/pages/project-information?wrap=1)\n2. [Project Report](https://canvas.illinois.edu/courses/47839/assignments/999179)\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "notes-classification",
+      "path": "notes/09_results_and_metrics.md",
+      "locator": "lines 46–56",
+      "excerpt": "## Model 1 Direction Prediction\nConfirmed from report:\n| Model | Accuracy | F1 | ROC AUC | Interpretation |\n|---|---:|---:|---:|---|\n| Logistic Regression | 0.8026 | 0.6589 | N/A | Fast, interpretable baseline |\n| Random Forest initial | 0.7599 | 0.5459 | 0.835 | Nonlinear but needed tuning |\n| Random Forest tuned | 0.7738 | 0.7142 | 0.8718 | Best directional model by F1/ROC AUC |\n\nNote:\n- Notebook summary also says tuned RF accuracy `78.75%`; report table says `0.7738`. Treat as minor metric discrepancy needing verification.\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "notes-analysis",
+      "path": "notes/09_results_and_metrics.md",
+      "locator": "lines 35–45",
+      "excerpt": "## Analysis A Baselines\nConfirmed from report:\n| Model | R2 | MSE | Note |\n|---|---:|---:|---|\n| Linear Regression 1 | 0.132 | 5.36e-08 | Weak linear baseline |\n| Linear Regression 2 | 0.284 | 4.42e-08 | Better with volatility/std feature |\n| Random Forest | 0.936 | 9.34e-09 | Best Analysis A model in report |\n\nConfirmed from notebook PDF:\n- Random Forest R2 about `0.936258`.\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "notes-garch",
+      "path": "notes/09_results_and_metrics.md",
+      "locator": "lines 57–69",
+      "excerpt": "## Model 2 Volatility Prediction\nConfirmed from report:\n- Best model: `GJR-GARCH(1,1) AR(2)`.\n- Log-likelihood about `366385`.\n- AIC about `-732756`.\n- BIC about `-732696`.\n- More exact text: AIC `-732755.679`, BIC `-732695.682`.\n\nInterpretation:\n- Captures volatility clustering.\n- AR(2) terms align with PACF evidence around lags 1 and 2.\n- Forecasted variance rose over the next five steps, indicating increasing short-term uncertainty.\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "notes-regression",
+      "path": "notes/09_results_and_metrics.md",
+      "locator": "lines 70–82",
+      "excerpt": "## Model 3 Exact Funding Rate\nConfirmed from report table:\n| Model 3 approach | R2 | MSE | Note |\n|---|---:|---:|---|\n| Random Forest Regressor | 0.96 | 0.0000023 | Strong ML baseline |\n| SARIMAX with exogenous variables | 0.925 | 0.0000112 | Integrates direction and volatility |\n\nNeeds verification:\n- Report narrative also mentions R2 up to about `97.5%`.\n- Current `predictions_RFR.csv` recomputes near R2 `0.975`.\n- Current `predictions_SARIMAX.csv` appears scale-mismatched and does not match report metrics.\n- Interview-safe answer: \"The reported Model 3 performance was strong, but I would rerun the full pipeline from a clean environment before claiming the final SARIMAX metric.\"\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "notes-features",
+      "path": "notes/05_feature_engineering.md",
+      "locator": "lines 11–43",
+      "excerpt": "## Feature Families Used\nConfirmed from code and notebooks:\n- Lag features:\n  - `funding_rate_lag1`\n  - `funding_rate_lag2`\n  - `open_interest_lag1`\n  - `mark_price_lag1`\n- Rolling features:\n  - `funding_rate_ma3`\n  - `funding_rate_ma5`\n  - rolling standard deviation / volatility proxy\n- EMA features:\n  - `funding_rate_ema3`\n  - `funding_rate_ema5`\n- Rate-of-change features:\n  - `funding_rate_roc1`\n  - `funding_rate_roc3`\n  - `open_interest_roc`\n- Interaction terms:\n  - `interaction1 = funding_rate_lag1 * funding_rate_lag2`\n  - `interaction2 = funding_rate_ma3 / funding_rate_lag1`\n  - `interaction3 = mark_price_lag1 * funding_rate_ma3`\n- Time features:\n  - `hour`, `day`, `month`\n  - `hour_sin`, `hour_cos`, `day_sin`, `day_cos`, `month_sin`, `month_cos`\n\n## Why These Features Were Used\n- Lags capture short-term memory.\n- Moving averages and EMAs smooth noisy behavior.\n- ROC features capture momentum and direction of change.\n- Volatility features capture recent uncertainty.\n- Interactions capture nonlinear relationships that linear models may miss.\n- Cyclical time features avoid treating hour 23 and hour 0 as far apart.",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "notes-models",
+      "path": "notes/06_ml_models.md",
+      "locator": "lines 11–78",
+      "excerpt": "## Model 1: Direction Prediction\nGoal: predict whether the next funding rate moves up or down.\n\nModels:\n- Logistic Regression:\n  - Baseline classifier.\n  - Interpretable and fast.\n  - Assumes a mostly linear relationship between features and log-odds.\n  - Report result: accuracy about `0.8026`, F1 about `0.6589`; ROC AUC not reported in table.\n- Random Forest Classifier:\n  - Nonlinear classifier.\n  - Handles interactions and threshold effects.\n  - Report result: tuned RF F1 about `0.7142`, ROC AUC about `0.8718`; report text also notes F1 about `71.27%`.\n  - Chosen because F1/recall behavior was better for the imbalanced direction task.\n\nAvant analogy:\n- Default / no default.\n- Churn / no churn.\n- Direct mail response / no response.\n- Customer moves into higher-risk state / stable state.\n\n## Model 2: Volatility Prediction\nGoal: estimate uncertainty/risk intensity, not exact direction.\n\nModels:\n- GARCH(1,1): baseline volatility clustering.\n- EGARCH: asymmetric shock modeling.\n- GJR-GARCH: leverage/asymmetric volatility effects.\n- GJR-GARCH(1,1) AR(2): best report-backed model by AIC/BIC.\n\nReport-backed result:\n- Best model: `GJR-GARCH(1,1) AR(2)`.\n- AIC about `-732755.679`.\n- BIC about `-732695.682`.\n- Forecasted conditional variances increased over five steps, indicating rising uncertainty.\n\nAvant analogy:\n- Risk uncertainty around a segment.\n- Instability in repayment behavior.\n- Stress-period detection for portfolio monitoring.\n- Confidence around pricing/approval decisions.\n\n## Model 3: Exact Funding-Rate Prediction\nGoal: predict the next continuous funding-rate value.\n\nModels:\n- Random Forest Regressor:\n  - Strong nonlinear baseline.\n  - Report table: RFR R2 `0.96`, MSE `0.0000023`.\n  - Current `predictions_RFR.csv` recomputes near R2 `0.975`; needs verification against report scaling and split.\n- SARIMAX:\n  - Time-series regression with exogenous variables.\n  - Report table: SARIMAX R2 `0.925`, MSE `0.0000112`.\n  - Report narrative also mentions about `97.5%` R2 in some places.\n  - Current `predictions_SARIMAX.csv` appears scale-mismatched; needs verification.\n\nAvant analogy:\n- Expected loss amount.\n- Expected balance or utilization.\n- Expected repayment amount.\n- Expected revenue or campaign value.\n\n## Baseline Analysis A\n- Linear Regression 1:\n  - Report/notebook result: R2 about `0.132`, MSE about `5.36e-08`.\n- Linear Regression 2:\n  - Report/notebook result: R2 about `0.284`, MSE about `4.42e-08`.\n- Random Forest:",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "assessment-stale-context",
+      "path": "v2/research/research_assessment.md",
+      "locator": "lines 11–15",
+      "excerpt": "### Materials and verification scope\n\nReviewed all four notebooks, their stored text outputs, preprocessing and model utilities, ingestion code, v2 audit helpers/configuration/tests, README files, the normalized data, and the saved prediction CSVs. Saved pickle files were inventoried but not executed. The original report linked through Canvas is not locally present; its contents were not available. Claims attributed to absent `notes/` files in the existing audit cannot be independently verified from those files.\n\nThe locally supplied data contain **42,179 rows and 11 columns**, Binance BTCUSDT only. Nonmissing message-arrival timestamps span **2020-01-01 00:59:57 UTC through 2024-10-17 23:59:59 UTC**. There are **5,256 distinct upcoming funding-event timestamps**. These are event identifiers, not 5,256 independently verified settled rates. The dataset is an hourly-style reduction of derivative-ticker messages, not a transaction tape, order book, or authoritative settlement ledger.",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "paper-stale-context",
+      "path": "v2/paper_plan/02_verified_findings.md",
+      "locator": "lines 1–7",
+      "excerpt": "# Verified findings and interpretation\n\n### Materials and verification scope\n\nReviewed all four notebooks, their stored text outputs, preprocessing and model utilities, ingestion code, v2 audit helpers/configuration/tests, README files, the normalized data, and the saved prediction CSVs. Saved pickle files were inventoried but not executed. The original report linked through Canvas is not locally present; its contents were not available. Claims attributed to absent `notes/` files in the existing audit cannot be independently verified from those files.\n\nThe locally supplied data contain **42,179 rows and 11 columns**, Binance BTCUSDT only. Nonmissing message-arrival timestamps span **2020-01-01 00:59:57 UTC through 2024-10-17 23:59:59 UTC**. There are **5,256 distinct upcoming funding-event timestamps**. These are event identifiers, not 5,256 independently verified settled rates. The dataset is an hourly-style reduction of derivative-ticker messages, not a transaction tape, order book, or authoritative settlement ledger.",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "v2-readme-status",
+      "path": "v2/README.md",
+      "locator": "lines 142–165",
+      "excerpt": "## Status\n\n| Phase | Scope | State |\n|---|---|---|\n| 0 | Scaffolding, `config.py`, `legacy.py`, `00_audit_v1.ipynb` | **Complete** |\n| 1 | `timebase.py`, `settlement.py`, notebooks 01–02 | Not started |\n| 2 | `baselines.py`, `metrics.py`, notebook 03 | Not started |\n| 3 | `features.py`, `validate.py`, notebook 04, tests | Not started |\n| 4 | `splits.py`, notebook 05 | Not started |\n| 5 | Economics and findings, notebooks 06–07 | Not started |\n| 6 | Tardis re-pull of `predicted_funding_rate`, cross-exchange dispersion | **Blocked** — needs `TARDIS_API_KEY` and explicit sign-off before any network call |\n\n### Known limitations\n\n- `predicted_funding_rate` is 100% null in the shipped file, so the most informative\n  formulation of the problem — forecasting the *residual* against the exchange's own\n  published estimate — is unavailable until Phase 6.\n- The data is a single instrument on a single venue. Cross-exchange funding dispersion\n  (OKX, Bybit, Hyperliquid) is the obvious next predictor and is also Phase 6.\n- The audit's Analysis A correction variants reproduce in sign and magnitude but not to\n  the quoted decimal; see the discrepancy note in §12 of the audit notebook.\n\n---\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "v2-readme-claims",
+      "path": "v2/README.md",
+      "locator": "lines 26–51",
+      "excerpt": "## What the audit found\n\n`notebooks/00_audit_v1.ipynb` reproduces 51 of 55 measured claims about the v1 build\ndirectly from the raw data and the committed result CSVs. The four exceptions are\nrecorded as discrepancies in the notebook rather than quietly reconciled.\n\nThe headline findings:\n\n| # | Finding | Evidence |\n|---|---|---|\n| 1 | Model 3's design matrix contains a closed-form reconstruction of its own target, `fr(t) = 3·ma3 − lag1 − lag2`. The closed form scores **0.9801**, beating the trained model's **0.9750** | §7 |\n| 2 | SARIMAX is reported at R² = 0.925; recomputed from the CSV v1 itself wrote, it is **−4.807**. `.predict(start, end)` past the sample is a 7,622-step forecast, scored as if one-step | §8 |\n| 3 | Analysis A's 0.936 uses a contemporaneous target, a rolling window containing that target, and a shuffled split on a series with lag-1 autocorrelation 0.9887 | §6 |\n| 4 | No baseline was ever computed. Naive persistence alone scores **0.937** on the same test set | §7 |\n| 5 | The `timestamp` column is synthetic — a manufactured hourly grid that drifts **130 hours** from the exchange clock, matching the true hour-of-day only 9.2% of the time | §2 |\n| 6 | `bfill()` on the full frame fills **8,531 cells** from future observations before any split | §3 |\n| 7 | Outlier removal plus whole-frame `fillna(0)` rewrites **1,118 real funding observations** averaging 12.44 bp as exactly zero | §4 |\n| 8 | Three \"model output\" columns in the shipped test set are constant, so Models 1 and 2 contribute nothing to Model 3 | §9 |\n| 9 | The measured edge over persistence is 0.0303 bp against a ~9 bp round trip — **~300× too small** | §10 |\n| 10 | The GARCH selection AIC of −732,756 is a units artefact; the identical fit scores +44,210 under a different scaling | §11 |\n\nThe common thread is finding 4. Every other defect stayed invisible because no metric\nwas ever reported next to a baseline. That is the ordering v2 inverts.\n\n---\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "v2-planned-modules",
+      "path": "v2/paper_plan/07_implementation_plan.md",
+      "locator": "lines 1–27",
+      "excerpt": "# Implementation plan\n\n## Deliverable boundary\n\nBuild an additive, executable study under `v2/`. This package is the implementation specification; the following modules and commands are **planned**, not currently implemented. Leave original notebooks, utilities, models, data and saved results unchanged. Do not implement the erroneous prohibitions against using the observable current indication or time-to-event features from the older build prompt.\n\n## Proposed modules and contracts\n\n| Proposed path | Responsibility | Interface / acceptance |\n|---|---|---|\n| `v2/src/funding_labels.py` | Cached official archive ingestion | `load_labels(paths) -> labels, manifest, exclusions`; checksum and units required |\n| `v2/src/timebase.py` | Preserve event, arrival and source IDs | `normalize_ticker(raw) -> frame`; no synthetic market clock |\n| `v2/src/settlement.py` | Origin construction and as-of event matching | `build_origin_panel(ticker, labels, spec) -> panel, exclusions`; explicit label-match offsets |\n| `v2/src/features.py` | Causal feature groups and availability lineage | `make_features(panel, history, spec) -> X, lineage`; fit transforms only on training |\n| `v2/src/baselines.py` | Current-indication and settled-history forecasts | All baselines use the same origin and admitted target |\n| `v2/src/forecast_models.py` | Ridge and RF residual fits | Separate horizon models; fitted preprocessing included in model bundle |\n| `v2/src/splits.py` | Expanding monthly cutoffs | Fold manifest with train-label cutoff, validation membership and excluded boundaries |\n| `v2/src/metrics.py` | bp losses, paired gain, block intervals | Explicit rate units and reference model; stable zero-error behavior |\n| `v2/src/validate.py` | Runtime data/time/lineage invariants | Reject future availability, unknown labels, conflicting event keys and nonfinite outputs |\n| `v2/experiments/run_study.py` | Deterministic orchestration | One config -> versioned outputs, manifest, logs and nonzero failure exit |\n| `v2/configs/settlement_study.json` | Protocol specification | Dates, horizons, staleness, publication assumptions, grids, seeds and comparison ledger |\n\nKeep audit-only legacy transformations out of the new feature pipeline. Avoid notebook execution order as a dependency. Existing `config.py` may supply safe paths, but legacy fee constants and HAC settings do not determine the scientific protocol.\n\n## Implementation order\n\n### A. Freeze inputs and definitions",
+      "evidenceType": "Planned"
+    },
+    {
+      "id": "v2-pending-results",
+      "path": "v2/paper_plan/09_results_ledger.md",
+      "locator": "lines 23–35",
+      "excerpt": "## New model experiments\n\n| ID | Status | Primary estimate | Interval / test | Required artifact |\n|---|---|---|---|---|\n| E0 full-period panel | PENDING; sample probe only | Not measured | Not applicable | Complete manifest, mapping and exclusions |\n| E1 four-hour ridge/RF | PENDING | Not measured | Not run | Per-event predictions + main table |\n| E2 matched lead-time curve | PENDING | Not measured | Not run | Same-event horizon comparisons |\n| E3 feature/delay ablation | PENDING | Not measured | Not run | Paired ablation outputs |\n| E3b label-proxy sensitivity | PENDING | Not measured | Not run | Identical frozen predictions rescored on matched labels |\n| E4 observable-state/time | PENDING | Not measured | Not run | Counts, conditional gains and uncertainty |\n| E5 robustness | PENDING | Not measured | Not run | Tail/window/seed comparison |\n| E6 fresh-time / DAR replication | PENDING | Not measured | Not run | Locked replication outputs |\n",
+      "evidenceType": "Planned"
+    },
+    {
+      "id": "v2-feasibility",
+      "path": "v2/paper_plan/05_data_contract_and_feasibility.md",
+      "locator": "lines 35–50",
+      "excerpt": "## Official label feasibility probe\n\nRead-only downloads succeeded for January 2020, June 2022 and March 2024 from the [Binance archive](https://data.binance.vision/?prefix=data/futures/um/monthly/fundingRate/BTCUSDT/). Each ZIP matched its published SHA-256 checksum; the [official repository](https://github.com/binance/binance-public-data#checksum) documents that mechanism. Stored source filenames, URLs and hashes are in [archive_probe.json](evidence/archive_probe.json).\n\nThe three archives contain 276 rows. Their header is `calc_time,funding_interval_hours,last_funding_rate`; all sampled intervals are eight hours. Match to scheduled event IDs only after retaining exact archive times. In the samples, calculation-time offsets from the scheduled hour range from 0 to 25 milliseconds. An exact timestamp join would miss some genuine candidates.\n\nThe diagnostic used a disclosed nearest-hour match within 60 seconds, required unique matches and 00/08/16 UTC alignment, and compared only ticker observations received **before** the scheduled event. This normalization is for label reconciliation, not permission to snap feature arrival times. Tighten/validate the rule over the full history and quarantine ambiguities.\n\n| Month | Archive labels | Matched indications | Final-indication MAE, bp | Largest difference, bp | Differences >0.01 bp |\n|---|---:|---:|---:|---:|---:|\n| 2020-01 | 93 | 92 | 0.004457 | 0.0579 | 14 |\n| 2022-06 | 90 | 90 | 0.006199 | 0.1573 | 9 |\n| 2024-03 | 93 | 93 | 0.010781 | 0.3211 | 24 |\n\nThese discrepancies show why the final ticker observation is not an interchangeable settlement label. They do not show model skill. The months were selected for early/middle/stress coverage; estimates are descriptive and not representative confidence estimates.\n",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "v2-backlog",
+      "path": "v2/paper_plan/13_execution_backlog.md",
+      "locator": "lines 17–29",
+      "excerpt": "## Definition of minimum completed study\n\n- [ ] Full-period official settlement labels and exact source manifest.\n- [ ] Causal event-origin panel with exclusion reasons and explicit availability assumptions.\n- [ ] Primary four-hour ridge comparison and secondary RF/baselines.\n- [ ] Matched lead-time comparison at 1/2/4/6 hours.\n- [ ] Controlled feature and one-hour delay ablations.\n- [ ] Paired uncertainty, comparison ledger and valid bounded-negative interpretation.\n- [ ] Observable-state/time analysis if these appear in the contribution claim.\n- [ ] Closest-literature comparison resolves or discloses remaining overlap.\n- [ ] Clean rerun reproduces tables, figures and counts.\n- [ ] Claims distinguish measured effects from hypotheses and economic speculation.\n",
+      "evidenceType": "Planned"
+    },
+    {
+      "id": "old-audit-identity",
+      "path": "v2/notebooks/00_audit_v1.ipynb",
+      "locator": "JSON cell 28 (markdown)",
+      "excerpt": "## 7 — Model 3 (RFR): the target is a linear combination of its own features\n\n**What v1 did.** `notebooks/model_development.ipynb` cell 14 selects features by\nexclusion:\n\n```python\nfeatures = [c for c in df.columns\n            if c not in ['funding_rate', 'future_funding_rate', 'direction']]\n```\n\n**Why it's wrong.** Excluding the target by name does not exclude the target. The\nexclusion list drops `funding_rate` but keeps `funding_rate_ma3`, `funding_rate_lag1`,\nand `funding_rate_lag2`. Since\n\n$$\\mathrm{ma3}(t) = \\tfrac{1}{3}\\left[fr(t) + fr(t-1) + fr(t-2)\\right]$$\n\nthe contemporaneous rate is exactly recoverable:\n\n$$fr(t) = 3\\,\\mathrm{ma3}(t) - \\mathrm{lag1}(t) - \\mathrm{lag2}(t)$$\n\nSo the design matrix contains a closed-form reconstruction of `funding_rate(t)`, and the\n\"forecast\" of `funding_rate(t+1)` is persistence dressed up as a Random Forest.\n\n**The fix.** *Phase 3*'s `validate.py` asserts that no linear combination of the feature\nset reconstructs the target, testing this exact path explicitly. Feature sets are\ndeclared by allow-list, never by exclusion.",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "old-audit-economics",
+      "path": "v2/notebooks/00_audit_v1.ipynb",
+      "locator": "JSON cell 38 (markdown)",
+      "excerpt": "The model improves on naive persistence by **0.0303 bp per settlement**. A single\nBinance taker round trip costs about **9 bp** (4.5 bp per side). The cost is roughly\n**300×** the edge — and that is before slippage, before the borrow leg of a hedge, and\nbefore the fact that the \"edge\" was measured on a leaked target.\n\nEven taken entirely at face value, the v1 result does not describe a trade.",
+      "evidenceType": "Reported in project notes"
+    },
+    {
+      "id": "saved-header-rf",
+      "path": "results/predictions_RFR.csv",
+      "locator": "lines 1–1",
+      "excerpt": "index,timestamp,local_timestamp,funding_timestamp,predicted_funding_rate,open_interest,last_price,index_price,mark_price,funding_rate_lag1,funding_rate_lag2,open_interest_lag1,mark_price_lag1,funding_rate_ma3,funding_rate_ma5,funding_rate_ema3,funding_rate_ema5,volatility_5min,funding_rate_roc1,funding_rate_roc3,open_interest_roc,interaction1,interaction2,interaction3,hour,day,month,hour_sin,hour_cos,day_sin,day_cos,month_sin,month_cos,model1_direction_pred,model2_volatility_h1,Actual,Predicted",
+      "evidenceType": "Saved artifact"
+    },
+    {
+      "id": "saved-header-sarimax",
+      "path": "results/predictions_SARIMAX.csv",
+      "locator": "lines 1–1",
+      "excerpt": "local_timestamp,funding_timestamp,predicted_funding_rate,open_interest,last_price,index_price,mark_price,timestamp,funding_rate_lag1,funding_rate_lag2,open_interest_lag1,mark_price_lag1,funding_rate_ma3,funding_rate_ma5,funding_rate_ema3,funding_rate_ema5,volatility_5min,funding_rate_roc1,funding_rate_roc3,open_interest_roc,interaction1,interaction2,interaction3,hour,day,month,hour_sin,hour_cos,day_sin,day_cos,month_sin,month_cos,model1_direction_pred,model2_volatility_h1,Actual,Predicted",
+      "evidenceType": "Saved artifact"
+    },
+    {
+      "id": "v2-source-inventory",
+      "path": "v2/src/",
+      "locator": "Python source-file inventory",
+      "excerpt": "v2/src/__init__.py\nv2/src/audit.py\nv2/src/config.py\nv2/src/legacy.py",
+      "evidenceType": "Current repository inspection"
+    },
+    {
+      "id": "model-inventory",
+      "path": "models/",
+      "locator": "Current file inventory; no serialized models loaded",
+      "excerpt": "models/model1.py\nmodels/model2.py\nmodels/model3.py\nmodels/saved_models/model1_LR.pkl\nmodels/saved_models/model1_RF.pkl\nmodels/saved_models/model1_logistic_regression.pkl\nmodels/saved_models/model2_garch.pkl\nmodels/saved_models/scaler1_LR.pkl\nmodels/saved_models/scaler1_RF.pkl\nmodels/saved_models/scaler1_logistic_regression.pkl",
+      "evidenceType": "Current repository inspection"
+    },
+    {
+      "id": "saved-integration-values",
+      "path": "results/predictions_RFR.csv",
+      "locator": "Descriptive scan of model1_direction_pred and model2_volatility_h1 over every saved row",
+      "excerpt": "{\n  \"model1_direction_pred\": {\n    \"rowCount\": 7797,\n    \"uniqueValueCount\": 1,\n    \"values\": [\n      1.0\n    ]\n  },\n  \"model2_volatility_h1\": {\n    \"rowCount\": 7797,\n    \"uniqueValueCount\": 1,\n    \"values\": [\n      1.6093525920932338e-10\n    ]\n  }\n}",
+      "evidenceType": "Recomputed from saved predictions"
+    }
+  ],
+  "artifactInventory": {
+    "v2Sources": [
+      "v2/src/__init__.py",
+      "v2/src/audit.py",
+      "v2/src/config.py",
+      "v2/src/legacy.py"
+    ],
+    "modelFiles": [
+      "models/model1.py",
+      "models/model2.py",
+      "models/model3.py",
+      "models/saved_models/model1_LR.pkl",
+      "models/saved_models/model1_RF.pkl",
+      "models/saved_models/model1_logistic_regression.pkl",
+      "models/saved_models/model2_garch.pkl",
+      "models/saved_models/scaler1_LR.pkl",
+      "models/saved_models/scaler1_RF.pkl",
+      "models/saved_models/scaler1_logistic_regression.pkl"
+    ],
+    "integrationColumns": {
+      "model1_direction_pred": {
+        "rowCount": 7797,
+        "uniqueValueCount": 1,
+        "values": [
+          1.0
+        ]
+      },
+      "model2_volatility_h1": {
+        "rowCount": 7797,
+        "uniqueValueCount": 1,
+        "values": [
+          1.6093525920932338e-10
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,296 @@
+/* Bitcoin identity. Decorative imagery never enters the evidence plotting area. */
+body { background: var(--bg); }
+.app-shell { position: relative; isolation: isolate; }
+.app-shell::before {
+  content: ""; position: absolute; inset: 190px 0 0; z-index: -1; pointer-events: none;
+  background: url('/art/bitcoin-lines.png') right top / 1100px auto repeat-y;
+  opacity: .55;
+}
+.brand-glyph { display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 0; border-radius: 12px; background: var(--orange); color: var(--ink); transform: rotate(-7deg); }
+.brand-glyph svg { transform: rotate(7deg); }
+.brand { gap: 12px; }
+.header-meta { font-size: 12px; }
+.button { font-size: 13px; min-height: 43px; border-radius: 7px; }
+.navigation-row { background: var(--ink); color: #fff8e9; padding: 0 23px; border: 0; border-radius: 10px; }
+.navigation { gap: 30px; }
+.navigation button { color: #d4d9d5; font-size: 13px; padding: 21px 0; }
+.navigation button span { color: #b8c0bb; font-size: 13px; }
+.navigation button[data-state=active], .navigation button:hover { color: #ffba64; }
+.navigation button[data-state=active] span { color: #ffba64; }
+.navigation button[data-state=active]:after { background: var(--orange); bottom: 0; height: 3px; }
+.navigation button:focus-visible { outline-color: #ffba64; outline-offset: 2px; }
+.local-indicator { color: #d4d9d5; font-size: 10px; }
+.local-indicator span { background: var(--orange); }
+.eyebrow { font-size: 11px; letter-spacing: 1.35px; }
+.accent-square { background: var(--orange); width: 7px; height: 7px; }
+.bitcoin-artwork { pointer-events: none; user-select: none; }
+.bitcoin-artwork img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.overview-intro {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+  grid-template-areas: "copy art" "question question"; align-items: center;
+  gap: 29px 38px; padding: 37px 0 30px;
+}
+.hero-copy { grid-area: copy; }
+.overview-intro h1 { font-size: clamp(43px, 4.25vw, 63px); margin: 21px 0; letter-spacing: -2.1px; }
+.overview-intro h1 > span { color: var(--accent); }
+.intro-description { font-size: 16px; line-height: 1.75; max-width: 610px; }
+.hero-art-panel {
+  grid-area: art; position: relative; isolation: isolate; min-height: 365px;
+  background: #ffb344; border-radius: 18px; border: 1px solid #ef9d2b;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 22px 25px;
+  box-shadow: 9px 9px 0 #f5e6ce; overflow: hidden;
+}
+.hero-art-panel::before { content: ""; position: absolute; inset: 0; background: url('/art/bitcoin-lines.png') center / cover; opacity: .55; z-index: -1; }
+.hero-art-panel .bitcoin-artwork { position: absolute; width: 105%; height: 340px; left: -3%; top: 0; z-index: -1; }
+.art-label { font-size: 11px; letter-spacing: 1.2px; font-weight: 600; color: #57340c; align-self: flex-start; background: #fff4dbe8; border: 1px solid #f6d695; border-radius: 5px; padding: 7px 10px; }
+.art-caption { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; color: var(--ink); margin-top: 227px; }
+.art-caption > span:first-child { font-size: 10px; letter-spacing: 1.4px; font-weight: 600; }
+.art-caption strong { font-size: 31px; font-family: var(--serif); font-weight: 400; line-height: 1.1; }
+.art-caption > span:last-child { font-size: 11px; color: #57340c; }
+.research-question { grid-area: question; max-width: none; margin: 0; display: grid; grid-template-columns: 170px minmax(0,1fr) auto; gap: 25px; align-items: center; padding: 19px 24px; background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--orange); border-radius: 7px; }
+.research-question .small { font-size: 11px; letter-spacing: 1px; }
+.research-question p { font: 400 20px/1.5 var(--serif); color: var(--ink); margin: 0; }
+.text-button { font-size: 13px; }
+.dataset-strip { background: var(--ink); border-color: var(--ink); border-radius: 10px; padding: 26px 0; }
+.dataset-strip > div { border-color: #465052; }
+.dataset-strip .meta-label { color: #f0c677; font-size: 11px; letter-spacing: 1.1px; }
+.dataset-strip b { color: #fffaf0; font-size: 38px; }
+.dataset-strip b.date-stat { font-size: 26px; }
+.dataset-strip > div > span:last-child { color: #d5d9d3; font-size: 12px; }
+.overview-grid { grid-template-columns: minmax(0, 1fr) 365px; }
+.panel { background: var(--panel); border-radius: 11px; box-shadow: 0 5px 20px #49361207; }
+.panel-heading h2 { font-size: 29px; }
+.icon-button { background: #ffe1ac; color: var(--ink); border-color: #ebc481; border-radius: 7px; width: 38px; height: 38px; }
+.panel-bottom, .source-link { font-size: 12px; }
+.result-preview { background: #ffe5b6; border-color: #e7c58f; border-top: 4px solid var(--orange); }
+.result-preview h2 { font-size: 35px; }
+.result-preview > p { font-size: 14px; color: #635138; }
+.score-pair { border-color: #d7b985; gap: 15px; }
+.score-pair > div > span:first-child { font-size: 12px; color: #625039; }
+.score-pair strong { font-size: 26px; color: var(--ink); }
+.score-pair strong.accent { color: #97410e; }
+.score-pair .small { font-size: 12px; }
+.badge { font-size: 11px; }
+.badge-verified { color: #803e0e; background: #fff0d5; border-color: #d5ac6b; }
+.result-preview .small { font-size: 12px; }
+.overview-foot { position: relative; margin-top: 29px; padding: 20px 27px 20px 145px; min-height: 127px; background: #fff0d9; border: 1px solid #e7d0a7; border-radius: 11px; overflow: hidden; }
+.overview-foot p { color: var(--ink); font-size: 24px; }
+.overview-foot > div > span { display: block; font-size: 13px; margin-top: 5px; color: var(--muted); }
+.overview-foot .text-button { white-space: nowrap; }
+.transition-art { position: absolute; width: 135px; height: 135px; left: 6px; top: 0; }
+.app-footer { font-size: 11px; background: var(--bg); }
+.app-footer .mono { font-size: 10px; }
+/* The same art direction carries into every research section. */
+.section-heading { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) 205px; gap: 28px; align-items: center; padding: 30px 34px; margin: 30px 0; border: 1px solid var(--border); border-radius: 13px; background: #fff6e4; overflow: hidden; }
+.section-heading::before { content: ""; position: absolute; inset: 0; background: url('/art/bitcoin-lines.png') right center / 840px auto no-repeat; opacity: .55; z-index: -1; pointer-events: none; }
+.section-heading-copy { position: relative; }
+.section-heading h1 { font-size: 44px; line-height: 1.12; margin: 13px 0 15px; max-width: 880px; }
+.section-heading p { font-size: 16px; line-height: 1.7; max-width: 780px; }
+.section-art { width: 205px; height: 205px; transform: rotate(-7deg); }
+.section-heading-03 { background: #ffe4b5; border-color: #ecc992; }
+.section-heading-04 { background: var(--ink); border-color: var(--ink); color: #fff7e8; }
+.section-heading-04 .eyebrow { color: #ffc77c; }
+.section-heading-04 p { color: #d9ded7; }
+.section-heading-04::before { opacity: .25; }
+.section-heading-05 { background: #ffd18a; border-color: #f0b76c; }
+.section-heading-05 p { color: #5e503c; }
+.subnav { border-radius: 9px; background: #f7ebd6; }
+.subnav button { font-size: 13px; border-radius: 5px; }
+.subnav button[data-state=active] { border-color: #ce9b53; color: #923e09; background: #fffdf7; }
+.filter-bar label { font-size: 12px; }
+.filter-bar input, .filter-bar select { font-size: 14px; min-height: 44px; }
+.filter-bar label { min-width: 0; }
+.note { font-size: 14px; line-height: 1.75; border-left: 3px solid var(--orange); background: #fff2db; border-color: #e5cda4; color: #60533e; }
+.note-marker { color: #97440c; border-color: #c69247; }
+.data-notes h3, .method-columns h3 { color: var(--ink); font-size: 23px; }
+.data-notes p, .method-columns p, .panel-description { font-size: 15px; }
+.data-notes .small, .chart-caption, .feature-caveat { font-size: 12px; }
+.descriptive-stats { gap: 17px; font-size: 12px; }
+.descriptive-stats > span { padding: 10px 13px; background: #fff1d8; border: 1px solid #ead4af; border-radius: 6px; }
+.descriptive-stats b { color: #8f3b09; font-size: 19px; }
+.method-origin { background: var(--ink); border-color: var(--ink); padding: 21px 24px; }
+.method-origin .mono { color: #ffc779; font-size: 12px; }
+.method-origin > span:last-child { color: #dce1d9; font-size: 13px; }
+.task-navigation > button { background: var(--panel); border-radius: 9px; }
+.task-navigation > button[data-state=active] { background: #ffdfaa; border-color: #c18c3e; box-shadow: inset 0 3px var(--orange); }
+.task-navigation b { font-size: 13px; }
+.task-navigation small { font-size: 12px; }
+.task-number { color: #9c450e; font-size: 19px; }
+.target-definition { background: #fff5e3; border-color: #e8d2ac; border-left: 3px solid var(--orange); }
+.target-definition > code { color: #8b410e; }
+.target-definition > p { font-size: 13px; }
+.plain-list { font-size: 14px; }
+.feature-expanded { background: #fff9ee; }
+.feature-formula > code, .formula-block { background: #ffedcd; border-color: #e5c697; color: #663a13; }
+.feature-row summary code { font-size: 13px; }
+.feature-row summary > span:not(.expand-symbol) { font-size: 12px; }
+.feature-facts > div, .feature-formula p { font-size: 13px; }
+.disclosure summary { font-size: 14px; }
+.disclosure > p, .model-card .small { font-size: 13px; }
+th { font-size: 11px; }
+td { font-size: 13px; }
+.metric-table caption { font-size: 12px; }
+.metric-table tr.best td { color: #7d3a0d; background: #fff0d2; }
+.metric-table tr.best td:first-child { box-shadow: inset 3px 0 var(--orange); }
+.metric-table .table-tag { color: #8a4c21; font-size: 10px; }
+.comparison-detail { gap: 40px; }
+.comparison-detail > div:last-child { background: var(--ink); color: #fff5e6; border-radius: 9px; padding: 23px; }
+.excess-error strong { color: #ffc47a; }
+.excess-error span { color: #d9dfd7; font-size: 13px; }
+.comparison-detail .source-link { color: #ffc47a; }
+.error-bar-row { font-size: 12px; grid-template-columns: 175px 1fr 76px; }
+.error-bar-track { height: 9px; background: #efe6d5; border-radius: 3px; }
+.error-bar-track > div { background: #67777a; border-radius: 3px; }
+.error-bar-track > .best-bar { background: #c65b0c; }
+.error-bar-row b { font-size: 11px; }
+.diagnostic-score { background: #fff1d6; border-radius: 8px; padding: 24px; }
+.finding-list { border: 0; }
+.finding { background: var(--panel); padding: 30px; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 10px; grid-template-columns: 48px 1fr; }
+.finding:first-child { background: var(--ink); border-color: var(--ink); color: #fff6e6; }
+.finding:first-child p { color: #dce0d8; }
+.finding:first-child .source-link { color: #ffc47a; }
+.finding-number { background: #ffdc9f; color: #8f3e0c; border-radius: 8px; font-size: 23px; padding: 7px 0; text-align: center; align-self: start; }
+.finding h2 { font-size: 28px; }
+.finding p { font-size: 15px; }
+.limitation-grid p, .limitation-extra p, .plan-grid article p { font-size: 14px; }
+.attribution-note { display: flex; align-items: center; position: relative; padding: 28px 28px 28px 185px; min-height: 170px; background: #ffebca; border: 1px solid #e8cca0; border-radius: 11px; overflow: hidden; }
+.attribution-note .transition-art { width: 170px; height: 170px; top: calc(50% - 85px); }
+.attribution-note p { font-size: 14px; }
+/* Plot colors encode series identity, never a buy/sell indication. */
+.chart-key { font-size: 12px; }
+.unit-label { font-size: 11px; }
+.legend:before { background: #a74609; height: 3px; width: 17px; }
+.legend-1:before { background: #253f46; }
+.legend-2:before { background: transparent; border-color: #8c6c32; border-width: 2px; }
+.band-legend:before { height: 9px; background: #f9a03926; border: 1px solid #bd7434; }
+.plot-line-0 { stroke: #b24c09; stroke-width: 1.5; }
+.plot-line-1 { stroke: #253f46; stroke-width: 1.5; }
+.plot-line-2 { stroke: #8c6c32; stroke-width: 1.3; }
+.range-band { fill: #f398201a; stroke: #c77c3880; }
+.plot-dot { fill: #b24c09; }
+.plot-dot-1 { fill: #253f46; }
+.plot-dot-2 { fill: #8c6c32; }
+.chart-grid text, .x-label { fill: #6c675b; font-size: 11px; }
+.chart-readout, .compact .chart-readout { background: #fff6e5; padding: 12px; border: 1px solid #ecdbbd; border-radius: 6px; font-size: 11px; }
+.chart-readout b { color: #8d3e0e; }
+.chart-scrubber, .compact .chart-scrubber { font-size: 12px; }
+.dialog-content { background: #fffdf7; border-top: 4px solid var(--orange); }
+.source-record pre { background: #fff4e0; }
+@media (max-width: 1200px) {
+  .navigation { gap: 22px; }
+  .local-indicator { display: none; }
+  .overview-intro h1 { font-size: 48px; }
+  .overview-grid { grid-template-columns: minmax(0, 1fr) 320px; }
+  .result-preview h2 { font-size: 32px; }
+  .score-pair strong { font-size: 22px; }
+  .dataset-strip b.date-stat { font-size: 23px; }
+  .dataset-strip > div { padding: 0 20px; }
+  .research-question { grid-template-columns: 135px 1fr; gap: 14px 20px; }
+  .research-question .text-button { grid-column: 2; }
+  .error-bar-row { grid-template-columns: 130px 1fr 72px; gap: 10px; }
+}
+@media (max-width: 800px) {
+  .navigation-row { padding: 0 17px; }
+  .navigation { gap: 26px; }
+  .overview-intro { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "art" "question"; padding-top: 32px; gap: 26px; }
+  .overview-intro h1 { font-size: 51px; }
+  .hero-art-panel { min-height: 300px; padding: 24px; }
+  .hero-art-panel .bitcoin-artwork { width: 320px; height: 320px; left: auto; right: 0; top: -8px; }
+  .art-caption { margin-top: 110px; max-width: 200px; }
+  .research-question { padding: 20px; grid-template-columns: 1fr; gap: 12px; }
+  .research-question .text-button { grid-column: auto; margin-top: 4px; }
+  .research-question p { font-size: 21px; }
+  .overview-grid { grid-template-columns: minmax(0, 1fr); }
+  .result-preview { display: block; }
+  .result-preview .score-pair { margin: 24px 0; max-width: 340px; }
+  .result-preview .score-pair strong { font-size: 30px; }
+  .result-preview > p { margin: 17px 0; }
+  .result-preview > p.small { margin: 14px 0; }
+  .overview-foot { display: flex; gap: 14px; align-items: flex-start; flex-direction: column; padding-left: 130px; }
+  .overview-foot .text-button { margin-left: 0; }
+  .overview-foot .transition-art { width: 125px; height: 125px; top: 12px; }
+  .section-heading { grid-template-columns: minmax(0, 1fr) 125px; gap: 8px; padding: 27px; }
+  .section-heading h1 { font-size: 37px; }
+  .section-heading p { font-size: 15px; }
+  .section-art { width: 125px; height: 150px; }
+  .comparison-detail > div:last-child { gap: 24px; }
+  .descriptive-stats { gap: 10px; }
+  .error-bar-row { grid-template-columns: 155px 1fr 76px; }
+}
+@media (max-width: 520px) {
+  .app-shell { padding: 0 17px; }
+  .app-shell::before { opacity: .2; background-size: 900px auto; }
+  .app-header { height: 84px; }
+  .brand-glyph { width: 33px; height: 33px; border-radius: 9px; }
+  .brand-glyph svg { width: 21px; height: 21px; }
+  .brand { gap: 8px; font-size: 16px; }
+  .summary-trigger { font-size: 11px; padding: 9px; gap: 5px; min-height: 37px; }
+  .navigation-row { padding: 0 14px; border-radius: 8px; }
+  .navigation button { font-size: 12px; padding: 19px 0; }
+  .navigation button span { font-size: 12px; }
+  .overview-intro h1 { font-size: 39px; letter-spacing: -1.6px; }
+  .overview-intro .eyebrow { font-size: 10px; max-width: none; line-height: 1.7; }
+  .intro-description { font-size: 15px; }
+  .hero-art-panel { min-height: 345px; box-shadow: 5px 5px 0 #f5e6ce; padding: 19px; }
+  .hero-art-panel .bitcoin-artwork { width: 100%; height: 275px; right: -24px; top: 14px; }
+  .art-label { font-size: 10px; padding: 6px 8px; }
+  .art-caption { margin-top: 222px; max-width: 100%; }
+  .art-caption strong { font-size: 28px; }
+  .research-question { padding: 19px; }
+  .dataset-strip { gap: 25px 0; padding: 23px 0; grid-template-columns: .9fr 1.1fr; }
+  .dataset-strip > div { padding: 0 14px; }
+  .dataset-strip .meta-label { font-size: 9px; letter-spacing: .8px; }
+  .dataset-strip b { font-size: 31px; }
+  .dataset-strip b.date-stat { font-size: 18px; }
+  .dataset-strip > div > span:last-child { font-size: 11px; }
+  .panel { padding: 20px 17px; }
+  .panel-heading h2 { font-size: 25px; }
+  .eyebrow { font-size: 10px; }
+  .result-preview h2 { font-size: 34px; }
+  .result-preview .score-pair strong { font-size: 26px; }
+  .overview-foot { padding: 22px 20px 22px 105px; }
+  .overview-foot .transition-art { width: 106px; height: 120px; left: 0; top: 20px; }
+  .overview-foot p { font-size: 22px; line-height: 1.4; }
+  .overview-foot > div > span { font-size: 12px; }
+  .section-heading { grid-template-columns: 1fr; padding: 23px 21px; margin: 25px 0; overflow: hidden; }
+  .section-heading .eyebrow { padding-right: 54px; min-height: 33px; }
+  .section-heading h1 { font-size: 34px; letter-spacing: -.8px; margin-top: 12px; }
+  .section-heading p { font-size: 15px; }
+  .section-art { position: absolute; width: 91px; height: 91px; right: 5px; top: -8px; z-index: -1; }
+  .section-heading::before { background-size: 650px auto; opacity: .35; }
+  .subnav button { font-size: 12px; padding: 11px; }
+  .note { padding: 15px; font-size: 13px; }
+  .descriptive-stats > span { width: 100%; font-size: 12px; }
+  .chart-key { font-size: 11px; gap: 10px; }
+  .chart-scrubber, .compact .chart-scrubber { font-size: 11px; }
+  .panel-bottom { font-size: 11px; }
+  .data-notes p, .method-columns p { font-size: 14px; }
+  .task-navigation b { font-size: 12px; }
+  .task-navigation small { font-size: 11px; }
+  .task-navigation > button { padding: 17px 12px; gap: 8px; }
+  .task-number { font-size: 15px; }
+  .task-detail .badge { font-size: 10px; }
+  .plain-list { font-size: 13px; }
+  .feature-row summary code { font-size: 12px; }
+  .feature-row summary > span:not(.expand-symbol) { font-size: 11px; }
+  .feature-facts > div { font-size: 12px; }
+  .comparison-detail > div:last-child { padding: 20px; }
+  .error-bar-row { grid-template-columns: 103px 1fr 64px; gap: 8px; font-size: 11px; }
+  .error-bar-row b { font-size: 10px; }
+  .excess-error strong { font-size: 32px; }
+  .excess-error span { font-size: 12px; }
+  th { font-size: 10px; }
+  td, .metric-table td.numeric { font-size: 12px; }
+  .metric-table .table-tag { font-size: 9px; }
+  .finding { padding: 23px 17px; grid-template-columns: 27px 1fr; gap: 13px; }
+  .finding-number { font-size: 17px; border-radius: 5px; padding: 4px 0; }
+  .finding h2 { font-size: 25px; }
+  .finding p { font-size: 14px; }
+  .attribution-note { padding: 110px 22px 23px; }
+  .attribution-note .transition-art { width: 130px; height: 130px; left: 10px; top: -10px; }
+  .app-footer { font-size: 10px; }
+}
+@media (max-width: 360px) {
+  .dataset-strip { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .dataset-strip b.date-stat { font-size: 14px; letter-spacing: -.3px; }
+}

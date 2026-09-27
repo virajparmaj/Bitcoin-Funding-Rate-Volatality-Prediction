@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "generator": "demo/scripts/export_evidence.py",
+  "generator_sha256": "3e17b3fa9f9d979215c0b6d1d9e74ea49cd4c2f29a9d4a373848d82723deac25",
+  "command": "demo/.venv/bin/python demo/scripts/export_evidence.py",
+  "supplemental_generators": {
+    "research-content.json": {
+      "generator": "demo/scripts/export_research_content.py",
+      "sha256": "d67c657a872396e9ca4fa800b8e69ec8d23f7fc9e7fe9922fc3a74bfe7f95002"
+    }
+  },
+  "deterministic": true,
+  "input_sha256": {
+    "README.md": "588d667b5ccaf8585adde5f2d38893fc611036afa91c3bc152b0db8eb9e5fdc4",
+    "config.py": "aa15bf421b07ea46c09232880997674736e7564195c5c07b085a5f0639678020",
+    "data/normalized_datasets/binance_btc_perp.csv": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24",
+    "dgieser3/research.ipynb": "0bf9e863132285f06606a18fb0ed84b23c06be729ef9ac94b485616fdf9fd1e4",
+    "models/model1.py": "870c2dc963e74a67dd14199bcea5556c4513b399bf25a42c528f21435e370315",
+    "notebooks/model_development.ipynb": "e794cac0cc0e74d1b57f2ecc2faee26e04d3dc81d03e4607030262349bc30c0f",
+    "notebooks/stat429_analysis_a.ipynb": "c715063f9ec07feb175de788ce08449a77b41238310b1496039e97f4214ad6c2",
+    "notes/05_feature_engineering.md": "8584745fb4ab497b45c337227a8a8e8190534510362da03887a956cc554793e1",
+    "notes/06_ml_models.md": "c5b8c406e0c038507cb53cf9a2ffe26cd96dfbc1d92c22ffcd17ce6eea09f8f4",
+    "notes/09_results_and_metrics.md": "8c61265bfde8acc157e24a9c8f7420752d1a81ab5548690191eaae2bb9fa791b",
+    "results/predictions_RFR.csv": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e",
+    "results/predictions_SARIMAX.csv": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6",
+    "utilities/data_import.py": "5dd50ffc71e11373b657bd3b200dd9aeee12fb0ee6cdcdb24ec84c68337764ab",
+    "utilities/data_processing.py": "5e89a13ae425565bfa602569ab8b01fb5a37e7b513b03c867b8929da40216957",
+    "utilities/functions.py": "8c1eee3e8cd89acbd6e18e1b76a06ff0a902511950afe6855b265c52224200fe",
+    "utilities/model_utils.py": "5180f4f8b484e31b56230e889aaa5a84c48c9997a5415edbd581683e9e4ff41c",
+    "v2/README.md": "583537166cd6e38e5857908fcb6713fa99041f7fd108864ee7d825669ed84ade",
+    "v2/notebooks/00_audit_v1.ipynb": "a70e6fc472b7e57acbcd9528043686f5cf7b2b13cd91c1ebadd189ea49ab9e2e",
+    "v2/paper_plan/02_verified_findings.md": "520355091e4f19b5699eeaf840f81bd35f3063816044f1d5c1f391fd37568266",
+    "v2/paper_plan/05_data_contract_and_feasibility.md": "31d45e91335152d08ec611ba3edcbadb81fba4f3fad8413dc06d86f45248ca42",
+    "v2/paper_plan/07_implementation_plan.md": "5d7f8118a221f8bb8a1d7b2bc9b33dd1e9312e3ee05b50956c0ed737010b1d5d",
+    "v2/paper_plan/09_results_ledger.md": "81013710c23a94e7e4898fc01f604051fd500156b4e05a959f41504840e1ad0d",
+    "v2/paper_plan/13_execution_backlog.md": "9855a47f6ad6ff95f93ca7871160281fb5624c620e2c6154918f4b68116622be",
+    "v2/research/evidence.json": "c00fa8ba2bc8f3cf74be0fb52470ae8a35a4a185f2d3c51bcca39d0d1261e72d",
+    "v2/research/reproduce_evidence.py": "d0e18ab5d4f2b8ae34f68f5b9d429757906dac70ac151c612687ac05445d6878",
+    "v2/research/research_assessment.md": "178207488a9c0cf7f30a42d3fe7178feb7c0b804f2182ab7bd3839f024018be5",
+    "v2/research/saved_prediction_scores.csv": "afb249d2d7e663760928ada241d6f63ba15a37636249a0b6a20010a4954efaaf",
+    "v2/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "v2/src/audit.py": "09c6a2acb2ca35db7d1ad43416461d74b5598e8dd7f59148323825e06ccca80b",
+    "v2/src/config.py": "47f97439ec39102afebd44ae83dfaf7817bf96eb2483cf78d9c447e780e240da",
+    "v2/src/legacy.py": "ca3a9aba18f5a1b7c445ae319b3cee0eb6f5be6d620c1845e9b145199de35038"
+  },
+  "outputs": {
+    "evidence.json": {
+      "sha256": "c620d916a6eac46c157089142f69be021fa2bb8becb8cb2acbe1595f9dfabe51",
+      "bytes": 39315
+    },
+    "series.json": {
+      "sha256": "3b52029bb4708112a5d2639ef074e516f543bb63d33f2d370ad37129fb4bd5be",
+      "bytes": 2391356
+    },
+    "research-content.json": {
+      "sha256": "5654b73517a5885199823dedf33b2abf78f4ba06a059eaa75a82cd7fe9a1e1e6",
+      "bytes": 149525
+    }
+  },
+  "publication": {
+    "public_release_cleared": false,
+    "note": "Local demo only. Provider-derived aggregates and saved predictions may carry redistribution restrictions. No redistribution permission is established in this export; review provider rights before public deployment. Full raw CSV is not copied."
+  },
+  "purpose": "Local presentation of existing saved artifacts; no fresh training, clean prospective validation, settlement backtest or profitability claim.",
+  "evidence_status_definitions": {
+    "Recomputed from saved predictions": "Arithmetic reproduced from existing saved pairs; no fresh fit.",
+    "Stored execution output": "Notebook output present; not rerun.",
+    "Reported in project notes": "Narrative claim; not independently reproduced.",
+    "Implemented, result unavailable": "Code exists; usable result unverified.",
+    "Planned": "Future work; excluded from completed comparisons."
+  }
+}
