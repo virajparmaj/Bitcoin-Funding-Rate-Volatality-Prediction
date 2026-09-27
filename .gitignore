@@ -17,6 +17,11 @@ secrets.yaml
 .claude/
 CLAUDE.md
 CLAUDE.local.md
+.codex/
+CODEX.md
+CODEX.local.md
+AGENTS.md
+AGENTS.local.md
 .mcp.json
 .cursor/
 .cursorrules
@@ -34,8 +39,14 @@ CLAUDE.local.md
 prompts/
 .agent/
 .agents/
+.agent.md
+AGENT.md
 scratchpad/
 .scratch/
+AI_USAGE*
+ai_usage*
+*_AI_USAGE*
+*_ai_usage*
 
 # ===========================================
 # Logs and run output
