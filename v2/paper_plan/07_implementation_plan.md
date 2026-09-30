@@ -1,5 +1,7 @@
 # Implementation plan
 
+**30 September 2026:** this dated specification has now been implemented for the core retrospective study. Use [the development prompt](15_implementation_brief.md) and [executed report](../results/settlement_study/REPORT.md) for current status and deviations. The original planning text below is retained for traceability.
+
 ## Deliverable boundary
 
 Build an additive, executable study under `v2/`. This package is the implementation specification; the following modules and commands are **planned**, not currently implemented. Leave original notebooks, utilities, models, data and saved results unchanged. Do not implement the erroneous prohibitions against using the observable current indication or time-to-event features from the older build prompt.

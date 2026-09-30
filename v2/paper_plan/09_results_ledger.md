@@ -1,5 +1,7 @@
 # Results ledger
 
+**30 September 2026 execution update:** the original pending ledger below is a historical planning record. Current E0–E4 results and remaining limitations are in [the generated report](../results/settlement_study/REPORT.md), with machine-readable scores and source manifests beside it.
+
 Status codes: **VERIFIED** = measured from available inputs; **REPORTED** = an external/legacy claim not independently reproduced; **PENDING** = not run. Never copy pending entries into an abstract as results.
 
 ## Verified local evidence

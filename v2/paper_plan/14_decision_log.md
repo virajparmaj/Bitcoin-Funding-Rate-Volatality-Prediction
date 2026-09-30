@@ -27,3 +27,14 @@ The original files remain unchanged as historical context. This package proposes
 ## Outstanding uncertainties
 
 Closest Inan full text; full-period official label coverage; historical funding-rule changes; raw-message provenance of hourly aggregation; exact historical label publication delay; redistribution rights; clean residual forecast performance and its precision. No date, readiness promise or model score should be invented to close these gaps.
+
+## Implementation revision — 30 September 2026
+
+- December 2019 archive returned HTTP 404. Start label acquisition in January 2020 and exclude incomplete nine-settlement warm-up explicitly.
+- Full-period calc-time offsets are at most 47 ms. Use a one-second bounded mapping, preserve original timestamps and reject duplicates/schedule deviations.
+- Exclude month-boundary events whose origins precede the monthly fit; otherwise the fitted model would use information from after its claimed decision.
+- Feature ablations reuse the full-model validation selection to isolate information removal at fixed hyperparameters. This differs from independently tuning each reduced feature set.
+- Primary analysis uses the common intersection across all declared availability variants and horizons. Report both total forecast coverage and common-cohort counts.
+- Subgroup/quarter analysis is descriptive with pointwise intervals. No simultaneous equivalence, universal unpredictability or economic-value conclusion is made.
+- Source code, source hashes, tuning choices and aggregate outputs are committed; raw provider-derived panels/predictions remain local pending redistribution review.
+- The executable config and generated report supersede historical pending statuses. Later-time/DAR replication and full seed/window/tail robustness remain separate work. The 0/5/15-minute publication-delay check was executed and produced identical histories and fold membership.

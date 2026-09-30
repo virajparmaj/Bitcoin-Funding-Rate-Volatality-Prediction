@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "model": "ridge",
+      "fit_time": "2023-01-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "rf",
+      "fit_time": "2023-01-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 1.3552527156068805e-20
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-02-01 00:00:00+00:00",
+      "n": 83,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-03-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-04-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-05-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-06-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-07-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-08-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-09-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-10-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-11-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2023-12-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-01-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-02-01 00:00:00+00:00",
+      "n": 86,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-03-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-04-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-05-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-06-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-07-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-08-01 00:00:00+00:00",
+      "n": 92,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-09-01 00:00:00+00:00",
+      "n": 89,
+      "max_abs_native_difference": 0.0
+    },
+    {
+      "model": "ridge",
+      "fit_time": "2024-10-01 00:00:00+00:00",
+      "n": 51,
+      "max_abs_native_difference": 0.0
+    }
+  ],
+  "scope": "All four-hour ridge folds and first four-hour RF fold replayed from serialized panel; not a fresh independent dataset"
+}

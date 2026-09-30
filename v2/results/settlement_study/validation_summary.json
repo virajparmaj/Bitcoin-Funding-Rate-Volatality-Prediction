@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-30",
+  "pytest": "32 passed",
+  "scientific_tests": "future availability, exact-origin boundary, staleness, same-event matching, label maturity, monthly cutoff, checksum corruption, archive jitter/duplicates, bp units, training-only preprocessing, future perturbation, paired calendar bootstrap, matched cohorts, synthetic model integration",
+  "ruff": "passed for new modules/tests",
+  "demo_build": "passed; largest JS bundle 250.30 kB",
+  "original_protected_files_modified": false,
+  "scope": "Tests validate implementation, not publication novelty or complete historical field provenance",
+  "numerical_replay": "23 model/fold combinations passed: all four-hour ridge folds and the first four-hour RF fold",
+  "publication_delay_sensitivity": "0/5/15-minute assumptions yield identical histories and folds"
+}
