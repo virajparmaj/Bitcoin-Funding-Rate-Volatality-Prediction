@@ -240,3 +240,48 @@ def test_report_requires_exact_invariance(tmp_path):
     with pytest.raises(ValueError, match="Publication assumptions"):
         verify_report_inputs(tmp_path, {})
     assert snapshot(tmp_path) == before
+
+
+@pytest.mark.parametrize("change,passes", [("roundoff", True), ("score", False), ("choice", False)])
+def test_full_reproduction_comparison_tolerance_and_exact_choices(
+    monkeypatch, tmp_path, change, passes
+):
+    from v2.experiments import compare_study_runs as comparator
+
+    reference, candidate, work = (tmp_path / name for name in ["reference", "candidate", "work"])
+    for directory in [reference, candidate, work]:
+        directory.mkdir()
+        (directory / "manifest.json").write_text("{}")
+    record = dict(horizon=4, model="rf", params={"max_depth": 3}, mae_bp=0.25, n=1083)
+    for directory in [reference, candidate]:
+        (directory / "selection.json").write_text(json.dumps({"choices": {"4": {"alpha": 1.0}}}))
+        (directory / "baseline_selection.json").write_text("{}")
+        (directory / "coverage.json").write_text("{}")
+        for name in ["validation_candidates.json", "baseline_validation_candidates.json"]:
+            (directory / name).write_text(json.dumps([record]))
+    if change in ["roundoff", "score"]:
+        changed = dict(record, mae_bp=record["mae_bp"] + (1e-13 if change == "roundoff" else 1e-3))
+        (candidate / "validation_candidates.json").write_text(json.dumps([changed]))
+    else:
+        (candidate / "selection.json").write_text(json.dumps({"choices": {"4": {"alpha": 100.0}}}))
+    identity = {k: {} for k in ["archives", "ticker_sha256", "code_sha256", "python", "packages"]}
+    configs = [
+        comparator.ROOT / "v2/configs/test_reference.json",
+        comparator.ROOT / "v2/configs/test_candidate.json",
+    ]
+
+    def inspect(config):
+        directory = reference if config == configs[0] else candidate
+        return dict(output_dir=str(directory)), identity, directory, {}
+
+    monkeypatch.setattr(comparator, "inspect_run", inspect)
+    monkeypatch.setattr(
+        comparator, "execute_stage", lambda out, stage, ident, action, recheck: action(work)
+    )
+    if passes:
+        comparator.compare(*configs)
+        assert json.loads((work / "reproduction_check.json").read_text())["status"] == "passed"
+    else:
+        with pytest.raises((ValueError, AssertionError)):
+            comparator.compare(*configs)
+        assert not (work / "reproduction_check.json").exists()

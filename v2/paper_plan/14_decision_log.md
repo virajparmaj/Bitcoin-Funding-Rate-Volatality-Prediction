@@ -63,8 +63,8 @@ Before any revised test scoring, the following corrections were fixed:
 - The revised date reflects actual implementation on 1 October. The plan's
   proposed September 30 revision date was not used to backdate execution.
 
-Results and completion evidence will be appended after execution. No model or
-hyperparameter changes will be made in response to revised test performance.
+The completed evidence is summarized below and in the hardening execution record.
+No model or hyperparameter changes were made in response to revised test performance.
 
 ### Preflight verification correction
 
@@ -76,3 +76,12 @@ any revised test results. Preserved the incomplete attempt locally and restarted
 both complete runs in new `settlement_study_v2_1` directories, protocol
 `2026-10-01-v2.1`. Exact selected parameters and event membership remain required.
 No statistical settings or models changed.
+
+### Completed revised execution
+
+Both `v2.1` runs completed E0–E4/E3b, exact delay checks and 23-fold replay checks.
+Full independent execution matched all 19 compared artifacts, including 248,752
+predictions. All candidates used 1,083 eligible validation events per horizon;
+selected parameters and rounded primary/secondary results are unchanged. The
+primary gain remains 0.008613 bp with interval [-0.007970, 0.028633] bp. This result
+does not establish positive primary skill. See [the complete evidence record](16_hardening_execution.md).
