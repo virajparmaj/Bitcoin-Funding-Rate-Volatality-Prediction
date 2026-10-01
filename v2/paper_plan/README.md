@@ -1,5 +1,7 @@
 # Research-to-paper development package
 
+**Implementation update — 1 October 2026:** the development prompt is [15_implementation_brief.md](15_implementation_brief.md). The executable study and measured status are documented in [v2 README](../README.md) and [the execution report](../results/settlement_study_v2_1/REPORT.md). See [the hardening execution record](16_hardening_execution.md) for requirement coverage. The remainder of this package preserves the original planning snapshot.
+
 Prepared 25 September 2026. Status: **research plan plus verified diagnostic results; the proposed settlement forecasting study has not been run**.
 
 The best modest contribution is a multi-year empirical answer to this question: **when, and in which observable market states, can simple models improve on the exchange's current indication of the next funding payment?** The paper should measure incremental information at explicit settlement lead times. It should not claim a new algorithm or the first funding forecast.

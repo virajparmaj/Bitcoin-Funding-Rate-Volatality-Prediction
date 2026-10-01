@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "candidate_config": "v2/configs/settlement_study_v2_1_reproduction.json",
+  "candidate_manifest_sha256": "f43686d5ec1a5be5f9b2e63913dd470b9c2cb241eb31467d5f9e046008040042",
+  "candidate_artifacts": {
+    "ticker_exclusions.csv": "68f9ff14c4bc65eb92e2eb321691cb049378c0c1b146caf68df3a3cc20d81629",
+    "panel.csv.gz": "ad1f3e6fdb66461f09c345aa619ad7c269239bd278e6dc801ba28c67c68ec04d",
+    "manifest.json": "f43686d5ec1a5be5f9b2e63913dd470b9c2cb241eb31467d5f9e046008040042",
+    "coverage.json": "2c099febcf01f75d8854a598d35be8939c70e02c79e9e5182e92db3cb86287ee",
+    "origin_exclusions.csv": "7e4731f0abc4562da635dd873e1e667b9380f0011fc277bab436192adfa004c2",
+    "baseline_predictions.csv.gz": "c9d88da1cd4010c04d7ec40e71a2895cce6c389897673dd8754adbf6f08e5662",
+    "baseline_selection.json": "e669c7b20e55690ae3fb2a0413ad085b5ec258c71f77360f7646ce799f0b16dd",
+    "baseline_folds.csv": "75e3a70b57640e8addc617e73751fd7c86c3f0b2fbd0ea34dc61180f860e59d7",
+    "baseline_validation_candidates.json": "f47d84749446f4d3ad9f31128685aeb159afe0de57c4fe716f3b6c55ee2a0ca8",
+    "predictions.csv.gz": "22cfeea03f11ac6c5cdbae68bfc1109ee307ca385086c36fee3d5551306c6bb2",
+    "validation_candidates.json": "81d7301b8d6bcf9c15c7a447ec3818321feada7bc623dba92ec6c63433dae2bf",
+    "selection.json": "318c30587cf7d681f9b68d947ac8aff1be63626c1140827a32b5208dbf4731b2",
+    "delay_exclusions.csv": "c0767d65dabe4f3161544cb1ae9780f7e7692af31cec864ef339cf619936bab5",
+    "folds.csv": "9b911609bbdc1ac3a8aadd7f9cf01b370d3a7d2286fd74cedb5dc5548c3942e6",
+    "publication_delay_sensitivity.json": "748db589b55946a94201536a8c87d7acfaf33c2906b948aa87c69f538206a2a7",
+    "fold_boundary_exclusions.csv": "f5933e8e3e514188d469e7557de9ab7e0cbbdfeba52e6e05ba3014d1f851e2ad",
+    "forecast_replay.json": "39beb3c0343c8440300520df4734b2c4b35f2238d83384b47f62526013ca83cb",
+    "state_quarter_scores.csv": "5d307533029302c8c37ef0ee92015c30ce7fc6157276f578b318a7def89753ae",
+    "REPORT.md": "f05e63d5d4347fcb8cde3117df4f60ad21f7a13a7de3bbae8c43ec19de7d945a",
+    "staleness_scores.csv": "1a70043e46086bd860cb1c357bafa2e9b351bda78b9be001b482091c09788e7a",
+    "scores.csv": "374e355d8301d60bee43fed92682d118bb55e39bb427826cbcf73ae8b04b5f18",
+    "paired_contrasts.csv": "01fb3c82d9efcaa100d1b5b1813be8c60b227b84944d1b9edc383c4bc0432f4e",
+    "lead_time.png": "07f18ab8f43800ee1e94187fc3f3da5bc0947470fc4c019de7d07c20fe10766e",
+    "forecast_artifact_manifest.json": "8a7f9ce38ec8ec12bb265e3a5792375fa42422477cf7d6ae2acdac5bb53e9272",
+    "proxy_label_scores.csv": "0313fba2619088d88785dd74af3386c22049cdc12b42cff1ce16f899a8769156"
+  },
+  "checks": [
+    {
+      "artifact": "baseline_folds.csv",
+      "rows": 88,
+      "status": "passed"
+    },
+    {
+      "artifact": "baseline_predictions.csv.gz",
+      "rows": 38940,
+      "status": "passed"
+    },
+    {
+      "artifact": "delay_exclusions.csv",
+      "rows": 405,
+      "status": "passed"
+    },
+    {
+      "artifact": "fold_boundary_exclusions.csv",
+      "rows": 136,
+      "status": "passed"
+    },
+    {
+      "artifact": "folds.csv",
+      "rows": 352,
+      "status": "passed"
+    },
+    {
+      "artifact": "origin_exclusions.csv",
+      "rows": 32,
+      "status": "passed"
+    },
+    {
+      "artifact": "paired_contrasts.csv",
+      "rows": 38,
+      "status": "passed"
+    },
+    {
+      "artifact": "panel.csv.gz",
+      "rows": 20992,
+      "status": "passed"
+    },
+    {
+      "artifact": "predictions.csv.gz",
+      "rows": 248752,
+      "status": "passed"
+    },
+    {
+      "artifact": "proxy_label_scores.csv",
+      "rows": 32,
+      "status": "passed"
+    },
+    {
+      "artifact": "scores.csv",
+      "rows": 384,
+      "status": "passed"
+    },
+    {
+      "artifact": "staleness_scores.csv",
+      "rows": 96,
+      "status": "passed"
+    },
+    {
+      "artifact": "state_quarter_scores.csv",
+      "rows": 80,
+      "status": "passed"
+    },
+    {
+      "artifact": "ticker_exclusions.csv",
+      "rows": 132,
+      "status": "passed"
+    },
+    {
+      "artifact": "selection.json",
+      "status": "passed"
+    },
+    {
+      "artifact": "baseline_selection.json",
+      "status": "passed"
+    },
+    {
+      "artifact": "coverage.json",
+      "status": "passed"
+    },
+    {
+      "artifact": "validation_candidates.json",
+      "status": "passed"
+    },
+    {
+      "artifact": "baseline_validation_candidates.json",
+      "status": "passed"
+    }
+  ],
+  "rtol": 1e-09,
+  "atol": 1e-12,
+  "scope": "Fresh full pipeline from cached sources; same machine and package environment"
+}

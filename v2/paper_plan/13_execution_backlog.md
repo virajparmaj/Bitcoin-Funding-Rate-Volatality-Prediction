@@ -1,5 +1,9 @@
 # Ordered implementation backlog
 
+> Historical design/preparation record. Current execution status, corrections and
+> evidence are maintained in [the hardening record](16_hardening_execution.md)
+> and [the revised report](../results/settlement_study_v2_1/REPORT.md).
+
 The estimates below are planning judgments for focused development time, not elapsed-time promises. Existing package/environment setup helps, but unresolved data provenance or full-text access can extend the schedule.
 
 | Order | Work package | Depends on | Acceptance | Rough effort |

@@ -1,5 +1,9 @@
 # Conclusions and permissible claims
 
+> Historical design/preparation record. Current execution status, corrections and
+> evidence are maintained in [the hardening record](16_hardening_execution.md)
+> and [the revised report](../results/settlement_study_v2_1/REPORT.md).
+
 ## What is supported now
 
 The saved RF's high R² does not establish improvement over information already present at prediction time: properly aligned current-rate persistence performs better. A previous interpretation mistakenly called that observable value the future target. The dataset contains evolving funding indications, and sampled final indications differ from official archived settlement rates. A settlement-level comparison therefore needs verified labels and explicit origins.

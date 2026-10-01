@@ -1,0 +1,24 @@
+{
+  "identity_sha256": "b1b732e2e48f935bafb2fa11902ba5be0c1938c37e166e867035411967a3bacc",
+  "checks": [
+    {
+      "label_delay_minutes": 0,
+      "same_origin_keys": true,
+      "identical_settled_features": true,
+      "identical_fold_membership": true
+    },
+    {
+      "label_delay_minutes": 5,
+      "same_origin_keys": true,
+      "identical_settled_features": true,
+      "identical_fold_membership": true
+    },
+    {
+      "label_delay_minutes": 15,
+      "same_origin_keys": true,
+      "identical_settled_features": true,
+      "identical_fold_membership": true
+    }
+  ],
+  "scope": "Exact features and validation/evaluation event-horizon membership"
+}

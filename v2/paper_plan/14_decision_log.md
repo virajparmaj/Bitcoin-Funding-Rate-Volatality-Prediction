@@ -27,3 +27,61 @@ The original files remain unchanged as historical context. This package proposes
 ## Outstanding uncertainties
 
 Closest Inan full text; full-period official label coverage; historical funding-rule changes; raw-message provenance of hourly aggregation; exact historical label publication delay; redistribution rights; clean residual forecast performance and its precision. No date, readiness promise or model score should be invented to close these gaps.
+
+## Implementation revision — 30 September 2026
+
+- December 2019 archive returned HTTP 404. Start label acquisition in January 2020 and exclude incomplete nine-settlement warm-up explicitly.
+- Full-period calc-time offsets are at most 47 ms. Use a one-second bounded mapping, preserve original timestamps and reject duplicates/schedule deviations.
+- Exclude month-boundary events whose origins precede the monthly fit; otherwise the fitted model would use information from after its claimed decision.
+- Feature ablations reuse the full-model validation selection to isolate information removal at fixed hyperparameters. This differs from independently tuning each reduced feature set.
+- Primary analysis uses the common intersection across all declared availability variants and horizons. Report both total forecast coverage and common-cohort counts.
+- Subgroup/quarter analysis is descriptive with pointwise intervals. No simultaneous equivalence, universal unpredictability or economic-value conclusion is made.
+- Source code, source hashes, tuning choices and aggregate outputs are committed; raw provider-derived panels/predictions remain local pending redistribution review.
+- The executable config and generated report supersede historical pending statuses. Later-time/DAR replication and full seed/window/tail robustness remain separate work. The 0/5/15-minute publication-delay check was executed and produced identical histories and fold membership.
+
+## Reproducibility hardening — 1 October 2026
+
+Protocol `2026-10-01-v2.1` implements the approved completion pass. The original
+`2026-09-30-v1` config and result directory remain immutable historical evidence.
+Before any revised test scoring, the following corrections were fixed:
+
+- EWMA selection now uses the same monthly 2022 eligibility as ridge/RF/history
+  ridge. Whole events are partitioned before horizon filtering. Every EWMA span
+  enters the validation ledger; ties follow configured grid order.
+- Every execution module, package version, config, ticker, archive and checksum
+  is part of the execution identity. Completed stages verify without rewriting;
+  changed identities require another output directory.
+- Stages commit immutable directories atomically. Top-level artifact links point
+  to those directories. Failed computations cannot replace earlier evidence;
+  a committed stage can repair links after an interrupted publication.
+- Delay diagnostics compare exact keyed features and both validation/evaluation
+  membership. Approximate equality no longer establishes invariant predictions.
+- Both verification CLIs accept `--config`. A separate full reproduction uses
+  identical scientific settings and fresh selection/fitting from cached sources.
+- Scientific periods, grids, seed, losses and inference family are unchanged.
+  This is a retrospective protocol correction, not an untouched holdout.
+- The revised date reflects actual implementation on 1 October. The plan's
+  proposed September 30 revision date was not used to backdate execution.
+
+The completed evidence is summarized below and in the hardening execution record.
+No model or hyperparameter changes were made in response to revised test performance.
+
+### Preflight verification correction
+
+The first hardening attempt (`2026-10-01-v2`) completed data/baseline stages but
+was interrupted before committing its model stage. Its reproduction comparator
+used exact equality for floating validation scores, stricter than the planned
+numerical tolerance. Corrected that verification-only behavior before accepting
+any revised test results. Preserved the incomplete attempt locally and restarted
+both complete runs in new `settlement_study_v2_1` directories, protocol
+`2026-10-01-v2.1`. Exact selected parameters and event membership remain required.
+No statistical settings or models changed.
+
+### Completed revised execution
+
+Both `v2.1` runs completed E0–E4/E3b, exact delay checks and 23-fold replay checks.
+Full independent execution matched all 19 compared artifacts, including 248,752
+predictions. All candidates used 1,083 eligible validation events per horizon;
+selected parameters and rounded primary/secondary results are unchanged. The
+primary gain remains 0.008613 bp with interval [-0.007970, 0.028633] bp. This result
+does not establish positive primary skill. See [the complete evidence record](16_hardening_execution.md).

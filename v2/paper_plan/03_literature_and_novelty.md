@@ -1,5 +1,9 @@
 # Literature positioning and a defensible modest contribution
 
+> Historical design/preparation record. Current execution status, corrections and
+> evidence are maintained in [the hardening record](16_hardening_execution.md)
+> and [the revised report](../results/settlement_study_v2_1/REPORT.md).
+
 ## Updated novelty decision
 
 **Promising, but unproven:** a reproducible multi-year measurement of incremental settlement forecast skill beyond the contemporaneous exchange indication, including lead-time and observable-state dependence. A bounded negative result could be useful if its intervals exclude a declared meaningful gain and its comparison with prior work is explicit.
