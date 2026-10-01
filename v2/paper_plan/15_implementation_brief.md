@@ -8,7 +8,7 @@ Convert this repository's proposed BTCUSDT funding study into a reproducible emp
 
 ## Authoritative inputs
 
-Read `v2/paper_plan/03_literature_and_novelty.md`, `04_questions_and_hypotheses.md`, `05_data_contract_and_feasibility.md`, `06_experimental_protocol.md`, `07_implementation_plan.md`, `08_test_and_validation_plan.md` and the current `v2/results/settlement_study/REPORT.md`. The executable config is `v2/configs/settlement_study.json`. Log justified deviations in the decision log; do not follow superseded target-leakage claims from the original v2 build prompt.
+Read `v2/paper_plan/03_literature_and_novelty.md`, `04_questions_and_hypotheses.md`, `05_data_contract_and_feasibility.md`, `06_experimental_protocol.md`, `07_implementation_plan.md`, `08_test_and_validation_plan.md` and the current `v2/results/settlement_study_v2_1/REPORT.md`. The executable config is `v2/configs/settlement_study_v2_1.json`. Log justified deviations in the decision log; do not follow superseded target-leakage claims from the original v2 build prompt.
 
 ## Required changes
 
@@ -32,14 +32,34 @@ A reviewer can reproduce data validation, model selection, saved forecasts and r
 From repository root with the existing v2 environment:
 
 ```bash
-v2/.venv/bin/python -m v2.experiments.run_study --stage acquire
-v2/.venv/bin/python -m v2.experiments.run_study --stage validate-data
-v2/.venv/bin/python -m v2.experiments.run_study --stage baselines
-v2/.venv/bin/python -m v2.experiments.run_study --stage models
-v2/.venv/bin/python -m v2.experiments.run_study --stage report
+study_config=v2/configs/settlement_study_v2_1.json
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage acquire
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage validate-data
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage baselines
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage models
+v2/.venv/bin/python -m v2.experiments.check_sensitivities --config "$study_config"
+v2/.venv/bin/python -m v2.experiments.verify_saved_forecasts --config "$study_config"
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage report
 v2/.venv/bin/python -m pytest -q -c v2/pyproject.toml v2/tests
 ```
 
-The acquisition stage uses public network reads. Other stages are offline once the archives are cached. Source/implementation changes invalidate cached model selection; create a versioned output directory for a revised protocol instead of overwriting a prior study.
+The acquisition stage uses public network reads only when cached archives are
+missing. Other stages are offline. Preserve both previous study directories.
+Changes to source, implementation, config or environment invalidate execution
+identity: create a new versioned output directory, never overwrite a prior study.
 
-The implementation also provides `v2/.venv/bin/python -m v2.experiments.check_sensitivities` for publication-delay invariance and explicit monthly-boundary exclusion records. Run it before generating the report. If it finds different features or training membership, rerun affected models under separately versioned protocols rather than assuming invariant predictions.
+Run the same stages with `v2/configs/settlement_study_v2_1_reproduction.json` for an
+independent full execution. Then run `v2.experiments.compare_study_runs` with
+`--config` pointing to the revised study and `--other-config` to its reproduction.
+The [README](../README.md) explains fresh-checkout behavior and ignored artifacts.
+
+Publication-delay checks must compare exact feature values and both validation
+and evaluation membership. Different features or membership require separately
+versioned sensitivity fits; do not report invariant forecasts from approximate
+equality. Reporting requires matching sensitivity and replay evidence.
+
+A completion pass must preserve the primary comparison and fixed grids, use the
+same monthly validation cohort for EWMA and fitted models, verify every completed
+stage before writes, publish new stages atomically, and test interruption and
+changed-input failures. Update existing PR #1 on `viraj/research`; do not create a
+duplicate PR or merge without a separate request.

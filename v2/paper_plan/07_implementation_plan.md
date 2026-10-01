@@ -1,5 +1,9 @@
 # Implementation plan
 
+> Historical design/preparation record. Current execution status, corrections and
+> evidence are maintained in [the hardening record](16_hardening_execution.md)
+> and [the revised report](../results/settlement_study_v2_1/REPORT.md).
+
 **30 September 2026:** this dated specification has now been implemented for the core retrospective study. Use [the development prompt](15_implementation_brief.md) and [executed report](../results/settlement_study/REPORT.md) for current status and deviations. The original planning text below is retained for traceability.
 
 ## Deliverable boundary

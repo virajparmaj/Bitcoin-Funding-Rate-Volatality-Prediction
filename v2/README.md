@@ -2,7 +2,7 @@
 
 This additive research layer preserves the original coursework and evaluates whether simple models improve on the exchange's current indication of the next BTCUSDT funding settlement. It distinguishes next-row prediction from prediction of an actual payment at a specified lead time.
 
-The implementation follows the [development prompt](paper_plan/15_implementation_brief.md) and [study protocol](configs/settlement_study.json). See the [executed report](results/settlement_study/REPORT.md) for measured results, uncertainty and outstanding limitations. The original [paper plan](paper_plan/README.md) is the dated design record; it is not an execution log.
+The implementation follows the [development prompt](paper_plan/15_implementation_brief.md) and [study protocol](configs/settlement_study_v2_1.json). See the [executed report](results/settlement_study_v2_1/REPORT.md) for measured results, uncertainty and outstanding limitations. The original [paper plan](paper_plan/README.md) is the dated design record; it is not an execution log.
 
 ## Study
 
@@ -21,24 +21,70 @@ This is an empirical evaluation, not a claim of a new algorithm, first publicati
 Use the existing per-project environment or install `v2/requirements.txt` in a Python 3.11 virtual environment. Run from the repository root:
 
 ```bash
-v2/.venv/bin/python -m v2.experiments.run_study --stage acquire
-v2/.venv/bin/python -m v2.experiments.run_study --stage validate-data
-v2/.venv/bin/python -m v2.experiments.run_study --stage baselines
-v2/.venv/bin/python -m v2.experiments.run_study --stage models
-v2/.venv/bin/python -m v2.experiments.check_sensitivities
-v2/.venv/bin/python -m v2.experiments.run_study --stage report
+study_config=v2/configs/settlement_study_v2_1.json
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage acquire
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage validate-data
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage baselines
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage models
+v2/.venv/bin/python -m v2.experiments.check_sensitivities --config "$study_config"
+v2/.venv/bin/python -m v2.experiments.verify_saved_forecasts --config "$study_config"
+v2/.venv/bin/python -m v2.experiments.run_study --config "$study_config" --stage report
 v2/.venv/bin/python -m pytest -q -c v2/pyproject.toml v2/tests
 ```
 
-Acquisition downloads small public label files without credentials. All later stages run offline. The optional December 2019 warm-up archive was unavailable; initial incomplete histories are explicitly excluded. The default full grid fits hundreds of small forests during validation; expect minutes rather than an instantaneous demo.
+Acquisition verifies cached public ZIP/checksum pairs or downloads missing ones;
+no credentials are needed. Later stages are offline. The December 2019 warm-up
+archive was unavailable; incomplete histories are explicitly excluded.
 
-`--config` selects another JSON protocol. Use a new output directory for a changed protocol; cached selection checks configuration, source and training-code hashes. The forecast stage never substitutes a baseline after a failed fit.
+All commands accept `--config`. Defaults retain the historical config for CLI
+compatibility, but the revised implementation refuses to modify that legacy run.
+Use the explicit revised config above. Completed stages verify and return without
+rewriting. A code, config, source or numerical environment change requires a new
+output directory; failed fits never silently substitute a baseline.
+
+For a **fresh checkout**, the derived panels/forecasts are absent by design. Run
+the same commands with `v2/configs/settlement_study_v2_1_reproduction.json`, whose
+ignored output directory starts empty. To repeat again, copy that JSON to a new
+config and change only `output_dir` to another unused child of `v2/results/`.
+Do not delete or overwrite a completed run to force execution.
+
+To check full independent reproduction when both runs are present locally:
+
+```bash
+v2/.venv/bin/python -m v2.experiments.compare_study_runs \
+  --config v2/configs/settlement_study_v2_1.json \
+  --other-config v2/configs/settlement_study_v2_1_reproduction.json
+```
+
+This compares fresh source-derived panels, eligibility, validation choices,
+folds, every prediction and numeric tables. Event membership and parameters must
+match exactly; floating outputs use `rtol=1e-9`, `atol=1e-12`. It is same-machine
+reproducibility, not independent market replication. The full grid and repeated
+forest fitting take substantially longer than the demo.
 
 ## Artifacts and release boundaries
 
-`v2/results/settlement_study/` contains the executed report, aggregate scores, fold counts, exclusions, source manifest, validation scores, selected parameters and a lead-time figure. Local `panel.csv.gz` and `predictions.csv.gz` retain per-event lineage and forecasts. They are ignored by Git pending redistribution review of provider-derived information. Raw downloaded archives are cached under ignored `v2/data/`; public URLs and checksums allow reacquisition.
+The revised run is under `v2/results/settlement_study_v2_1/`. Each successful stage
+atomically publishes a directory under `_stages/`, including a receipt of input
+and output hashes. Top-level symlinks provide convenient access to the artifacts.
+An interrupted publication can repair missing links after verifying canonical
+files; partial computations never receive a completion receipt.
 
-The aggregate release is therefore reproducible only with access to the original input file. Do not advertise it as an independently accessible open dataset until source redistribution rights are resolved.
+The execution identity includes every Python module under `v2/src` and
+`v2/experiments`, configuration, ticker, exact archive/checksum hashes and package
+versions. Git commit and dirty state are also recorded as metadata. Results
+committed later do not change the code used for the recorded run.
+
+The [original September 30 report](results/settlement_study/REPORT.md) remains
+unchanged. The [hardening record](paper_plan/16_hardening_execution.md) maps
+requirements to evidence and documents remaining limitations.
+
+Local `panel.csv.gz`, `predictions.csv.gz` and baseline forecasts retain per-event
+lineage but remain Git-ignored pending redistribution review. Raw archives are
+cached under ignored `v2/data/`; manifests contain official URLs and checksums.
+Reproduction requires access to the original input CSV and the recorded package
+environment. Existing inclusion of the input does not establish redistribution
+rights; this is not advertised as an independently accessible open dataset.
 
 ## Historical audit corrections
 

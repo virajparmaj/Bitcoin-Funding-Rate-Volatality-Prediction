@@ -1,5 +1,9 @@
 # Tests, validation and current execution status
 
+> Historical design/preparation record. Current execution status, corrections and
+> evidence are maintained in [the hardening record](16_hardening_execution.md)
+> and [the revised report](../results/settlement_study_v2_1/REPORT.md).
+
 ## Executed during preparation
 
 | Check | Result | What it actually establishes |

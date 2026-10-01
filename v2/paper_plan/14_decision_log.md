@@ -41,7 +41,7 @@ Closest Inan full text; full-period official label coverage; historical funding-
 
 ## Reproducibility hardening — 1 October 2026
 
-Protocol `2026-10-01-v2` implements the approved completion pass. The original
+Protocol `2026-10-01-v2.1` implements the approved completion pass. The original
 `2026-09-30-v1` config and result directory remain immutable historical evidence.
 Before any revised test scoring, the following corrections were fixed:
 
@@ -65,3 +65,14 @@ Before any revised test scoring, the following corrections were fixed:
 
 Results and completion evidence will be appended after execution. No model or
 hyperparameter changes will be made in response to revised test performance.
+
+### Preflight verification correction
+
+The first hardening attempt (`2026-10-01-v2`) completed data/baseline stages but
+was interrupted before committing its model stage. Its reproduction comparator
+used exact equality for floating validation scores, stricter than the planned
+numerical tolerance. Corrected that verification-only behavior before accepting
+any revised test results. Preserved the incomplete attempt locally and restarted
+both complete runs in new `settlement_study_v2_1` directories, protocol
+`2026-10-01-v2.1`. Exact selected parameters and event membership remain required.
+No statistical settings or models changed.

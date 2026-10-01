@@ -54,7 +54,15 @@ def compare(config, other_config):
             left, right = (json.loads((p / name).read_text()) for p in (output, other_output))
             if name == "selection.json":
                 left, right = left["choices"], right["choices"]
-            if left != right:
+            if "candidates" in name:
+                assert_frame_equal(
+                    pd.DataFrame(left),
+                    pd.DataFrame(right),
+                    check_exact=False,
+                    rtol=1e-9,
+                    atol=1e-12,
+                )
+            elif left != right:
                 raise ValueError(f"Reproduction choice/validation mismatch: {name}")
             checks.append(dict(artifact=name, status="passed"))
         save_json(

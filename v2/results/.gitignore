@@ -2,3 +2,5 @@
 .*-*/
 **/*.csv.gz
 settlement_study_v2_reproduction/
+settlement_study_v2/
+settlement_study_v2_1_reproduction/

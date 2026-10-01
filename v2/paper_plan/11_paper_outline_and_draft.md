@@ -1,5 +1,9 @@
 # Paper outline and writing material
 
+> Historical design/preparation record. Current execution status, corrections and
+> evidence are maintained in [the hardening record](16_hardening_execution.md)
+> and [the revised report](../results/settlement_study_v2_1/REPORT.md).
+
 Working title: **Beyond Persistence: Bitcoin Funding Forecasts Against Exchange Indications at Fixed Settlement Lead Times**.
 
 One-sentence intended contribution: We measure whether simple models add information beyond the exchange's available indication of an upcoming funding payment, and how incremental errors vary with lead time and observable state.
