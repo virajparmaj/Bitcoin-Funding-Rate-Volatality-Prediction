@@ -39,31 +39,61 @@ def candidates(model: str, spec: dict) -> list[dict]:
     ]
 
 
+def horizon_folds(panel, spec, horizon, validation=False):
+    """Partition complete events before selecting a horizon."""
+    start = spec["validation_start"] if validation else spec["test_start"]
+    end = (
+        (pd.Timestamp(spec["test_start"]) - pd.Timedelta(nanoseconds=1)).isoformat()
+        if validation
+        else spec["test_end"]
+    )
+    for cutoff, train, test in monthly_folds(panel, start, end):
+        train, test = train[train.horizon.eq(horizon)], test[test.horizon.eq(horizon)]
+        if len(train) < spec["minimum_training_events"] or test.empty:
+            raise ValueError("Insufficient training or evaluation history")
+        yield cutoff, train, test
+
+
+def select_ewma(panel, spec):
+    """Use the same monthly validation cohort as fitted models; ties follow grid order."""
+    choices, ledger = {}, []
+    for horizon in spec["horizons"]:
+        tests = [test for _, _, test in horizon_folds(panel, spec, horizon, validation=True)]
+        if not tests:
+            raise ValueError("Empty validation folds")
+        validation = pd.concat(tests)
+        scores = []
+        for span in spec["ewma_spans"]:
+            error = abs(validation.target - validation[f"ewma_{span}"]) * 1e4
+            if not np.isfinite(error).all():
+                raise ValueError("Nonfinite EWMA validation loss")
+            score = float(error.mean())
+            scores.append(score)
+            ledger.append(
+                dict(
+                    horizon=horizon, model="ewma", params={"span": span}, mae_bp=score, n=len(error)
+                )
+            )
+        choices[str(horizon)] = {"ewma_span": spec["ewma_spans"][int(np.argmin(scores))]}
+    return choices, ledger
+
+
 def tune(panel: pd.DataFrame, spec: dict):
     """Select on monthly 2022 forecasts only; return a complete candidate ledger."""
-    choices, ledger = {}, []
-    end = (pd.Timestamp(spec["test_start"]) - pd.Timedelta(nanoseconds=1)).isoformat()
+    choices, ledger = select_ewma(panel, spec)
     for horizon in spec["horizons"]:
-        sample = panel[panel.horizon == horizon]
-        validation = sample[sample.event_id.ge(spec["validation_start"]) & sample.event_id.le(end)]
-        span = min(
-            spec["ewma_spans"],
-            key=lambda s: (validation.target - validation[f"ewma_{s}"]).abs().mean(),
-        )
-        choices[str(horizon)] = {"ewma_span": span}
+        folds = list(horizon_folds(panel, spec, horizon, validation=True))
         for model in ("ridge", "rf", "history_ridge"):
             columns = HISTORY_COLUMNS if model == "history_ridge" else feature_columns("full")
             scores = []
             for params in candidates(model, spec):
                 errors = []
-                for cutoff, train, test in monthly_folds(sample, spec["validation_start"], end):
-                    if len(train) < spec["minimum_training_events"]:
-                        raise ValueError("Insufficient training history")
+                for cutoff, train, test in folds:
                     prediction = predict_model(model, params, train, test, columns, spec)
                     errors.extend(abs(test.target.to_numpy() - prediction) * 1e4)
-                score = float(np.mean(errors))
-                if not errors or not np.isfinite(score):
+                if not errors or not np.isfinite(errors).all():
                     raise ValueError("Empty/nonfinite validation loss")
+                score = float(np.mean(errors))
                 scores.append(score)
                 ledger.append(
                     dict(horizon=horizon, model=model, params=params, mae_bp=score, n=len(errors))
@@ -85,9 +115,8 @@ def forecast(
     outputs, folds = [], []
     columns = feature_columns(group)
     for horizon in spec["horizons"]:
-        sample = panel[panel.horizon == horizon]
         chosen = choices[str(horizon)]
-        for cutoff, train, test in monthly_folds(sample, spec["test_start"], spec["test_end"]):
+        for cutoff, train, test in horizon_folds(panel, spec, horizon):
             if len(train) < spec["minimum_training_events"]:
                 raise ValueError("Insufficient training history")
             predictions = baseline_predictions(train, test, chosen["ewma_span"])

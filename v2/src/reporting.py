@@ -252,7 +252,7 @@ def write_narrative(data, predictions, table, spec, output):
     sensitivity_path = output / "publication_delay_sensitivity.json"
     publication_note = "Publication-delay sensitivity has not been run."
     if sensitivity_path.exists():
-        checks = json.loads(sensitivity_path.read_text())
+        checks = json.loads(sensitivity_path.read_text())["checks"]
         same = all(
             row["same_origin_keys"]
             and row["identical_settled_features"]
@@ -264,6 +264,16 @@ def write_narrative(data, predictions, table, spec, output):
             if same
             else "Publication-delay checks changed features or membership; model sensitivity remains required."
         )
+    significant = horizon_table[
+        horizon_table.p_holm_secondary.lt(0.05) & horizon_table.gain_bp.gt(0)
+    ]
+    secondary_note = (
+        "Positive main-variant gains passing the declared secondary Holm test: "
+        + ", ".join(f"{int(r.horizon)}h {r.model}" for r in significant.itertuples())
+        + "."
+        if len(significant)
+        else "No positive main-variant gain passes the declared secondary Holm test."
+    )
     coverage = json.loads((output / "coverage.json").read_text())
     report_text = f"""# Executed settlement study
 
@@ -279,7 +289,9 @@ Primary MAE reduction: **{ridge.gain_bp:.6f} bp**, 95% seven-day moving-calendar
 
 {markdown_table(horizon_table, ["horizon", "model", "gain_bp", "gain_low_bp", "gain_high_bp", "p_holm_secondary"])}
 
-The one-hour RF result is a declared secondary comparison, not a replacement for the primary four-hour ridge test. Pointwise intervals and multiplicity-adjusted tests answer different questions. Statistical evidence in this retrospective sample does not establish a deployable or economically material advantage.
+RF and non-primary horizon results are declared secondary comparisons; they do not replace the primary four-hour ridge test. Pointwise intervals and multiplicity-adjusted tests answer different questions. Statistical evidence in this retrospective sample does not establish a deployable or economically material advantage.
+
+{secondary_note}
 
 ## Data validation
 

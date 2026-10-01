@@ -2,20 +2,21 @@
 
 from __future__ import annotations
 
+import argparse
 import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-from v2.experiments.run_study import DEFAULT_CONFIG, ROOT, configuration, save_json
+from v2.experiments.run_study import DEFAULT_CONFIG, run, save_json
 from v2.src.evaluation import predict_model
 from v2.src.features import feature_columns
-from v2.src.splits import monthly_folds
+from v2.src.evaluation import horizon_folds
+from v2.src.study_store import digest
 
 
-def main() -> None:
-    spec = configuration(DEFAULT_CONFIG)
-    output = ROOT / spec["output_dir"]
+def replay(output, spec, identity) -> None:
     times = [
         "event_id",
         "origin",
@@ -37,11 +38,8 @@ def main() -> None:
         float_precision="round_trip",
     )
     chosen = json.loads((output / "selection.json").read_text())["choices"]["4"]
-    panel = panel[panel.horizon.eq(4)]
     errors = []
-    for index, (cutoff, train, test) in enumerate(
-        monthly_folds(panel, spec["test_start"], spec["test_end"])
-    ):
+    for index, (cutoff, train, test) in enumerate(horizon_folds(panel, spec, 4)):
         for model in ["ridge", "rf"] if index == 0 else ["ridge"]:
             replayed = predict_model(
                 model, chosen[model], train, test, feature_columns("full"), spec
@@ -62,15 +60,24 @@ def main() -> None:
                     max_abs_native_difference=float(np.max(abs(replayed - actual))),
                 )
             )
+    if not errors:
+        raise ValueError("No forecast folds replayed")
     save_json(
         output / "forecast_replay.json",
         dict(
             status="passed",
+            identity_sha256=digest(identity),
             checks=errors,
             scope="All four-hour ridge folds and first four-hour RF fold replayed from serialized panel; not a fresh independent dataset",
         ),
     )
     print(f"Replayed {len(errors)} model/fold combinations successfully")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    run("replay", parser.parse_args().config.resolve())
 
 
 if __name__ == "__main__":

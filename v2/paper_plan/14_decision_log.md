@@ -38,3 +38,30 @@ Closest Inan full text; full-period official label coverage; historical funding-
 - Subgroup/quarter analysis is descriptive with pointwise intervals. No simultaneous equivalence, universal unpredictability or economic-value conclusion is made.
 - Source code, source hashes, tuning choices and aggregate outputs are committed; raw provider-derived panels/predictions remain local pending redistribution review.
 - The executable config and generated report supersede historical pending statuses. Later-time/DAR replication and full seed/window/tail robustness remain separate work. The 0/5/15-minute publication-delay check was executed and produced identical histories and fold membership.
+
+## Reproducibility hardening — 1 October 2026
+
+Protocol `2026-10-01-v2` implements the approved completion pass. The original
+`2026-09-30-v1` config and result directory remain immutable historical evidence.
+Before any revised test scoring, the following corrections were fixed:
+
+- EWMA selection now uses the same monthly 2022 eligibility as ridge/RF/history
+  ridge. Whole events are partitioned before horizon filtering. Every EWMA span
+  enters the validation ledger; ties follow configured grid order.
+- Every execution module, package version, config, ticker, archive and checksum
+  is part of the execution identity. Completed stages verify without rewriting;
+  changed identities require another output directory.
+- Stages commit immutable directories atomically. Top-level artifact links point
+  to those directories. Failed computations cannot replace earlier evidence;
+  a committed stage can repair links after an interrupted publication.
+- Delay diagnostics compare exact keyed features and both validation/evaluation
+  membership. Approximate equality no longer establishes invariant predictions.
+- Both verification CLIs accept `--config`. A separate full reproduction uses
+  identical scientific settings and fresh selection/fitting from cached sources.
+- Scientific periods, grids, seed, losses and inference family are unchanged.
+  This is a retrospective protocol correction, not an untouched holdout.
+- The revised date reflects actual implementation on 1 October. The plan's
+  proposed September 30 revision date was not used to backdate execution.
+
+Results and completion evidence will be appended after execution. No model or
+hyperparameter changes will be made in response to revised test performance.

@@ -48,6 +48,8 @@ def download_archives(directory: Path, start: str, end: str) -> list[Path]:
                 raise ValueError(f"Downloaded checksum mismatch: {url}")
             if path.exists() and path.read_bytes() != blob:
                 raise ValueError(f"Refusing to replace existing archive: {path}")
+            if checksum.exists() and checksum.read_bytes() != check:
+                raise ValueError(f"Refusing to replace existing checksum: {checksum}")
             path.write_bytes(blob)
             checksum.write_bytes(check)
         paths.append(path)
@@ -73,7 +75,15 @@ def load_labels(paths: list[Path], delay_minutes: float, tolerance_seconds: floa
             raise ValueError(f"Invalid label schema/values: {path}")
         frame["source_archive"] = path.name
         frames.append(frame)
-        manifest.append({"file": path.name, "url": ARCHIVE + path.name, "sha256": sha256(path)})
+        manifest.append(
+            {
+                "file": path.name,
+                "url": ARCHIVE + path.name,
+                "sha256": sha256(path),
+                "checksum_url": ARCHIVE + path.name + ".CHECKSUM",
+                "checksum_sha256": sha256(path.with_suffix(".zip.CHECKSUM")),
+            }
+        )
     if not frames:
         raise ValueError("No verified funding archives; run the acquire stage first")
     labels = pd.concat(frames, ignore_index=True)

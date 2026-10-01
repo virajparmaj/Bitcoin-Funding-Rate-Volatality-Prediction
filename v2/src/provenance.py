@@ -1,45 +1,38 @@
-"""Bind aggregate reports to their exact forecast artifacts and frozen protocol."""
-
-from __future__ import annotations
+"""Bind reports to their complete source, forecast and verification evidence."""
 
 import json
 from pathlib import Path
 
 from .funding_labels import sha256
+from .study_store import digest, execution_identity
 
 
 def verify_report_inputs(output: Path, spec: dict) -> dict:
-    """Reject changed sources/selection; write hashes before scoring forecasts."""
+    """Verify dependencies before the transactional report stage publishes anything."""
     manifest = json.loads((output / "manifest.json").read_text())
+    identity = execution_identity(manifest)
     if manifest["protocol"] != spec:
         raise ValueError("Report config differs from executed forecast protocol")
     selection = json.loads((output / "selection.json").read_text())
-    if selection["identity"]["config_sha256"] != manifest["config_sha256"]:
+    if selection["identity"] != identity:
         raise ValueError("Selection and forecast manifest disagree")
-    root = Path(__file__).resolve().parents[2]
-    identity = selection["identity"]
-    if sha256(root / spec["ticker_path"]) != identity["ticker_sha256"]:
-        raise ValueError("Ticker source changed since selection")
-    for name, digest in identity["code_sha256"].items():
-        if sha256(root / f"v2/src/{name}.py") != digest:
-            raise ValueError(f"Forecast code changed since selection: {name}")
-    record = {
-        "prediction_sha256": sha256(output / "predictions.csv.gz"),
-        "folds_sha256": sha256(output / "folds.csv"),
-        "selection_sha256": sha256(output / "selection.json"),
-        "config_sha256": manifest["config_sha256"],
-        "reporting_code_sha256": {
-            name: sha256(root / f"v2/src/{name}.py")
-            for name in ["metrics", "reporting", "provenance"]
-        },
-    }
-    path = output / "forecast_artifact_manifest.json"
-    if path.exists():
-        previous = json.loads(path.read_text())
-        for key in ["prediction_sha256", "folds_sha256", "selection_sha256", "config_sha256"]:
-            if previous[key] != record[key]:
-                raise ValueError(
-                    "Previously reported forecast artifacts changed; use a new run directory"
-                )
-    path.write_text(json.dumps(record, indent=2) + "\n")
+    for name in ["publication_delay_sensitivity.json", "forecast_replay.json"]:
+        record = json.loads((output / name).read_text())
+        if record["identity_sha256"] != digest(identity):
+            raise ValueError(f"Stale verification evidence: {name}")
+    checks = json.loads((output / "publication_delay_sensitivity.json").read_text())["checks"]
+    if {r["label_delay_minutes"] for r in checks} != {0, 5, 15} or not all(
+        r["same_origin_keys"] and r["identical_settled_features"] and r["identical_fold_membership"]
+        for r in checks
+    ):
+        raise ValueError(
+            "Publication assumptions change predictions; execute versioned sensitivity runs"
+        )
+    if json.loads((output / "forecast_replay.json").read_text())["status"] != "passed":
+        raise ValueError("Forecast replay did not pass")
+    record = dict(
+        identity_sha256=digest(identity),
+        artifacts={p.name: sha256(p) for p in sorted(output.iterdir()) if p.is_file()},
+    )
+    (output / "forecast_artifact_manifest.json").write_text(json.dumps(record, indent=2) + "\n")
     return record

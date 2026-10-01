@@ -12,12 +12,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from v2.src.evaluation import forecast, tune
+from v2.src.evaluation import forecast, select_ewma, tune
 from v2.src.features import add_settled_history, ticker_features
 from v2.src.funding_labels import download_archives, load_labels, sha256
 from v2.src.settlement import build_origin_panel
 from v2.src.timebase import normalize_ticker
 from v2.src.validate import validate_panel
+from v2.src.study_store import check_store, execute_stage, execution_identity
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / "v2/configs/settlement_study.json"
@@ -92,9 +93,13 @@ def manifest_for(spec, config_path, archives):
         git_commit=subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
         ).strip(),
+        git_dirty=bool(
+            subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
+        ),
         python=platform.python_version(),
         packages={
-            p: version(p) for p in ["numpy", "pandas", "scikit-learn", "scipy", "statsmodels"]
+            p: version(p)
+            for p in ["numpy", "pandas", "scikit-learn", "scipy", "statsmodels", "matplotlib"]
         },
         limitations=[
             "Retrospective, previously inspected historical sample",
@@ -128,41 +133,14 @@ def validate_data(spec, output, ticker, labels, archives, rejected):
     return panel
 
 
-def frozen_choices(panel, spec, output, config_hash, source_hash):
-    """Reuse tuning only when it matches exactly the current pre-test inputs."""
-    path = output / "selection.json"
-    critical = [
-        "timebase",
-        "funding_labels",
-        "settlement",
-        "features",
-        "splits",
-        "evaluation",
-        "forecast_models",
-    ]
-    identity = dict(
-        config_sha256=config_hash,
-        ticker_sha256=source_hash,
-        code_sha256={name: sha256(ROOT / f"v2/src/{name}.py") for name in critical},
-        labels_sha256={
-            p.name: sha256(p) for p in sorted((ROOT / spec["labels_dir"]).glob("*.zip"))
-        },
-    )
-    if path.exists():
-        saved = json.loads(path.read_text())
-        if saved["identity"] != identity:
-            raise ValueError(
-                "Existing selection belongs to a different protocol/source; use a new output directory"
-            )
-        return saved["choices"]
+def frozen_choices(panel, spec, output, identity):
+    """Record validation choices bound to the entire execution identity."""
     choices, ledger = tune(panel, spec)
+    baseline = json.loads((output / "baseline_selection.json").read_text())
+    if any(choices[h]["ewma_span"] != value["ewma_span"] for h, value in baseline.items()):
+        raise ValueError("Baseline and model EWMA selection disagree")
     save_json(output / "validation_candidates.json", ledger)
-    save_json(
-        path,
-        dict(
-            identity=identity, selected_at=datetime.now(timezone.utc).isoformat(), choices=choices
-        ),
-    )
+    save_json(output / "selection.json", dict(identity=identity, choices=choices))
     return choices
 
 
@@ -185,68 +163,89 @@ def models(panel, ticker, labels, spec, output, choices):
     pd.concat(fold_tables, ignore_index=True).to_csv(output / "folds.csv", index=False)
 
 
-def run(stage: str, config_path: Path) -> None:
-    """Dispatch acquisition separately from offline evaluation, failing visibly."""
-    spec = configuration(config_path)
-    output = ROOT / spec["output_dir"]
-    output.mkdir(parents=True, exist_ok=True)
-    if stage == "acquire":
-        download_archives(ROOT / spec["labels_dir"], spec["archive_start"], spec["archive_end"])
-        return
-    if stage == "report":
-        from v2.src.reporting import report
+def load_panel(output):
+    """Read exact serialized inputs shared by every downstream stage."""
+    times = [
+        "event_id",
+        "origin",
+        "source_available_at",
+        "label_available_at",
+        "history_available_at",
+        "calc_time",
+        "terminal_proxy_at",
+    ]
+    return pd.read_csv(
+        output / "panel.csv.gz",
+        parse_dates=times,
+        date_format="mixed",
+        float_precision="round_trip",
+    )
 
-        report(output, spec)
-        return
-    ticker, labels, archives, rejected = inputs(spec)
-    manifest = manifest_for(spec, config_path, archives)
-    existing = output / "manifest.json"
-    if existing.exists():
-        previous = json.loads(existing.read_text())
-        if (
-            previous["config_sha256"] != manifest["config_sha256"]
-            or previous["ticker_sha256"] != manifest["ticker_sha256"]
-            or previous["archives"] != archives
-        ):
-            raise ValueError(
-                "Existing run has different protocol/sources; use a new output directory"
-            )
-    panel = validate_data(spec, output, ticker, labels, archives, rejected)
-    save_json(output / "manifest.json", manifest)
+
+def stage_action(stage, output, spec, manifest, ticker, labels, archives, rejected):
+    """Produce a stage inside an unpublished transaction directory."""
+    identity = execution_identity(manifest)
     if stage == "validate-data":
+        validate_data(spec, output, ticker, labels, archives, rejected)
+        save_json(output / "manifest.json", manifest)
         return
+    panel = load_panel(output)
     if stage == "baselines":
-        # Baselines do not require fitting RF/ridge or selecting them.
-        validation = panel[
-            panel.event_id.ge(spec["validation_start"]) & panel.event_id.lt(spec["test_start"])
-        ]
-        choices = {
-            str(h): {
-                "ewma_span": min(
-                    spec["ewma_spans"],
-                    key=lambda s: (
-                        validation.loc[validation.horizon.eq(h), "target"]
-                        - validation.loc[validation.horizon.eq(h), f"ewma_{s}"]
-                    )
-                    .abs()
-                    .mean(),
-                )
-            }
-            for h in spec["horizons"]
-        }
+        choices, ledger = select_ewma(panel, spec)
         result, folds = forecast(panel, choices, spec, include_models=False)
         result.to_csv(
             output / "baseline_predictions.csv.gz",
             index=False,
             compression={"method": "gzip", "mtime": 0},
         )
+        folds.to_csv(output / "baseline_folds.csv", index=False)
+        save_json(output / "baseline_selection.json", choices)
+        save_json(output / "baseline_validation_candidates.json", ledger)
+    elif stage == "models":
+        choices = frozen_choices(panel, spec, output, identity)
+        models(panel, ticker, labels, spec, output, choices)
+    elif stage == "sensitivities":
+        from v2.experiments.check_sensitivities import check
+
+        check(output, spec, ticker, labels, identity)
+    elif stage == "replay":
+        from v2.experiments.verify_saved_forecasts import replay
+
+        replay(output, spec, identity)
+    elif stage == "report":
+        from v2.src.reporting import report
+
+        report(output, spec)
+
+
+def run(stage: str, config_path: Path) -> None:
+    """Reject changed evidence before writing; commit successful stages atomically."""
+    spec = configuration(config_path)
+    output = ROOT / spec["output_dir"]
+    if stage == "acquire" and not (output / "manifest.json").exists():
+        download_archives(ROOT / spec["labels_dir"], spec["archive_start"], spec["archive_end"])
         return
-    choices = frozen_choices(
-        panel, spec, output, manifest["config_sha256"], manifest["ticker_sha256"]
+    ticker, labels, archives, rejected = inputs(spec)
+    manifest = manifest_for(spec, config_path, archives)
+    identity = execution_identity(manifest)
+    check_store(output, identity)
+    if stage == "acquire":
+        download_archives(ROOT / spec["labels_dir"], spec["archive_start"], spec["archive_end"])
+        return
+
+    def recheck():
+        _, _, current_archives, _ = inputs(spec)
+        return execution_identity(
+            manifest_for(configuration(config_path), config_path, current_archives)
+        )
+
+    execute_stage(
+        output,
+        stage,
+        identity,
+        lambda work: stage_action(stage, work, spec, manifest, ticker, labels, archives, rejected),
+        recheck,
     )
-    models(panel, ticker, labels, spec, output, choices)
-    if sha256(ROOT / spec["ticker_path"]) != manifest["ticker_sha256"]:
-        raise ValueError("Original input changed during execution")
 
 
 def main() -> None:

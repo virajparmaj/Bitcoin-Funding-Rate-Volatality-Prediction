@@ -1,0 +1,4 @@
+.*.lock
+.*-*/
+**/*.csv.gz
+settlement_study_v2_reproduction/
