@@ -1,7 +1,7 @@
 # Revised settlement study artifacts
 
 Protocol `2026-10-01-v2.1`; execution code commit `00a8a9c`. Start with
-[REPORT.md](REPORT.md) and the [execution record](../../paper_plan/16_hardening_execution.md).
+[REPORT.md](REPORT.md) and the [methodology guide](../../docs/STUDY.md).
 The September 30 run remains unchanged in the adjacent `settlement_study/` folder.
 
 Each `_stages/<stage>/receipt.json` records the execution identity and exact hashes
@@ -31,7 +31,3 @@ collected market data. Raw public archives and provider-derived `.csv.gz` files
 remain ignored pending redistribution review. The alternate reproduction config
 writes to an empty ignored directory in a fresh checkout. See the [run commands](../../README.md)
 before attempting to execute into a directory containing committed evidence.
-
-The first hardening attempt (`v2`) was interrupted during selection after finding
-a verification tolerance mismatch. Its data/baseline stages remain local; it
-never committed model forecasts or a report. This `v2.1` run is a fresh execution.

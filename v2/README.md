@@ -2,7 +2,7 @@
 
 This additive research layer preserves the original coursework and evaluates whether simple models improve on the exchange's current indication of the next BTCUSDT funding settlement. It distinguishes next-row prediction from prediction of an actual payment at a specified lead time.
 
-The implementation follows the [development prompt](paper_plan/15_implementation_brief.md) and [study protocol](configs/settlement_study_v2_1.json). See the [executed report](results/settlement_study_v2_1/REPORT.md) for measured results, uncertainty and outstanding limitations. The original [paper plan](paper_plan/README.md) is the dated design record; it is not an execution log.
+The implementation follows the [methodology guide](docs/STUDY.md) and [study protocol](configs/settlement_study_v2_1.json). See the [executed report](results/settlement_study_v2_1/REPORT.md) for measured results, uncertainty and outstanding limitations. Research planning and task-execution notes are local-only.
 
 ## Study
 
@@ -76,8 +76,7 @@ versions. Git commit and dirty state are also recorded as metadata. Results
 committed later do not change the code used for the recorded run.
 
 The [original September 30 report](results/settlement_study/REPORT.md) remains
-unchanged. The [hardening record](paper_plan/16_hardening_execution.md) maps
-requirements to evidence and documents remaining limitations.
+unchanged. The [study guide](docs/STUDY.md) explains methods, evidence and remaining limitations.
 
 Local `panel.csv.gz`, `predictions.csv.gz` and baseline forecasts retain per-event
 lineage but remain Git-ignored pending redistribution review. Raw archives are
@@ -88,7 +87,7 @@ rights; this is not advertised as an independently accessible open dataset.
 
 ## Historical audit corrections
 
-`src/audit.py`, `src/legacy.py` and `notebooks/00_audit_v1.ipynb` reproduce historical artifacts; they are not the clean modeling pipeline. The corrected [assessment](research/research_assessment.md) explains why:
+`src/audit.py`, `src/legacy.py` and `notebooks/00_audit_v1.ipynb` reproduce historical artifacts; they are not the clean modeling pipeline. The [historical-results guide](docs/STUDY.md#historical-results) explains why:
 
 - `3 × ma3 − lag1 − lag2` reconstructs the observable current indication, not Model 3's shifted future target.
 - Current-rate persistence beats the saved RF even though both have high next-row R².
@@ -96,4 +95,4 @@ rights; this is not advertised as an independently accessible open dataset.
 - Constant saved test columns do not establish their training contribution.
 - AIC magnitude, ADF rejection and fee/MAE ratios do not establish forecast validity or profit.
 
-Original v1 notebooks, utilities, models, source data and saved results stay unchanged. The clean study imports no legacy preprocessing.
+Original v1 scientific outputs, utilities, models, source data and saved results are retained. Notebook path settings are portable; machine-specific output paths are redacted. The clean study imports no legacy preprocessing.
