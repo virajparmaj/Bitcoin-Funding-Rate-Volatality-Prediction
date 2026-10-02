@@ -94,3 +94,23 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Local research drafting and exploratory evidence (published study artifacts stay tracked).
+/v2/paper_plan/
+/v2/research/research_assessment.md
+/v2/research/*.png
+# Superseded configs from an interrupted attempt, not the completed v2.1 protocol.
+/v2/configs/settlement_study_v2.json
+/v2/configs/settlement_study_v2_reproduction.json
+# Personal placeholder workspace, not project source.
+/vparmaj2/
+
+# Additional local tooling and temporary files.
+node_modules/
+*_env/
+.firecrawl/
+.playwright-mcp/
+playwright-report/
+test-results/
+*.tmp
+*~
