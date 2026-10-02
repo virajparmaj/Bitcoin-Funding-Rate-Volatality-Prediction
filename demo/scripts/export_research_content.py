@@ -94,20 +94,15 @@ lines("standalone-model1", "models/model1.py", 21, 78)
 lines("config-input", "config.py", 18, 45)
 lines("import-sampling", "utilities/data_import.py", 83, 110)
 lines("group-attribution", "README.md", 1, 10, "Reported in project notes")
-section("notes-classification", "notes/09_results_and_metrics.md", "## Model 1 Direction Prediction")
-section("notes-analysis", "notes/09_results_and_metrics.md", "## Analysis A Baselines")
-section("notes-garch", "notes/09_results_and_metrics.md", "## Model 2 Volatility Prediction")
-section("notes-regression", "notes/09_results_and_metrics.md", "## Model 3 Exact Funding Rate")
-lines("notes-features", "notes/05_feature_engineering.md", 11, 43, "Reported in project notes")
-lines("notes-models", "notes/06_ml_models.md", 11, 78, "Reported in project notes")
-lines("assessment-stale-context", "v2/research/research_assessment.md", 11, 15, "Reported in project notes")
-lines("paper-stale-context", "v2/paper_plan/02_verified_findings.md", 1, 7, "Reported in project notes")
-section("v2-readme-status", "v2/README.md", "## Status")
-section("v2-readme-claims", "v2/README.md", "## What the audit found")
-lines("v2-planned-modules", "v2/paper_plan/07_implementation_plan.md", 1, 27, "Planned")
-section("v2-pending-results", "v2/paper_plan/09_results_ledger.md", "## New model experiments", "Planned")
-section("v2-feasibility", "v2/paper_plan/05_data_contract_and_feasibility.md", "## Official label feasibility probe")
-section("v2-backlog", "v2/paper_plan/13_execution_backlog.md", "## Definition of minimum completed study", "Planned")
+for source_id in ("notes-classification", "notes-analysis", "notes-garch", "notes-regression",
+                  "notes-features", "notes-models"):
+    section(source_id, "demo/docs/historical-claims.md", "## " + source_id)
+section("v2-readme-status", "v2/docs/STUDY.md", "## Results and limitations", "Completed study")
+section("v2-readme-claims", "v2/docs/STUDY.md", "## Historical results", "Methodology")
+section("v2-planned-modules", "v2/docs/STUDY.md", "## Models and validation", "Methodology")
+section("v2-pending-results", "v2/docs/STUDY.md", "## Results and limitations", "Completed study")
+section("v2-feasibility", "v2/docs/STUDY.md", "## Data and availability", "Methodology")
+section("v2-backlog", "v2/docs/STUDY.md", "## Results and limitations", "Remaining limitations")
 cell("old-audit-identity", "v2/notebooks/00_audit_v1.ipynb", 28)
 cell("old-audit-economics", "v2/notebooks/00_audit_v1.ipynb", 38)
 
@@ -248,7 +243,7 @@ FINDINGS = [
     dict(id="feature-work", title="Real feature engineering, explicit scope", text="The implementation creates lags, smoothers, proportional changes, interactions and cyclical calendar encodings. Experiment selections differ, and design rationales are not measured feature contributions.", status="Confirmed from executable definitions", sourceIds=["lag-definitions", "technical-definitions", "interaction-definitions", "target-calendar", "classifier-rf", "classifier-logistic"]),
     dict(id="evaluation-design", title="Evaluation design changes the claim", text="Analysis A combines a shuffled split with a current-rate target and a target-containing variability feature. Its stored regression scores are exploratory evidence, not verified future forecasts.", status="Stored execution output", sourceIds=["analysis-features", "analysis-split", "analysis-rf-output"]),
     dict(id="integration", title="An intended stack, an unresolved contribution", text="Model 3 attempts to add direction and conditional variance. Both columns are constant in its saved RF test data; no verified integration improvement is available, and training effects cannot be inferred from test constants.", status="Recomputed from saved predictions", sourceIds=["regression-rf", "saved-integration-values"]),
-    dict(id="reproducibility", title="Saved artifacts need separate interpretation", text="Notebook outputs, current helper interfaces and narrative results disagree. The later audit adds useful saved-result checks, while settlement forecasting and clean walk-forward model comparisons remain planned.", status="Current repository inspection", sourceIds=["pipeline-stored-error", "variance-integration", "notes-classification", "v2-pending-results", "v2-source-inventory"]),
+    dict(id="reproducibility", title="Saved artifacts need separate interpretation", text="Notebook outputs, current helper interfaces and narrative results disagree. The later audit adds useful saved-result checks, and the separate settlement study now provides completed monthly evaluations. These charts retain the original next-row evidence.", status="Current repository inspection", sourceIds=["pipeline-stored-error", "variance-integration", "notes-classification", "v2-pending-results", "v2-source-inventory"]),
 ]
 
 LIMITATIONS = [
@@ -264,19 +259,16 @@ LIMITATIONS = [
 ]
 
 PLANS = [
-    dict(id="settlement-labels", title="Validate settlement labels", status="Planned", text="Build complete official settlement-label coverage, event reconciliation and an availability-aware origin panel. Existing archive samples are feasibility checks, not completed full-period forecasts.", sourceIds=["v2-feasibility", "v2-planned-modules", "v2-pending-results"]),
-    dict(id="lead-time", title="Forecast at defined lead times", status="Planned", text="Compare current indications, settled-history baselines and residual ridge/RF models at fixed lead times on matched events.", sourceIds=["v2-planned-modules", "v2-pending-results"]),
-    dict(id="walk-forward", title="Use chronological evaluation", status="Planned", text="Implement expanding monthly splits, causal feature availability, validation-only selection and controlled delay/feature ablations.", sourceIds=["v2-planned-modules", "v2-pending-results"]),
-    dict(id="uncertainty", title="Measure uncertainty and robustness", status="Planned", text="Add paired gain intervals, dependence-aware testing, tail/window/seed sensitivity and untouched-time or external validation.", sourceIds=["v2-pending-results", "v2-backlog"]),
-    dict(id="economics", title="Evaluate a defined trading policy", status="Planned", text="Only after forecasting validation, test a specified policy with actual cash flows, execution assumptions, turnover and costs. No economic result is claimed here.", sourceIds=["v2-backlog", "v2-readme-status"]),
+    dict(id="external", title="Replicate on fresh data", status="Planned", text="Freeze the protocol before collecting a later-time or external-venue sample. Same-machine reproduction does not establish external validity.", sourceIds=["v2-backlog"]),
+    dict(id="uncertainty", title="Extend robustness checks", status="Planned", text="Add the remaining tail/window/seed sensitivities and verify the closest forecasting paper before claiming a distinct research contribution.", sourceIds=["v2-backlog"]),
+    dict(id="economics", title="Evaluate a defined trading policy", status="Planned", text="Test a specified policy with actual cash flows, execution assumptions, turnover and costs. No economic result is claimed by the current forecast study.", sourceIds=["v2-backlog"]),
 ]
 
 CORRECTIONS = [
-    dict(id="notes-present", title="The project notes are present", staleClaim="The newer research assessment and copied verified-findings document describe notes/ as absent.", correction="notes/05_feature_engineering.md, notes/06_ml_models.md and notes/09_results_and_metrics.md exist in this checkout and were read. Their narrative claims still require artifact-level verification.", sourceIds=["assessment-stale-context", "paper-stale-context", "notes-features", "notes-models", "notes-classification"]),
     dict(id="identity", title="Current-rate reconstruction is a baseline", staleClaim="The older v2 README/audit calls 3×MA3−lag1−lag2 a reconstruction of Model 3's target.", correction="The identity reconstructs funding_rate[t]. Model 3 explicitly targets funding_rate[t+1]. It supplies an observable current-rate persistence predictor; the identity alone does not establish future-target leakage.", sourceIds=["v2-readme-claims", "old-audit-identity", "technical-definitions", "lag-definitions", "regression-rf"]),
     dict(id="garch-dependency", title="No implemented direction-to-GARCH edge", staleClaim="Notebook narrative describes direction feeding Model 2.", correction="The GARCH fitting cell extracts funding_rate and passes that series to arch_model. It does not consume Model 1 predictions.", sourceIds=["garch", "direction-integration"]),
     dict(id="analysis-metrics", title="Stored outputs take precedence over summaries", staleClaim="Analysis A markdown and project notes quote different Linear/RF scores and an RF MSE that does not match the stored execution output.", correction="The primary table uses exact metrics parsed from notebook outputs. LR2 retains a stored output despite a null execution_count; no new fitting was performed.", sourceIds=["analysis-lr1-output", "analysis-lr2-output", "analysis-rf-output", "analysis-conflicting-summary", "notes-analysis"]),
-    dict(id="v2-implementation", title="The corrected study remains a plan", staleClaim="Some v2 README prose describes baseline, validation and walk-forward modules in the present tense.", correction="The actual Python sources are __init__.py, config.py, legacy.py and audit.py. The paper-plan results ledger marks new experiments pending. Preliminary data-feasibility files do not change that status.", sourceIds=["v2-source-inventory", "v2-readme-status", "v2-planned-modules", "v2-pending-results", "v2-feasibility"]),
+    dict(id="v2-implementation", title="The settlement study is implemented", staleClaim="Earlier planning material marked settlement experiments as pending.", correction="The repository now includes completed event-aligned monthly forecasts, generated results and a reproducibility check. The demo keeps its original saved next-row charts separate from those settlement results.", sourceIds=["v2-source-inventory", "v2-readme-status", "v2-planned-modules", "v2-pending-results", "v2-feasibility"]),
 ]
 
 # Narrative numbers are kept isolated from primary metrics, never inferred as executions.

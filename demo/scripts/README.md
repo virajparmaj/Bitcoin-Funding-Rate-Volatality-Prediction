@@ -25,7 +25,7 @@ run experiments, or alter research files. All output is confined to
 
 The sibling `export_research_content.py` owns `research-content.json`, which
 contains task definitions, feature selections, stored notebook results and source
-excerpts. Run it first. The evidence exporter includes its output and source
+excerpts. Narrative claims come from the tracked [historical excerpts](../docs/historical-claims.md); settlement definitions come from the [study guide](../../v2/docs/STUDY.md). Local notes and planning files are not inputs. Run it first. The evidence exporter includes its output and source
 hashes in the manifest, and refuses to certify stale source hashes.
 
 Outputs are deterministic: they contain no generation clock or machine-specific

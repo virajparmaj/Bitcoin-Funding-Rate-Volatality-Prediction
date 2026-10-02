@@ -27,7 +27,7 @@ RF = "results/predictions_RFR.csv"
 SAR = "results/predictions_SARIMAX.csv"
 SOURCES = [RAW, RF, SAR, "v2/research/evidence.json",
            "v2/research/saved_prediction_scores.csv", "v2/research/reproduce_evidence.py",
-           "v2/research/research_assessment.md", "utilities/functions.py",
+           "v2/docs/STUDY.md", "utilities/functions.py",
            "utilities/data_processing.py", "utilities/data_import.py",
            "notebooks/model_development.ipynb", "dgieser3/research.ipynb"]
 FIELD_INFO = {

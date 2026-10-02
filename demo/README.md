@@ -2,7 +2,7 @@
 
 A local interactive presentation of the repository's original group research and later saved-result audit. Research inputs stay outside this directory and are never trained, repaired, or overwritten by the demo.
 
-The presentation uses gold Bitcoin artwork, orange and deep-ink accents, cream surfaces, and editorial serif headings. Decorative line art sits behind the content; the charts draw only the project's exported observations and saved predictions. System fonts and local artwork keep it self-contained. See [artwork and generation prompts](ARTWORK.md) for the two decorative assets; source records and explicit evidence labels remain part of every research section.
+The presentation uses gold Bitcoin artwork, orange and deep-ink accents, cream surfaces, and editorial serif headings. Decorative line art sits behind the content; the charts draw only the project's exported observations and saved predictions. System fonts and local artwork keep it self-contained. Source records and explicit evidence labels remain part of every research section. Decorative asset production notes are local-only.
 
 ## Run
 
@@ -47,7 +47,7 @@ npm run validate
 
 Python 3.10+ is sufficient; the scripts use only the standard library. The command first extracts stored notebook evidence and definitions, then recomputes saved-pair arithmetic and daily summaries. It records source/output SHA-256 fingerprints in `public/data/manifest.json`. See [export details](scripts/README.md) for units, time semantics, missingness, and validation scope.
 
-The eight evidence checks cover raw counts and missingness, source preservation, deterministic regeneration, target alignment, saved scores, units, residual pairs, daily extrema, and explicit null gaps. `npm run build` separately checks strict TypeScript and creates the static bundle. Browser interaction checks are recorded in [QA.md](QA.md).
+The eight evidence checks cover raw counts and missingness, source preservation, deterministic regeneration, target alignment, saved scores, units, residual pairs, daily extrema, and explicit null gaps. `npm run build` separately checks strict TypeScript and creates the static bundle. Local browser QA notes are not part of the repository.
 
 ## Evidence and release scope
 
