@@ -97,6 +97,7 @@ Thumbs.db
 
 # Local research drafting and exploratory evidence (published study artifacts stay tracked).
 /v2/paper_plan/
+/v2/paper_package/
 /v2/research/research_assessment.md
 /v2/research/*.png
 # Superseded configs from an interrupted attempt, not the completed v2.1 protocol.
