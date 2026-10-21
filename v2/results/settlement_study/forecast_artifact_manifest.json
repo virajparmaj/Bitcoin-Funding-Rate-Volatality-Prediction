@@ -1,0 +1,11 @@
+{
+  "prediction_sha256": "89c269d2cf4caab084e0b496e45fb4e1dffe8c96779de53fd956d175ff239130",
+  "folds_sha256": "9b911609bbdc1ac3a8aadd7f9cf01b370d3a7d2286fd74cedb5dc5548c3942e6",
+  "selection_sha256": "1cc391c32553c541d05424753cce5b8edcddbf30c109fb28987f1dd4d6a07c6e",
+  "config_sha256": "3abb07a4244ef0b5dabd05574eb39edd639470a43873a1a05f11c1ddf898c49c",
+  "reporting_code_sha256": {
+    "metrics": "ef4105cd4c9b69d4e45eb5c7196f07aa5f433d5f24e365cf237a69959db90410",
+    "reporting": "57a137bb58b76c9260d46d97128194ada3be51681bda9773b93664e2f3a5bbef",
+    "provenance": "717b94c6fa9d4e9da6969c4f4c560f1b7c99f0416aed4056939f2b417d74c65c"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "stage": "report",
+  "identity_sha256": "b1b732e2e48f935bafb2fa11902ba5be0c1938c37e166e867035411967a3bacc",
+  "inputs": {
+    "ticker_exclusions.csv": "68f9ff14c4bc65eb92e2eb321691cb049378c0c1b146caf68df3a3cc20d81629",
+    "panel.csv.gz": "ad1f3e6fdb66461f09c345aa619ad7c269239bd278e6dc801ba28c67c68ec04d",
+    "manifest.json": "024eae03dd7bbddaaa94fc0cb3b59fa58d5ffa11e08421a9d96f44520d76f3b7",
+    "coverage.json": "2c099febcf01f75d8854a598d35be8939c70e02c79e9e5182e92db3cb86287ee",
+    "origin_exclusions.csv": "7e4731f0abc4562da635dd873e1e667b9380f0011fc277bab436192adfa004c2",
+    "baseline_predictions.csv.gz": "c9d88da1cd4010c04d7ec40e71a2895cce6c389897673dd8754adbf6f08e5662",
+    "baseline_selection.json": "e669c7b20e55690ae3fb2a0413ad085b5ec258c71f77360f7646ce799f0b16dd",
+    "baseline_folds.csv": "75e3a70b57640e8addc617e73751fd7c86c3f0b2fbd0ea34dc61180f860e59d7",
+    "baseline_validation_candidates.json": "f47d84749446f4d3ad9f31128685aeb159afe0de57c4fe716f3b6c55ee2a0ca8",
+    "predictions.csv.gz": "536161937d82d5997be7c53b5e52b9034eb5e321ed64a15527b52724774727a5",
+    "validation_candidates.json": "1663966c9ca867240c64b180b003b03d2d4ff1221ff5e4a2161c319745497578",
+    "selection.json": "15346e2013a59d568662da572a06504e4ad63df780484ee1441e16075f335e05",
+    "delay_exclusions.csv": "c0767d65dabe4f3161544cb1ae9780f7e7692af31cec864ef339cf619936bab5",
+    "folds.csv": "9b911609bbdc1ac3a8aadd7f9cf01b370d3a7d2286fd74cedb5dc5548c3942e6",
+    "publication_delay_sensitivity.json": "e6996bc757b6d39600fb4628f865504f15b3f3edcf07af168d43f6615c43d893",
+    "fold_boundary_exclusions.csv": "f5933e8e3e514188d469e7557de9ab7e0cbbdfeba52e6e05ba3014d1f851e2ad",
+    "forecast_replay.json": "1fe45e1dd9baa6ee451cb49d60af9982993633bda94746f84e6a265734115f41"
+  },
+  "outputs": {
+    "state_quarter_scores.csv": "2d132d5b170635bac0b552528c38d846c4038138512db79df3d8c2508e443dda",
+    "REPORT.md": "f05e63d5d4347fcb8cde3117df4f60ad21f7a13a7de3bbae8c43ec19de7d945a",
+    "staleness_scores.csv": "a0250f7559c50a8d533eb835111c1a2fad0be07629ea0559389eade0fd2cc683",
+    "scores.csv": "eeef6a363d6f9391e1fa9dc2406b8d3f3c3432914e07e59c91ed1bf8c807bda6",
+    "paired_contrasts.csv": "a7efee896c65a65330eeb73df5c91815986a3d809882b96b90bc6a2ee016b0fe",
+    "lead_time.png": "07f18ab8f43800ee1e94187fc3f3da5bc0947470fc4c019de7d07c20fe10766e",
+    "forecast_artifact_manifest.json": "156bd9a376eb5506b61d7056d110e89aab30784ad02458c704cedc131009cfe1",
+    "proxy_label_scores.csv": "d22a59351929a8208237d7bf509644f27f71868e80ceb2061821e0ba8a6611af"
+  }
+}

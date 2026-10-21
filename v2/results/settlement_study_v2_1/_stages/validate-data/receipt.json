@@ -1,0 +1,12 @@
+{
+  "stage": "validate-data",
+  "identity_sha256": "b1b732e2e48f935bafb2fa11902ba5be0c1938c37e166e867035411967a3bacc",
+  "inputs": {},
+  "outputs": {
+    "ticker_exclusions.csv": "68f9ff14c4bc65eb92e2eb321691cb049378c0c1b146caf68df3a3cc20d81629",
+    "panel.csv.gz": "ad1f3e6fdb66461f09c345aa619ad7c269239bd278e6dc801ba28c67c68ec04d",
+    "manifest.json": "024eae03dd7bbddaaa94fc0cb3b59fa58d5ffa11e08421a9d96f44520d76f3b7",
+    "coverage.json": "2c099febcf01f75d8854a598d35be8939c70e02c79e9e5182e92db3cb86287ee",
+    "origin_exclusions.csv": "7e4731f0abc4562da635dd873e1e667b9380f0011fc277bab436192adfa004c2"
+  }
+}

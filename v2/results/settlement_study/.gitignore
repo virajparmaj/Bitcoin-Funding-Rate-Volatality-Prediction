@@ -1,0 +1,5 @@
+# Provider-derived row-level artifacts remain local pending redistribution review.
+panel.csv.gz
+predictions.csv.gz
+baseline_predictions.csv.gz
+*.log

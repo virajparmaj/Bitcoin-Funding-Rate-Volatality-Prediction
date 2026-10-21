@@ -1,0 +1,13 @@
+{
+  "protocol": "paper-supplement-2026-10-01-v1",
+  "parent": "v2/results/settlement_study_v2_1",
+  "output": "v2/paper_package/2026-10-01/run",
+  "window_months": [12, 24],
+  "additional_rf_seeds": [7, 2026],
+  "calibration_baselines": ["residual_mean", "residual_median"],
+  "tail_training_quantile": 0.99,
+  "bootstrap_draws": 5000,
+  "bootstrap_seed": 42,
+  "block_days": 7,
+  "interpretation": "Post-result sensitivity; frozen original hyperparameters; no selection among these runs; original primary result unchanged"
+}

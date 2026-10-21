@@ -1,0 +1,59 @@
+{
+  "protocol_version": "2026-10-01-v2.1",
+  "ticker_path": "data/normalized_datasets/binance_btc_perp.csv",
+  "labels_dir": "v2/data/raw/funding_labels",
+  "output_dir": "v2/results/settlement_study_v2_1",
+  "archive_start": "2020-01",
+  "archive_end": "2024-10",
+  "horizons": [
+    1,
+    2,
+    4,
+    6
+  ],
+  "max_age_minutes": 65,
+  "label_delay_minutes": 5,
+  "label_match_tolerance_seconds": 1,
+  "validation_start": "2022-01-01T00:00:00Z",
+  "test_start": "2023-01-01T00:00:00Z",
+  "test_end": "2024-10-18T00:00:00Z",
+  "ridge_alphas": [
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "rf_depths": [
+    3,
+    6,
+    null
+  ],
+  "rf_min_leaves": [
+    5,
+    20
+  ],
+  "rf_trees": 300,
+  "rf_jobs": 4,
+  "ewma_spans": [
+    3,
+    9,
+    21
+  ],
+  "seed": 42,
+  "bootstrap_draws": 5000,
+  "block_days": [
+    3,
+    7,
+    14
+  ],
+  "primary_horizon": 4,
+  "practical_gain_bp": 0.05,
+  "flat_tolerance": 1e-10,
+  "feature_groups": [
+    "indication",
+    "history",
+    "full"
+  ],
+  "availability_delay_minutes": 60,
+  "minimum_training_events": 100
+}

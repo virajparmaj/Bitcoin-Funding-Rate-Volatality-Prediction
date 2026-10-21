@@ -1,0 +1,17 @@
+{
+  "stage": "baselines",
+  "identity_sha256": "b1b732e2e48f935bafb2fa11902ba5be0c1938c37e166e867035411967a3bacc",
+  "inputs": {
+    "ticker_exclusions.csv": "68f9ff14c4bc65eb92e2eb321691cb049378c0c1b146caf68df3a3cc20d81629",
+    "panel.csv.gz": "ad1f3e6fdb66461f09c345aa619ad7c269239bd278e6dc801ba28c67c68ec04d",
+    "manifest.json": "024eae03dd7bbddaaa94fc0cb3b59fa58d5ffa11e08421a9d96f44520d76f3b7",
+    "coverage.json": "2c099febcf01f75d8854a598d35be8939c70e02c79e9e5182e92db3cb86287ee",
+    "origin_exclusions.csv": "7e4731f0abc4562da635dd873e1e667b9380f0011fc277bab436192adfa004c2"
+  },
+  "outputs": {
+    "baseline_predictions.csv.gz": "c9d88da1cd4010c04d7ec40e71a2895cce6c389897673dd8754adbf6f08e5662",
+    "baseline_selection.json": "e669c7b20e55690ae3fb2a0413ad085b5ec258c71f77360f7646ce799f0b16dd",
+    "baseline_folds.csv": "75e3a70b57640e8addc617e73751fd7c86c3f0b2fbd0ea34dc61180f860e59d7",
+    "baseline_validation_candidates.json": "f47d84749446f4d3ad9f31128685aeb159afe0de57c4fe716f3b6c55ee2a0ca8"
+  }
+}

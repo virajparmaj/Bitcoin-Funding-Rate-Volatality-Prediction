@@ -1,0 +1,389 @@
+{
+  "created_at": "2026-09-30T17:16:46.985305+00:00",
+  "config_sha256": "3abb07a4244ef0b5dabd05574eb39edd639470a43873a1a05f11c1ddf898c49c",
+  "protocol": {
+    "protocol_version": "2026-09-30-v1",
+    "ticker_path": "data/normalized_datasets/binance_btc_perp.csv",
+    "labels_dir": "v2/data/raw/funding_labels",
+    "output_dir": "v2/results/settlement_study",
+    "archive_start": "2020-01",
+    "archive_end": "2024-10",
+    "horizons": [
+      1,
+      2,
+      4,
+      6
+    ],
+    "max_age_minutes": 65,
+    "label_delay_minutes": 5,
+    "label_match_tolerance_seconds": 1,
+    "validation_start": "2022-01-01T00:00:00Z",
+    "test_start": "2023-01-01T00:00:00Z",
+    "test_end": "2024-10-18T00:00:00Z",
+    "ridge_alphas": [
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "rf_depths": [
+      3,
+      6,
+      null
+    ],
+    "rf_min_leaves": [
+      5,
+      20
+    ],
+    "rf_trees": 300,
+    "rf_jobs": 4,
+    "ewma_spans": [
+      3,
+      9,
+      21
+    ],
+    "seed": 42,
+    "bootstrap_draws": 5000,
+    "block_days": [
+      3,
+      7,
+      14
+    ],
+    "primary_horizon": 4,
+    "practical_gain_bp": 0.05,
+    "flat_tolerance": 1e-10,
+    "feature_groups": [
+      "indication",
+      "history",
+      "full"
+    ],
+    "availability_delay_minutes": 60,
+    "minimum_training_events": 100
+  },
+  "archives": [
+    {
+      "file": "BTCUSDT-fundingRate-2020-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-01.zip",
+      "sha256": "7f81b2f3694d13779e7e896b69d60cd61e9444d7b9f9e90df761935e1c1b76e2"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-02.zip",
+      "sha256": "6599466d108d120c64a078824326c063ed2d4335b3292e52c5e572f79166533a"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-03.zip",
+      "sha256": "eee845fde6336e29d25889563cba3d2cff2d4d640e51fb1f82ae9b28cedaee77"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-04.zip",
+      "sha256": "d009ce034d08c3dcf3e7f874b0f8b0ec76ba507bc6bb4e007e541df537bafbce"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-05.zip",
+      "sha256": "3f2b56dd6b9a42457009bb367d0adadd3cf7e2216cd325172d0089e3883125a8"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-06.zip",
+      "sha256": "30b3470ff98576578973d75e3c157a5cbf1778b11e4c26b4b4ff70a3cbb348ec"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-07.zip",
+      "sha256": "18dae7b11075fc0fba79ad47df46683415cba5d027caa69c66bc2a5c9d9b459a"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-08.zip",
+      "sha256": "e6f6d1749f674c85d4766e0eb36af6ea40d91a0674234d30df80eb9876b094e3"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-09.zip",
+      "sha256": "7ae9a3b6afb2dc06e46080582908ec8c27063b707a14c7f1e679dc991ff48032"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-10.zip",
+      "sha256": "4c55b191c101f39c7fb193a6529665dd9e83302ca21876521e4c93b3902e9fb1"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-11.zip",
+      "sha256": "676356a2d075caa51b4f8ada026e9430dc320ffd23d2343b13b7aa25324ed6d1"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2020-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-12.zip",
+      "sha256": "d7390f90edf54cc4ad9bbe78e2f6b291ae06ad9539f591a2d0fce445873bbd63"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-01.zip",
+      "sha256": "cff916dc4b638ec3de97828e8911cd91cf7d7a3d0836ec0175869c374e66823d"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-02.zip",
+      "sha256": "819a7b107443686adb313fc5fc223302a29f3981e1d1bd9828ad0ade65a8a8af"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-03.zip",
+      "sha256": "2125fd300848938c7b992b8f7b7b5007d5b277a4ff1ebda7da083b40242729da"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-04.zip",
+      "sha256": "9cd888e3b0a1954813d0062c2e60426fdc8e34a7f258f6838371ec67f535b028"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-05.zip",
+      "sha256": "ed934afb9cf84df6ecae742e755147333a84244836a66b51523abc66dd5f63af"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-06.zip",
+      "sha256": "7b8d9bfb8816636b800764dafb2aa2307d19166c695bfa245adbf7d01d61f766"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-07.zip",
+      "sha256": "8ab3df641d3bcf40527491f8e26d046ad2b662d1950ead9555ad32975571b7fe"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-08.zip",
+      "sha256": "7eb681cc45b94176f4b9192a62c3a1925d79031ba001cea2d8dec6ff6e5b9c35"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-09.zip",
+      "sha256": "03f25a7c25eef18d5f5b5b7bb0b664cab7a210b409f37e95a54e141808a0752d"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-10.zip",
+      "sha256": "f25820d6add687addbca3ef43bee58f70853a6da53832a0c1bc22d00dc8ec64a"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-11.zip",
+      "sha256": "e2e6b2d7218607e7e4a38137d50f553c2cfb901275c19edf567024c1cc6de85f"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2021-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2021-12.zip",
+      "sha256": "bf3ce484faf41d7dccfd38c5cc3d8de34d8297df30ab10784e874cc10fd1b310"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-01.zip",
+      "sha256": "22ee19079b620f5c6d820e7d7f8bafa7fde866d89bd664863b8bd527749c12cb"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-02.zip",
+      "sha256": "fa95088258a905c79ab79e8984d2f6f66933ec2e814dbab4ef9da89b01ab484a"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-03.zip",
+      "sha256": "4cf0883bc07f4ed4cdd3b0d8c0d166b4d15d21e666ab752f9f44401af4d6172f"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-04.zip",
+      "sha256": "57e2776cc68b3169fc9f8632dad67278f470cd453407a8ebe6c87963c8a31357"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-05.zip",
+      "sha256": "bced8a5013d09742b96682e6fd01ad4456213515a03d7586ec2b1f2689af5255"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-06.zip",
+      "sha256": "0cd0708f8903829eb46f98cf60f4b2516c986e1ccddf6620a5912b48e16baf93"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-07.zip",
+      "sha256": "29d58cce0cd45f74c6a112039835c6d9ee5a7e60e7c38c2503beb7930453a4fe"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-08.zip",
+      "sha256": "6f4f0c6c84c05694b4b4a5c085776730fd4059723eecd98ee6ffeb3fde4da811"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-09.zip",
+      "sha256": "d62cd4e13009de37add446dc4f63ead4c56dcc4955a1e60f6726bcadc5a68fa9"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-10.zip",
+      "sha256": "ad9efed10d4ca1567b865d7a158790977cec1b925395634217069df6696c8bc9"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-11.zip",
+      "sha256": "8febe5bec1a029e993bbf27490761f8c47c32849bf7dd13441b2b2f6ec1ffb51"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2022-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2022-12.zip",
+      "sha256": "4218c78331bcc4dbeb5768fa112242a880971c1f2cfd1d3f32aaa26ca34069af"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-01.zip",
+      "sha256": "05e3df32f28d0d50f4c5a280adee9368b4a66fc68c6ddca1b3277087ac0d19f5"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-02.zip",
+      "sha256": "5227accd9aaa59f71f5e682abffb58be5f99573ed208ab968b1704c81ac11345"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-03.zip",
+      "sha256": "ab022adff9b853d2f33cf80154e77c770f57c3392f0bbc36564b2e2cdbd0e872"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-04.zip",
+      "sha256": "2931039d26818edc65d4faefba84945fd1ba52989dd58fb127dc3cd7a12c7fbf"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-05.zip",
+      "sha256": "5d026fece46df86293054c8c56c2c8de575d30161b82979b11831831217a246e"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-06.zip",
+      "sha256": "3ffdde6f1dc9c3c065d77ae43f3ba64d19d4cb76512d4bc1d541933d4fb2e6f7"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-07.zip",
+      "sha256": "0304baed9fd407293a8a8040b30a1b68bd344803b630d33530375b421733a930"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-08.zip",
+      "sha256": "516a8f50631c6ede6a9642f6d1590b6a22c33ba09935501d2ace8dc1396501fd"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-09.zip",
+      "sha256": "3fd9df6fd1eef33cf5fe625c27012359bc6d64a68c109305d7b44a0354f533c2"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-10.zip",
+      "sha256": "03105cc140150bffca834bcccbddc6cfee245e079d2df1759653243bd6e92448"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-11.zip",
+      "sha256": "8015d2997f8d5e757ff3707ee87800ca30a74da0129daa747b64117f07bcc186"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2023-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2023-12.zip",
+      "sha256": "8f02fdd2a2da261bbf13ab301c74bdb57fae005f19d5088e9ece5f8824c1a2a7"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-01.zip",
+      "sha256": "3e0d30870672aa8f0f937881056e3cfd55913ae5c780cd50b33f2763aa0ba58e"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-02.zip",
+      "sha256": "daf1e4901e3d6436d82ad60f90d007eb5300be8047cfef121007203a7212cde6"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-03.zip",
+      "sha256": "711dcaf2a341aedfd06447b4117b540f60adb0784c5e64a313c718e4cf092bc3"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-04.zip",
+      "sha256": "6d220b8e2815362a11d294d35dbca28568370d8295351937eceec10f2b359b85"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-05.zip",
+      "sha256": "aef8c5fdce1493fd570b5829a72f2f17c7e459483390f25544d16c2a30be592e"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-06.zip",
+      "sha256": "43fc4473820d1fb4fe340d1b1951a87555f6841aa352e684fa95d6adffce04c6"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-07.zip",
+      "sha256": "acab0593c1452660ce74a6c239fb215c1192b0a9c6e8c1689e6495de40a0174b"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-08.zip",
+      "sha256": "7003d29a43dd5f9357f838da8766834954939e22c1d80af682d9f33984f67b71"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-09.zip",
+      "sha256": "6ef23b02392b481ef9c3855434bf3644289fb6e228b4f7d9a0dfc6d3cdff1116"
+    },
+    {
+      "file": "BTCUSDT-fundingRate-2024-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-10.zip",
+      "sha256": "26db65ac8020d80ece35df79c254c5f7e24427529bcceeb2972748c4fe2d2707"
+    }
+  ],
+  "ticker_sha256": "2486ff66f13f6867b3f38490cf148c0096d9164d765ba60d7b906c43b4ca2d24",
+  "code_sha256": {
+    "v2/experiments/__init__.py": "7b5fde0aa64a4085de3bbaee8d4f1aa9149d0da94491a6c7c3b83e0684d5213a",
+    "v2/experiments/run_study.py": "ebae550cff3437bf2ca9769b8308503789989b524e1f8939cd070b95310e10eb",
+    "v2/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "v2/src/audit.py": "09c6a2acb2ca35db7d1ad43416461d74b5598e8dd7f59148323825e06ccca80b",
+    "v2/src/baselines.py": "5f7f1ec46a32df12ed7c41f0a7a675b4be742b94188322f8f786043bc5d621aa",
+    "v2/src/config.py": "47f97439ec39102afebd44ae83dfaf7817bf96eb2483cf78d9c447e780e240da",
+    "v2/src/evaluation.py": "0b775630c9eea7979727d927ca0b8cc6d8b85e706b470ffafcaf705816cd0196",
+    "v2/src/features.py": "c67307487ace956cb6237efaf1329877642d1aed100152421b055517b5f709ed",
+    "v2/src/forecast_models.py": "fc1866ea6d276ea921d76a41bbd72b23721aa49b3c9ff9d54c5d8ce9e8ef519c",
+    "v2/src/funding_labels.py": "d4f1ff5bc59b866c06e1d2b47d5118eadd30292cccf756825c5a0e5f6821cb59",
+    "v2/src/legacy.py": "ca3a9aba18f5a1b7c445ae319b3cee0eb6f5be6d620c1845e9b145199de35038",
+    "v2/src/metrics.py": "ef4105cd4c9b69d4e45eb5c7196f07aa5f433d5f24e365cf237a69959db90410",
+    "v2/src/settlement.py": "864a90a43b903f683c5d01640bc2b75ec9722427b32007ea34b6064dd274de3c",
+    "v2/src/splits.py": "f7e83965fdbc1d76be27b1d7105ccf4509fe37c8e0805e62b410329e041fa150",
+    "v2/src/timebase.py": "cbf94e769fd0e9b71df378a95c2b2b938b76b5f474581fdaa73b63c683b0dc9e",
+    "v2/src/validate.py": "89876d72113b5a2a25df27e9feabb74477d53371acc90ceb9ee90aacbed10e64"
+  },
+  "git_commit": "1d65717de43ee0cd9fc8954ac983429e70fe220c",
+  "python": "3.11.14",
+  "packages": {
+    "numpy": "2.1.2",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "scipy": "1.14.1",
+    "statsmodels": "0.14.4"
+  },
+  "limitations": [
+    "Retrospective, previously inspected historical sample",
+    "Row-level arrival proxy; original field-level aggregation unverified",
+    "Settlement publication delay is an assumption",
+    "One venue/contract; no profitability claim"
+  ]
+}

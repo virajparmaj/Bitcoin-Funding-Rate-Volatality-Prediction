@@ -1,0 +1,12 @@
+{
+  "ticker_rows": 42047,
+  "rejected_ticker_rows": 132,
+  "raw_event_ids": 5256,
+  "archive_labels": 5298,
+  "admitted_events": 5248,
+  "origin_rows": 20992,
+  "origin_exclusions": 32,
+  "archives": 58,
+  "label_offset_max_seconds": 0.047,
+  "terminal_proxy_mae_bp": 0.015382317073170738
+}

@@ -7,31 +7,36 @@
     "inputHashes": {
       "README.md": "588d667b5ccaf8585adde5f2d38893fc611036afa91c3bc152b0db8eb9e5fdc4",
       "config.py": "aa15bf421b07ea46c09232880997674736e7564195c5c07b085a5f0639678020",
+      "demo/docs/historical-claims.md": "0c319ba51442b49344388a5b9e08a274cecd274e70e4fe812816c494e91369a1",
       "dgieser3/research.ipynb": "0bf9e863132285f06606a18fb0ed84b23c06be729ef9ac94b485616fdf9fd1e4",
       "models/model1.py": "870c2dc963e74a67dd14199bcea5556c4513b399bf25a42c528f21435e370315",
-      "notebooks/model_development.ipynb": "e794cac0cc0e74d1b57f2ecc2faee26e04d3dc81d03e4607030262349bc30c0f",
-      "notebooks/stat429_analysis_a.ipynb": "c715063f9ec07feb175de788ce08449a77b41238310b1496039e97f4214ad6c2",
-      "notes/05_feature_engineering.md": "8584745fb4ab497b45c337227a8a8e8190534510362da03887a956cc554793e1",
-      "notes/06_ml_models.md": "c5b8c406e0c038507cb53cf9a2ffe26cd96dfbc1d92c22ffcd17ce6eea09f8f4",
-      "notes/09_results_and_metrics.md": "8c61265bfde8acc157e24a9c8f7420752d1a81ab5548690191eaae2bb9fa791b",
+      "notebooks/model_development.ipynb": "b4469f363c9d90f452adc57c533d53a53ae08e376daf02913068f6132b9293f9",
+      "notebooks/stat429_analysis_a.ipynb": "362cf2410d331ef485d97ce960b9e3eea5b5bcfbeb4d8f3d600c7bc1e95db174",
       "results/predictions_RFR.csv": "216696f62a409cdf273290d771ee19e536ccef0288880328626216e5d991fe1e",
       "results/predictions_SARIMAX.csv": "e6faa976569196ca44f22aa5aa6d475ac86d5186a73dcf747e848c509f35b2a6",
       "utilities/data_import.py": "5dd50ffc71e11373b657bd3b200dd9aeee12fb0ee6cdcdb24ec84c68337764ab",
       "utilities/data_processing.py": "5e89a13ae425565bfa602569ab8b01fb5a37e7b513b03c867b8929da40216957",
       "utilities/functions.py": "8c1eee3e8cd89acbd6e18e1b76a06ff0a902511950afe6855b265c52224200fe",
       "utilities/model_utils.py": "5180f4f8b484e31b56230e889aaa5a84c48c9997a5415edbd581683e9e4ff41c",
-      "v2/README.md": "583537166cd6e38e5857908fcb6713fa99041f7fd108864ee7d825669ed84ade",
-      "v2/notebooks/00_audit_v1.ipynb": "a70e6fc472b7e57acbcd9528043686f5cf7b2b13cd91c1ebadd189ea49ab9e2e",
-      "v2/paper_plan/02_verified_findings.md": "520355091e4f19b5699eeaf840f81bd35f3063816044f1d5c1f391fd37568266",
-      "v2/paper_plan/05_data_contract_and_feasibility.md": "31d45e91335152d08ec611ba3edcbadb81fba4f3fad8413dc06d86f45248ca42",
-      "v2/paper_plan/07_implementation_plan.md": "5d7f8118a221f8bb8a1d7b2bc9b33dd1e9312e3ee05b50956c0ed737010b1d5d",
-      "v2/paper_plan/09_results_ledger.md": "81013710c23a94e7e4898fc01f604051fd500156b4e05a959f41504840e1ad0d",
-      "v2/paper_plan/13_execution_backlog.md": "9855a47f6ad6ff95f93ca7871160281fb5624c620e2c6154918f4b68116622be",
-      "v2/research/research_assessment.md": "178207488a9c0cf7f30a42d3fe7178feb7c0b804f2182ab7bd3839f024018be5",
+      "v2/docs/STUDY.md": "c51ad77f7d2f97402b6e66818aafdfab82c0f6a731781503839ad0f5b12c90fd",
+      "v2/notebooks/00_audit_v1.ipynb": "9079b8189e7672a7a3eeec5c989b8cd767e98433d13538b684faaf499801d7d8",
       "v2/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "v2/src/audit.py": "09c6a2acb2ca35db7d1ad43416461d74b5598e8dd7f59148323825e06ccca80b",
+      "v2/src/baselines.py": "5f7f1ec46a32df12ed7c41f0a7a675b4be742b94188322f8f786043bc5d621aa",
       "v2/src/config.py": "47f97439ec39102afebd44ae83dfaf7817bf96eb2483cf78d9c447e780e240da",
-      "v2/src/legacy.py": "ca3a9aba18f5a1b7c445ae319b3cee0eb6f5be6d620c1845e9b145199de35038"
+      "v2/src/evaluation.py": "511c5680bc7d8c8a4ad05c0a4737399338d878782c931b997f82604b1a00da82",
+      "v2/src/features.py": "c67307487ace956cb6237efaf1329877642d1aed100152421b055517b5f709ed",
+      "v2/src/forecast_models.py": "fc1866ea6d276ea921d76a41bbd72b23721aa49b3c9ff9d54c5d8ce9e8ef519c",
+      "v2/src/funding_labels.py": "5d8fd8fa951a5694100777d430ce21d94d2ef3fff20d27d7a07b37976afda584",
+      "v2/src/legacy.py": "ca3a9aba18f5a1b7c445ae319b3cee0eb6f5be6d620c1845e9b145199de35038",
+      "v2/src/metrics.py": "ef4105cd4c9b69d4e45eb5c7196f07aa5f433d5f24e365cf237a69959db90410",
+      "v2/src/provenance.py": "95737caa672edd6fdcb208d38f38780a09731fe2cfceedc382a990ff480928c2",
+      "v2/src/reporting.py": "a47c60a735334f9f1b1840555552ecf91a6e8bc8e6712eaf88649c6a5cc903b9",
+      "v2/src/settlement.py": "864a90a43b903f683c5d01640bc2b75ec9722427b32007ea34b6064dd274de3c",
+      "v2/src/splits.py": "f7e83965fdbc1d76be27b1d7105ccf4509fe37c8e0805e62b410329e041fa150",
+      "v2/src/study_store.py": "f06e4b24c08a5932ddb51cf113e6c9fb13d6611f44cd8c713919fb810bad075a",
+      "v2/src/timebase.py": "cbf94e769fd0e9b71df378a95c2b2b938b76b5f474581fdaa73b63c683b0dc9e",
+      "v2/src/validate.py": "89876d72113b5a2a25df27e9feabb74477d53371acc90ceb9ee90aacbed10e64"
     }
   },
   "tasks": [
@@ -1249,7 +1254,7 @@
     {
       "id": "reproducibility",
       "title": "Saved artifacts need separate interpretation",
-      "text": "Notebook outputs, current helper interfaces and narrative results disagree. The later audit adds useful saved-result checks, while settlement forecasting and clean walk-forward model comparisons remain planned.",
+      "text": "Notebook outputs, current helper interfaces and narrative results disagree. The later audit adds useful saved-result checks, and the separate settlement study now provides completed monthly evaluations. These charts retain the original next-row evidence.",
       "status": "Current repository inspection",
       "sourceIds": [
         "pipeline-stored-error",
@@ -1356,43 +1361,20 @@
   ],
   "plans": [
     {
-      "id": "settlement-labels",
-      "title": "Validate settlement labels",
+      "id": "external",
+      "title": "Replicate on fresh data",
       "status": "Planned",
-      "text": "Build complete official settlement-label coverage, event reconciliation and an availability-aware origin panel. Existing archive samples are feasibility checks, not completed full-period forecasts.",
+      "text": "Freeze the protocol before collecting a later-time or external-venue sample. Same-machine reproduction does not establish external validity.",
       "sourceIds": [
-        "v2-feasibility",
-        "v2-planned-modules",
-        "v2-pending-results"
-      ]
-    },
-    {
-      "id": "lead-time",
-      "title": "Forecast at defined lead times",
-      "status": "Planned",
-      "text": "Compare current indications, settled-history baselines and residual ridge/RF models at fixed lead times on matched events.",
-      "sourceIds": [
-        "v2-planned-modules",
-        "v2-pending-results"
-      ]
-    },
-    {
-      "id": "walk-forward",
-      "title": "Use chronological evaluation",
-      "status": "Planned",
-      "text": "Implement expanding monthly splits, causal feature availability, validation-only selection and controlled delay/feature ablations.",
-      "sourceIds": [
-        "v2-planned-modules",
-        "v2-pending-results"
+        "v2-backlog"
       ]
     },
     {
       "id": "uncertainty",
-      "title": "Measure uncertainty and robustness",
+      "title": "Extend robustness checks",
       "status": "Planned",
-      "text": "Add paired gain intervals, dependence-aware testing, tail/window/seed sensitivity and untouched-time or external validation.",
+      "text": "Add the remaining tail/window/seed sensitivities and verify the closest forecasting paper before claiming a distinct research contribution.",
       "sourceIds": [
-        "v2-pending-results",
         "v2-backlog"
       ]
     },
@@ -1400,27 +1382,13 @@
       "id": "economics",
       "title": "Evaluate a defined trading policy",
       "status": "Planned",
-      "text": "Only after forecasting validation, test a specified policy with actual cash flows, execution assumptions, turnover and costs. No economic result is claimed here.",
+      "text": "Test a specified policy with actual cash flows, execution assumptions, turnover and costs. No economic result is claimed by the current forecast study.",
       "sourceIds": [
-        "v2-backlog",
-        "v2-readme-status"
+        "v2-backlog"
       ]
     }
   ],
   "corrections": [
-    {
-      "id": "notes-present",
-      "title": "The project notes are present",
-      "staleClaim": "The newer research assessment and copied verified-findings document describe notes/ as absent.",
-      "correction": "notes/05_feature_engineering.md, notes/06_ml_models.md and notes/09_results_and_metrics.md exist in this checkout and were read. Their narrative claims still require artifact-level verification.",
-      "sourceIds": [
-        "assessment-stale-context",
-        "paper-stale-context",
-        "notes-features",
-        "notes-models",
-        "notes-classification"
-      ]
-    },
     {
       "id": "identity",
       "title": "Current-rate reconstruction is a baseline",
@@ -1459,9 +1427,9 @@
     },
     {
       "id": "v2-implementation",
-      "title": "The corrected study remains a plan",
-      "staleClaim": "Some v2 README prose describes baseline, validation and walk-forward modules in the present tense.",
-      "correction": "The actual Python sources are __init__.py, config.py, legacy.py and audit.py. The paper-plan results ledger marks new experiments pending. Preliminary data-feasibility files do not change that status.",
+      "title": "The settlement study is implemented",
+      "staleClaim": "Earlier planning material marked settlement experiments as pending.",
+      "correction": "The repository now includes completed event-aligned monthly forecasts, generated results and a reproducibility check. The demo keeps its original saved next-row charts separate from those settlement results.",
       "sourceIds": [
         "v2-source-inventory",
         "v2-readme-status",
@@ -1592,7 +1560,7 @@
       "id": "analysis-arima-warning",
       "path": "notebooks/stat429_analysis_a.ipynb",
       "locator": "JSON cell 32, output 0, execution_count=13",
-      "excerpt": "c:\\Users\\dpgie\\OneDrive\\Documents\\Illinois\\Semester 5\\STAT 429\\stat429_env\\lib\\site-packages\\statsmodels\\base\\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals\n  warnings.warn(\"Maximum Likelihood optimization failed to \"\n",
+      "excerpt": "<environment>/site-packages\\statsmodels\\base\\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals\n  warnings.warn(\"Maximum Likelihood optimization failed to \"\n",
       "evidenceType": "Stored execution output"
     },
     {
@@ -1786,101 +1754,87 @@
     },
     {
       "id": "notes-classification",
-      "path": "notes/09_results_and_metrics.md",
-      "locator": "lines 46–56",
-      "excerpt": "## Model 1 Direction Prediction\nConfirmed from report:\n| Model | Accuracy | F1 | ROC AUC | Interpretation |\n|---|---:|---:|---:|---|\n| Logistic Regression | 0.8026 | 0.6589 | N/A | Fast, interpretable baseline |\n| Random Forest initial | 0.7599 | 0.5459 | 0.835 | Nonlinear but needed tuning |\n| Random Forest tuned | 0.7738 | 0.7142 | 0.8718 | Best directional model by F1/ROC AUC |\n\nNote:\n- Notebook summary also says tuned RF accuracy `78.75%`; report table says `0.7738`. Treat as minor metric discrepancy needing verification.\n",
+      "path": "demo/docs/historical-claims.md",
+      "locator": "lines 11–25",
+      "excerpt": "## notes-classification\n\nOriginal source: `notes/09_results_and_metrics.md`, lines 46–56.\n\n> ## Model 1 Direction Prediction\n> Confirmed from report:\n> | Model | Accuracy | F1 | ROC AUC | Interpretation |\n> |---|---:|---:|---:|---|\n> | Logistic Regression | 0.8026 | 0.6589 | N/A | Fast, interpretable baseline |\n> | Random Forest initial | 0.7599 | 0.5459 | 0.835 | Nonlinear but needed tuning |\n> | Random Forest tuned | 0.7738 | 0.7142 | 0.8718 | Best directional model by F1/ROC AUC |\n>\n> Note:\n> - Notebook summary also says tuned RF accuracy `78.75%`; report table says `0.7738`. Treat as minor metric discrepancy needing verification.\n",
       "evidenceType": "Reported in project notes"
     },
     {
       "id": "notes-analysis",
-      "path": "notes/09_results_and_metrics.md",
-      "locator": "lines 35–45",
-      "excerpt": "## Analysis A Baselines\nConfirmed from report:\n| Model | R2 | MSE | Note |\n|---|---:|---:|---|\n| Linear Regression 1 | 0.132 | 5.36e-08 | Weak linear baseline |\n| Linear Regression 2 | 0.284 | 4.42e-08 | Better with volatility/std feature |\n| Random Forest | 0.936 | 9.34e-09 | Best Analysis A model in report |\n\nConfirmed from notebook PDF:\n- Random Forest R2 about `0.936258`.\n",
+      "path": "demo/docs/historical-claims.md",
+      "locator": "lines 26–40",
+      "excerpt": "## notes-analysis\n\nOriginal source: `notes/09_results_and_metrics.md`, lines 35–45.\n\n> ## Analysis A Baselines\n> Confirmed from report:\n> | Model | R2 | MSE | Note |\n> |---|---:|---:|---|\n> | Linear Regression 1 | 0.132 | 5.36e-08 | Weak linear baseline |\n> | Linear Regression 2 | 0.284 | 4.42e-08 | Better with volatility/std feature |\n> | Random Forest | 0.936 | 9.34e-09 | Best Analysis A model in report |\n>\n> Confirmed from notebook PDF:\n> - Random Forest R2 about `0.936258`.\n",
       "evidenceType": "Reported in project notes"
     },
     {
       "id": "notes-garch",
-      "path": "notes/09_results_and_metrics.md",
-      "locator": "lines 57–69",
-      "excerpt": "## Model 2 Volatility Prediction\nConfirmed from report:\n- Best model: `GJR-GARCH(1,1) AR(2)`.\n- Log-likelihood about `366385`.\n- AIC about `-732756`.\n- BIC about `-732696`.\n- More exact text: AIC `-732755.679`, BIC `-732695.682`.\n\nInterpretation:\n- Captures volatility clustering.\n- AR(2) terms align with PACF evidence around lags 1 and 2.\n- Forecasted variance rose over the next five steps, indicating increasing short-term uncertainty.\n",
+      "path": "demo/docs/historical-claims.md",
+      "locator": "lines 41–57",
+      "excerpt": "## notes-garch\n\nOriginal source: `notes/09_results_and_metrics.md`, lines 57–69.\n\n> ## Model 2 Volatility Prediction\n> Confirmed from report:\n> - Best model: `GJR-GARCH(1,1) AR(2)`.\n> - Log-likelihood about `366385`.\n> - AIC about `-732756`.\n> - BIC about `-732696`.\n> - More exact text: AIC `-732755.679`, BIC `-732695.682`.\n>\n> Interpretation:\n> - Captures volatility clustering.\n> - AR(2) terms align with PACF evidence around lags 1 and 2.\n> - Forecasted variance rose over the next five steps, indicating increasing short-term uncertainty.\n",
       "evidenceType": "Reported in project notes"
     },
     {
       "id": "notes-regression",
-      "path": "notes/09_results_and_metrics.md",
-      "locator": "lines 70–82",
-      "excerpt": "## Model 3 Exact Funding Rate\nConfirmed from report table:\n| Model 3 approach | R2 | MSE | Note |\n|---|---:|---:|---|\n| Random Forest Regressor | 0.96 | 0.0000023 | Strong ML baseline |\n| SARIMAX with exogenous variables | 0.925 | 0.0000112 | Integrates direction and volatility |\n\nNeeds verification:\n- Report narrative also mentions R2 up to about `97.5%`.\n- Current `predictions_RFR.csv` recomputes near R2 `0.975`.\n- Current `predictions_SARIMAX.csv` appears scale-mismatched and does not match report metrics.\n- Interview-safe answer: \"The reported Model 3 performance was strong, but I would rerun the full pipeline from a clean environment before claiming the final SARIMAX metric.\"\n",
+      "path": "demo/docs/historical-claims.md",
+      "locator": "lines 58–73",
+      "excerpt": "## notes-regression\n\nOriginal source: `notes/09_results_and_metrics.md`, lines 70–82.\n\n> ## Model 3 Exact Funding Rate\n> Confirmed from report table:\n> | Model 3 approach | R2 | MSE | Note |\n> |---|---:|---:|---|\n> | Random Forest Regressor | 0.96 | 0.0000023 | Strong ML baseline |\n> | SARIMAX with exogenous variables | 0.925 | 0.0000112 | Integrates direction and volatility |\n>\n> Needs verification:\n> - Report narrative also mentions R2 up to about `97.5%`.\n> - Current `predictions_RFR.csv` recomputes near R2 `0.975`.\n> - Current `predictions_SARIMAX.csv` appears scale-mismatched and does not match report metrics.\n",
       "evidenceType": "Reported in project notes"
     },
     {
       "id": "notes-features",
-      "path": "notes/05_feature_engineering.md",
-      "locator": "lines 11–43",
-      "excerpt": "## Feature Families Used\nConfirmed from code and notebooks:\n- Lag features:\n  - `funding_rate_lag1`\n  - `funding_rate_lag2`\n  - `open_interest_lag1`\n  - `mark_price_lag1`\n- Rolling features:\n  - `funding_rate_ma3`\n  - `funding_rate_ma5`\n  - rolling standard deviation / volatility proxy\n- EMA features:\n  - `funding_rate_ema3`\n  - `funding_rate_ema5`\n- Rate-of-change features:\n  - `funding_rate_roc1`\n  - `funding_rate_roc3`\n  - `open_interest_roc`\n- Interaction terms:\n  - `interaction1 = funding_rate_lag1 * funding_rate_lag2`\n  - `interaction2 = funding_rate_ma3 / funding_rate_lag1`\n  - `interaction3 = mark_price_lag1 * funding_rate_ma3`\n- Time features:\n  - `hour`, `day`, `month`\n  - `hour_sin`, `hour_cos`, `day_sin`, `day_cos`, `month_sin`, `month_cos`\n\n## Why These Features Were Used\n- Lags capture short-term memory.\n- Moving averages and EMAs smooth noisy behavior.\n- ROC features capture momentum and direction of change.\n- Volatility features capture recent uncertainty.\n- Interactions capture nonlinear relationships that linear models may miss.\n- Cyclical time features avoid treating hour 23 and hour 0 as far apart.",
+      "path": "demo/docs/historical-claims.md",
+      "locator": "lines 74–111",
+      "excerpt": "## notes-features\n\nOriginal source: `notes/05_feature_engineering.md`, lines 11–43.\n\n> ## Feature Families Used\n> Confirmed from code and notebooks:\n> - Lag features:\n>   - `funding_rate_lag1`\n>   - `funding_rate_lag2`\n>   - `open_interest_lag1`\n>   - `mark_price_lag1`\n> - Rolling features:\n>   - `funding_rate_ma3`\n>   - `funding_rate_ma5`\n>   - rolling standard deviation / volatility proxy\n> - EMA features:\n>   - `funding_rate_ema3`\n>   - `funding_rate_ema5`\n> - Rate-of-change features:\n>   - `funding_rate_roc1`\n>   - `funding_rate_roc3`\n>   - `open_interest_roc`\n> - Interaction terms:\n>   - `interaction1 = funding_rate_lag1 * funding_rate_lag2`\n>   - `interaction2 = funding_rate_ma3 / funding_rate_lag1`\n>   - `interaction3 = mark_price_lag1 * funding_rate_ma3`\n> - Time features:\n>   - `hour`, `day`, `month`\n>   - `hour_sin`, `hour_cos`, `day_sin`, `day_cos`, `month_sin`, `month_cos`\n>\n> ## Why These Features Were Used\n> - Lags capture short-term memory.\n> - Moving averages and EMAs smooth noisy behavior.\n> - ROC features capture momentum and direction of change.\n> - Volatility features capture recent uncertainty.\n> - Interactions capture nonlinear relationships that linear models may miss.\n> - Cyclical time features avoid treating hour 23 and hour 0 as far apart.\n",
       "evidenceType": "Reported in project notes"
     },
     {
       "id": "notes-models",
-      "path": "notes/06_ml_models.md",
-      "locator": "lines 11–78",
-      "excerpt": "## Model 1: Direction Prediction\nGoal: predict whether the next funding rate moves up or down.\n\nModels:\n- Logistic Regression:\n  - Baseline classifier.\n  - Interpretable and fast.\n  - Assumes a mostly linear relationship between features and log-odds.\n  - Report result: accuracy about `0.8026`, F1 about `0.6589`; ROC AUC not reported in table.\n- Random Forest Classifier:\n  - Nonlinear classifier.\n  - Handles interactions and threshold effects.\n  - Report result: tuned RF F1 about `0.7142`, ROC AUC about `0.8718`; report text also notes F1 about `71.27%`.\n  - Chosen because F1/recall behavior was better for the imbalanced direction task.\n\nAvant analogy:\n- Default / no default.\n- Churn / no churn.\n- Direct mail response / no response.\n- Customer moves into higher-risk state / stable state.\n\n## Model 2: Volatility Prediction\nGoal: estimate uncertainty/risk intensity, not exact direction.\n\nModels:\n- GARCH(1,1): baseline volatility clustering.\n- EGARCH: asymmetric shock modeling.\n- GJR-GARCH: leverage/asymmetric volatility effects.\n- GJR-GARCH(1,1) AR(2): best report-backed model by AIC/BIC.\n\nReport-backed result:\n- Best model: `GJR-GARCH(1,1) AR(2)`.\n- AIC about `-732755.679`.\n- BIC about `-732695.682`.\n- Forecasted conditional variances increased over five steps, indicating rising uncertainty.\n\nAvant analogy:\n- Risk uncertainty around a segment.\n- Instability in repayment behavior.\n- Stress-period detection for portfolio monitoring.\n- Confidence around pricing/approval decisions.\n\n## Model 3: Exact Funding-Rate Prediction\nGoal: predict the next continuous funding-rate value.\n\nModels:\n- Random Forest Regressor:\n  - Strong nonlinear baseline.\n  - Report table: RFR R2 `0.96`, MSE `0.0000023`.\n  - Current `predictions_RFR.csv` recomputes near R2 `0.975`; needs verification against report scaling and split.\n- SARIMAX:\n  - Time-series regression with exogenous variables.\n  - Report table: SARIMAX R2 `0.925`, MSE `0.0000112`.\n  - Report narrative also mentions about `97.5%` R2 in some places.\n  - Current `predictions_SARIMAX.csv` appears scale-mismatched; needs verification.\n\nAvant analogy:\n- Expected loss amount.\n- Expected balance or utilization.\n- Expected repayment amount.\n- Expected revenue or campaign value.\n\n## Baseline Analysis A\n- Linear Regression 1:\n  - Report/notebook result: R2 about `0.132`, MSE about `5.36e-08`.\n- Linear Regression 2:\n  - Report/notebook result: R2 about `0.284`, MSE about `4.42e-08`.\n- Random Forest:",
-      "evidenceType": "Reported in project notes"
-    },
-    {
-      "id": "assessment-stale-context",
-      "path": "v2/research/research_assessment.md",
-      "locator": "lines 11–15",
-      "excerpt": "### Materials and verification scope\n\nReviewed all four notebooks, their stored text outputs, preprocessing and model utilities, ingestion code, v2 audit helpers/configuration/tests, README files, the normalized data, and the saved prediction CSVs. Saved pickle files were inventoried but not executed. The original report linked through Canvas is not locally present; its contents were not available. Claims attributed to absent `notes/` files in the existing audit cannot be independently verified from those files.\n\nThe locally supplied data contain **42,179 rows and 11 columns**, Binance BTCUSDT only. Nonmissing message-arrival timestamps span **2020-01-01 00:59:57 UTC through 2024-10-17 23:59:59 UTC**. There are **5,256 distinct upcoming funding-event timestamps**. These are event identifiers, not 5,256 independently verified settled rates. The dataset is an hourly-style reduction of derivative-ticker messages, not a transaction tape, order book, or authoritative settlement ledger.",
-      "evidenceType": "Reported in project notes"
-    },
-    {
-      "id": "paper-stale-context",
-      "path": "v2/paper_plan/02_verified_findings.md",
-      "locator": "lines 1–7",
-      "excerpt": "# Verified findings and interpretation\n\n### Materials and verification scope\n\nReviewed all four notebooks, their stored text outputs, preprocessing and model utilities, ingestion code, v2 audit helpers/configuration/tests, README files, the normalized data, and the saved prediction CSVs. Saved pickle files were inventoried but not executed. The original report linked through Canvas is not locally present; its contents were not available. Claims attributed to absent `notes/` files in the existing audit cannot be independently verified from those files.\n\nThe locally supplied data contain **42,179 rows and 11 columns**, Binance BTCUSDT only. Nonmissing message-arrival timestamps span **2020-01-01 00:59:57 UTC through 2024-10-17 23:59:59 UTC**. There are **5,256 distinct upcoming funding-event timestamps**. These are event identifiers, not 5,256 independently verified settled rates. The dataset is an hourly-style reduction of derivative-ticker messages, not a transaction tape, order book, or authoritative settlement ledger.",
+      "path": "demo/docs/historical-claims.md",
+      "locator": "lines 112–165",
+      "excerpt": "## notes-models\n\nOriginal source: `notes/06_ml_models.md`, lines 11–78.\n\n> ## Model 1: Direction Prediction\n> Goal: predict whether the next funding rate moves up or down.\n>\n> Models:\n> - Logistic Regression:\n>   - Baseline classifier.\n>   - Interpretable and fast.\n>   - Assumes a mostly linear relationship between features and log-odds.\n>   - Report result: accuracy about `0.8026`, F1 about `0.6589`; ROC AUC not reported in table.\n> - Random Forest Classifier:\n>   - Nonlinear classifier.\n>   - Handles interactions and threshold effects.\n>   - Report result: tuned RF F1 about `0.7142`, ROC AUC about `0.8718`; report text also notes F1 about `71.27%`.\n>   - Chosen because F1/recall behavior was better for the imbalanced direction task.\n>\n> ## Model 2: Volatility Prediction\n> Goal: estimate uncertainty/risk intensity, not exact direction.\n>\n> Models:\n> - GARCH(1,1): baseline volatility clustering.\n> - EGARCH: asymmetric shock modeling.\n> - GJR-GARCH: leverage/asymmetric volatility effects.\n> - GJR-GARCH(1,1) AR(2): best report-backed model by AIC/BIC.\n>\n> Report-backed result:\n> - Best model: `GJR-GARCH(1,1) AR(2)`.\n> - AIC about `-732755.679`.\n> - BIC about `-732695.682`.\n> - Forecasted conditional variances increased over five steps, indicating rising uncertainty.\n>\n> ## Model 3: Exact Funding-Rate Prediction\n> Goal: predict the next continuous funding-rate value.\n>\n> Models:\n> - Random Forest Regressor:\n>   - Strong nonlinear baseline.\n>   - Report table: RFR R2 `0.96`, MSE `0.0000023`.\n>   - Current `predictions_RFR.csv` recomputes near R2 `0.975`; needs verification against report scaling and split.\n> - SARIMAX:\n>   - Time-series regression with exogenous variables.\n>   - Report table: SARIMAX R2 `0.925`, MSE `0.0000112`.\n>   - Report narrative also mentions about `97.5%` R2 in some places.\n>   - Current `predictions_SARIMAX.csv` appears scale-mismatched; needs verification.\n>\n> ## Baseline Analysis A\n> - Linear Regression 1:\n>   - Report/notebook result: R2 about `0.132`, MSE about `5.36e-08`.\n> - Linear Regression 2:\n>   - Report/notebook result: R2 about `0.284`, MSE about `4.42e-08`.\n> - Random Forest:",
       "evidenceType": "Reported in project notes"
     },
     {
       "id": "v2-readme-status",
-      "path": "v2/README.md",
-      "locator": "lines 142–165",
-      "excerpt": "## Status\n\n| Phase | Scope | State |\n|---|---|---|\n| 0 | Scaffolding, `config.py`, `legacy.py`, `00_audit_v1.ipynb` | **Complete** |\n| 1 | `timebase.py`, `settlement.py`, notebooks 01–02 | Not started |\n| 2 | `baselines.py`, `metrics.py`, notebook 03 | Not started |\n| 3 | `features.py`, `validate.py`, notebook 04, tests | Not started |\n| 4 | `splits.py`, notebook 05 | Not started |\n| 5 | Economics and findings, notebooks 06–07 | Not started |\n| 6 | Tardis re-pull of `predicted_funding_rate`, cross-exchange dispersion | **Blocked** — needs `TARDIS_API_KEY` and explicit sign-off before any network call |\n\n### Known limitations\n\n- `predicted_funding_rate` is 100% null in the shipped file, so the most informative\n  formulation of the problem — forecasting the *residual* against the exchange's own\n  published estimate — is unavailable until Phase 6.\n- The data is a single instrument on a single venue. Cross-exchange funding dispersion\n  (OKX, Bybit, Hyperliquid) is the obvious next predictor and is also Phase 6.\n- The audit's Analysis A correction variants reproduce in sign and magnitude but not to\n  the quoted decimal; see the discrepancy note in §12 of the audit notebook.\n\n---\n",
-      "evidenceType": "Reported in project notes"
+      "path": "v2/docs/STUDY.md",
+      "locator": "lines 71–89",
+      "excerpt": "## Results and limitations\n\nOn 1,889 common events, four-hour indication MAE is 0.246866 bp, ridge MAE is\n0.238253 bp and RF MAE is 0.232464 bp. The primary ridge gain is 0.008613 bp with\n95% interval [-0.007970, 0.028633] bp: positive primary improvement is not\nestablished. One-hour RF gain is 0.019581 bp, secondary Holm p=0.013797.\n\nThe complete independent execution matches all 248,752 forecasts, 352 fold\nrecords and the numerical tables within the documented tolerance. This is\nsame-machine computational reproduction, not independently collected evidence.\nThe [receipts and manifests](../results/settlement_study_v2_1/README.md) bind\nsources, frozen implementation, parameters and saved outputs.\n\nOriginal hourly aggregation lacks verified message-level provenance; publication\ndelay is assumed. Redistribution rights remain unresolved. Fresh-time/external\nreplication, exact closest-paper verification, DAR replication and full\nseed/window/tail robustness remain outstanding. Neither forecast errors nor a\npositive statistical comparison establish trading profit or market efficiency.\n",
+      "evidenceType": "Completed study"
     },
     {
       "id": "v2-readme-claims",
-      "path": "v2/README.md",
-      "locator": "lines 26–51",
-      "excerpt": "## What the audit found\n\n`notebooks/00_audit_v1.ipynb` reproduces 51 of 55 measured claims about the v1 build\ndirectly from the raw data and the committed result CSVs. The four exceptions are\nrecorded as discrepancies in the notebook rather than quietly reconciled.\n\nThe headline findings:\n\n| # | Finding | Evidence |\n|---|---|---|\n| 1 | Model 3's design matrix contains a closed-form reconstruction of its own target, `fr(t) = 3·ma3 − lag1 − lag2`. The closed form scores **0.9801**, beating the trained model's **0.9750** | §7 |\n| 2 | SARIMAX is reported at R² = 0.925; recomputed from the CSV v1 itself wrote, it is **−4.807**. `.predict(start, end)` past the sample is a 7,622-step forecast, scored as if one-step | §8 |\n| 3 | Analysis A's 0.936 uses a contemporaneous target, a rolling window containing that target, and a shuffled split on a series with lag-1 autocorrelation 0.9887 | §6 |\n| 4 | No baseline was ever computed. Naive persistence alone scores **0.937** on the same test set | §7 |\n| 5 | The `timestamp` column is synthetic — a manufactured hourly grid that drifts **130 hours** from the exchange clock, matching the true hour-of-day only 9.2% of the time | §2 |\n| 6 | `bfill()` on the full frame fills **8,531 cells** from future observations before any split | §3 |\n| 7 | Outlier removal plus whole-frame `fillna(0)` rewrites **1,118 real funding observations** averaging 12.44 bp as exactly zero | §4 |\n| 8 | Three \"model output\" columns in the shipped test set are constant, so Models 1 and 2 contribute nothing to Model 3 | §9 |\n| 9 | The measured edge over persistence is 0.0303 bp against a ~9 bp round trip — **~300× too small** | §10 |\n| 10 | The GARCH selection AIC of −732,756 is a units artefact; the identical fit scores +44,210 under a different scaling | §11 |\n\nThe common thread is finding 4. Every other defect stayed invisible because no metric\nwas ever reported next to a baseline. That is the ordering v2 inverts.\n\n---\n",
-      "evidenceType": "Reported in project notes"
+      "path": "v2/docs/STUDY.md",
+      "locator": "lines 90–100",
+      "excerpt": "## Historical results\n\nThe original notebooks study distinct contemporaneous and next-row targets.\n`3 * ma3 - lag1 - lag2` reconstructs the observable current indication, not the\nnext-row target. Current-indication persistence beats the saved original RF on\npaired errors, despite both having high R². Null following-event estimates,\nconstant saved test columns, AIC magnitude and ADF rejection do not independently\nestablish forecast validity. Original metrics remain separate from settlement\nresults. Local notebook paths were made portable; original numerical outputs,\nmodel artifacts and source data are retained.\n",
+      "evidenceType": "Methodology"
     },
     {
       "id": "v2-planned-modules",
-      "path": "v2/paper_plan/07_implementation_plan.md",
-      "locator": "lines 1–27",
-      "excerpt": "# Implementation plan\n\n## Deliverable boundary\n\nBuild an additive, executable study under `v2/`. This package is the implementation specification; the following modules and commands are **planned**, not currently implemented. Leave original notebooks, utilities, models, data and saved results unchanged. Do not implement the erroneous prohibitions against using the observable current indication or time-to-event features from the older build prompt.\n\n## Proposed modules and contracts\n\n| Proposed path | Responsibility | Interface / acceptance |\n|---|---|---|\n| `v2/src/funding_labels.py` | Cached official archive ingestion | `load_labels(paths) -> labels, manifest, exclusions`; checksum and units required |\n| `v2/src/timebase.py` | Preserve event, arrival and source IDs | `normalize_ticker(raw) -> frame`; no synthetic market clock |\n| `v2/src/settlement.py` | Origin construction and as-of event matching | `build_origin_panel(ticker, labels, spec) -> panel, exclusions`; explicit label-match offsets |\n| `v2/src/features.py` | Causal feature groups and availability lineage | `make_features(panel, history, spec) -> X, lineage`; fit transforms only on training |\n| `v2/src/baselines.py` | Current-indication and settled-history forecasts | All baselines use the same origin and admitted target |\n| `v2/src/forecast_models.py` | Ridge and RF residual fits | Separate horizon models; fitted preprocessing included in model bundle |\n| `v2/src/splits.py` | Expanding monthly cutoffs | Fold manifest with train-label cutoff, validation membership and excluded boundaries |\n| `v2/src/metrics.py` | bp losses, paired gain, block intervals | Explicit rate units and reference model; stable zero-error behavior |\n| `v2/src/validate.py` | Runtime data/time/lineage invariants | Reject future availability, unknown labels, conflicting event keys and nonfinite outputs |\n| `v2/experiments/run_study.py` | Deterministic orchestration | One config -> versioned outputs, manifest, logs and nonzero failure exit |\n| `v2/configs/settlement_study.json` | Protocol specification | Dates, horizons, staleness, publication assumptions, grids, seeds and comparison ledger |\n\nKeep audit-only legacy transformations out of the new feature pipeline. Avoid notebook execution order as a dependency. Existing `config.py` may supply safe paths, but legacy fee constants and HAC settings do not determine the scientific protocol.\n\n## Implementation order\n\n### A. Freeze inputs and definitions",
-      "evidenceType": "Planned"
+      "path": "v2/docs/STUDY.md",
+      "locator": "lines 35–51",
+      "excerpt": "## Models and validation\n\nBaselines are the current indication, last matured settlement, EWMA, training\nmedian and a labeled +1 bp reference. Residual ridge and RF predict the realized\nrate minus the current indication; a history-only ridge predicts the level.\nPreprocessing is fitted on training data only, and regression targets use bp.\n\nInitial history is 2020–2021. Monthly 2022 validation selects EWMA span 3/9/21,\nridge alpha 0.1/1/10/100 and RF depth 3/6/unlimited with leaf minimum 5/20.\nRF uses 300 trees and seed 42. All candidates share 1,083 validation events per\nhorizon; ties follow configured grid order. Selection is frozen before scoring.\n\nEvaluation runs from January 2023 through the final verified 18 October 2024\nevent. Monthly refits use labels available strictly before the fit cutoff. Whole\nevents are partitioned before horizon filtering; exclude decisions preceding the\nfit cutoff. This excludes 12 validation and 22 evaluation boundary events.\n",
+      "evidenceType": "Methodology"
     },
     {
       "id": "v2-pending-results",
-      "path": "v2/paper_plan/09_results_ledger.md",
-      "locator": "lines 23–35",
-      "excerpt": "## New model experiments\n\n| ID | Status | Primary estimate | Interval / test | Required artifact |\n|---|---|---|---|---|\n| E0 full-period panel | PENDING; sample probe only | Not measured | Not applicable | Complete manifest, mapping and exclusions |\n| E1 four-hour ridge/RF | PENDING | Not measured | Not run | Per-event predictions + main table |\n| E2 matched lead-time curve | PENDING | Not measured | Not run | Same-event horizon comparisons |\n| E3 feature/delay ablation | PENDING | Not measured | Not run | Paired ablation outputs |\n| E3b label-proxy sensitivity | PENDING | Not measured | Not run | Identical frozen predictions rescored on matched labels |\n| E4 observable-state/time | PENDING | Not measured | Not run | Counts, conditional gains and uncertainty |\n| E5 robustness | PENDING | Not measured | Not run | Tail/window/seed comparison |\n| E6 fresh-time / DAR replication | PENDING | Not measured | Not run | Locked replication outputs |\n",
-      "evidenceType": "Planned"
+      "path": "v2/docs/STUDY.md",
+      "locator": "lines 71–89",
+      "excerpt": "## Results and limitations\n\nOn 1,889 common events, four-hour indication MAE is 0.246866 bp, ridge MAE is\n0.238253 bp and RF MAE is 0.232464 bp. The primary ridge gain is 0.008613 bp with\n95% interval [-0.007970, 0.028633] bp: positive primary improvement is not\nestablished. One-hour RF gain is 0.019581 bp, secondary Holm p=0.013797.\n\nThe complete independent execution matches all 248,752 forecasts, 352 fold\nrecords and the numerical tables within the documented tolerance. This is\nsame-machine computational reproduction, not independently collected evidence.\nThe [receipts and manifests](../results/settlement_study_v2_1/README.md) bind\nsources, frozen implementation, parameters and saved outputs.\n\nOriginal hourly aggregation lacks verified message-level provenance; publication\ndelay is assumed. Redistribution rights remain unresolved. Fresh-time/external\nreplication, exact closest-paper verification, DAR replication and full\nseed/window/tail robustness remain outstanding. Neither forecast errors nor a\npositive statistical comparison establish trading profit or market efficiency.\n",
+      "evidenceType": "Completed study"
     },
     {
       "id": "v2-feasibility",
-      "path": "v2/paper_plan/05_data_contract_and_feasibility.md",
-      "locator": "lines 35–50",
-      "excerpt": "## Official label feasibility probe\n\nRead-only downloads succeeded for January 2020, June 2022 and March 2024 from the [Binance archive](https://data.binance.vision/?prefix=data/futures/um/monthly/fundingRate/BTCUSDT/). Each ZIP matched its published SHA-256 checksum; the [official repository](https://github.com/binance/binance-public-data#checksum) documents that mechanism. Stored source filenames, URLs and hashes are in [archive_probe.json](evidence/archive_probe.json).\n\nThe three archives contain 276 rows. Their header is `calc_time,funding_interval_hours,last_funding_rate`; all sampled intervals are eight hours. Match to scheduled event IDs only after retaining exact archive times. In the samples, calculation-time offsets from the scheduled hour range from 0 to 25 milliseconds. An exact timestamp join would miss some genuine candidates.\n\nThe diagnostic used a disclosed nearest-hour match within 60 seconds, required unique matches and 00/08/16 UTC alignment, and compared only ticker observations received **before** the scheduled event. This normalization is for label reconciliation, not permission to snap feature arrival times. Tighten/validate the rule over the full history and quarantine ambiguities.\n\n| Month | Archive labels | Matched indications | Final-indication MAE, bp | Largest difference, bp | Differences >0.01 bp |\n|---|---:|---:|---:|---:|---:|\n| 2020-01 | 93 | 92 | 0.004457 | 0.0579 | 14 |\n| 2022-06 | 90 | 90 | 0.006199 | 0.1573 | 9 |\n| 2024-03 | 93 | 93 | 0.010781 | 0.3211 | 24 |\n\nThese discrepancies show why the final ticker observation is not an interchangeable settlement label. They do not show model skill. The months were selected for early/middle/stress coverage; estimates are descriptive and not representative confidence estimates.\n",
-      "evidenceType": "Reported in project notes"
+      "path": "v2/docs/STUDY.md",
+      "locator": "lines 15–34",
+      "excerpt": "## Data and availability\n\nThe source ticker file contains recorded arrivals and an upcoming funding-event\nidentifier. For each origin, select the last same-event observation available at\nor before the origin, with a maximum age of 65 minutes. Never borrow a future\nobservation, invent an observation clock or impute an outcome. Preserve extremes\nand write exclusion reasons and source-row lineage.\n\nOfficial Binance monthly funding ZIPs and checksum files supply realized labels.\nScheduled event time, actual calculation time and assumed label availability are\nseparate. An at-most-one-second reconciliation maps calculation jitter to the\n00:00/08:00/16:00 UTC schedule; ambiguous matches, duplicates or schedule changes\nfail validation. Label availability is calculation time plus five minutes.\n\nThe executed sample uses January 2020–October 2024 archives. December 2019 was\nunavailable; incomplete nine-settlement warm-up is excluded. There are 5,298\nlabels and 5,248 admitted events before evaluation exclusions. Exact 0/5/15-minute\npublication assumptions preserve origin keys, settled-history features and both\nvalidation and evaluation membership in this sample.\n",
+      "evidenceType": "Methodology"
     },
     {
       "id": "v2-backlog",
-      "path": "v2/paper_plan/13_execution_backlog.md",
-      "locator": "lines 17–29",
-      "excerpt": "## Definition of minimum completed study\n\n- [ ] Full-period official settlement labels and exact source manifest.\n- [ ] Causal event-origin panel with exclusion reasons and explicit availability assumptions.\n- [ ] Primary four-hour ridge comparison and secondary RF/baselines.\n- [ ] Matched lead-time comparison at 1/2/4/6 hours.\n- [ ] Controlled feature and one-hour delay ablations.\n- [ ] Paired uncertainty, comparison ledger and valid bounded-negative interpretation.\n- [ ] Observable-state/time analysis if these appear in the contribution claim.\n- [ ] Closest-literature comparison resolves or discloses remaining overlap.\n- [ ] Clean rerun reproduces tables, figures and counts.\n- [ ] Claims distinguish measured effects from hypotheses and economic speculation.\n",
-      "evidenceType": "Planned"
+      "path": "v2/docs/STUDY.md",
+      "locator": "lines 71–89",
+      "excerpt": "## Results and limitations\n\nOn 1,889 common events, four-hour indication MAE is 0.246866 bp, ridge MAE is\n0.238253 bp and RF MAE is 0.232464 bp. The primary ridge gain is 0.008613 bp with\n95% interval [-0.007970, 0.028633] bp: positive primary improvement is not\nestablished. One-hour RF gain is 0.019581 bp, secondary Holm p=0.013797.\n\nThe complete independent execution matches all 248,752 forecasts, 352 fold\nrecords and the numerical tables within the documented tolerance. This is\nsame-machine computational reproduction, not independently collected evidence.\nThe [receipts and manifests](../results/settlement_study_v2_1/README.md) bind\nsources, frozen implementation, parameters and saved outputs.\n\nOriginal hourly aggregation lacks verified message-level provenance; publication\ndelay is assumed. Redistribution rights remain unresolved. Fresh-time/external\nreplication, exact closest-paper verification, DAR replication and full\nseed/window/tail robustness remain outstanding. Neither forecast errors nor a\npositive statistical comparison establish trading profit or market efficiency.\n",
+      "evidenceType": "Remaining limitations"
     },
     {
       "id": "old-audit-identity",
@@ -1914,7 +1868,7 @@
       "id": "v2-source-inventory",
       "path": "v2/src/",
       "locator": "Python source-file inventory",
-      "excerpt": "v2/src/__init__.py\nv2/src/audit.py\nv2/src/config.py\nv2/src/legacy.py",
+      "excerpt": "v2/src/__init__.py\nv2/src/audit.py\nv2/src/baselines.py\nv2/src/config.py\nv2/src/evaluation.py\nv2/src/features.py\nv2/src/forecast_models.py\nv2/src/funding_labels.py\nv2/src/legacy.py\nv2/src/metrics.py\nv2/src/provenance.py\nv2/src/reporting.py\nv2/src/settlement.py\nv2/src/splits.py\nv2/src/study_store.py\nv2/src/timebase.py\nv2/src/validate.py",
       "evidenceType": "Current repository inspection"
     },
     {
@@ -1936,8 +1890,21 @@
     "v2Sources": [
       "v2/src/__init__.py",
       "v2/src/audit.py",
+      "v2/src/baselines.py",
       "v2/src/config.py",
-      "v2/src/legacy.py"
+      "v2/src/evaluation.py",
+      "v2/src/features.py",
+      "v2/src/forecast_models.py",
+      "v2/src/funding_labels.py",
+      "v2/src/legacy.py",
+      "v2/src/metrics.py",
+      "v2/src/provenance.py",
+      "v2/src/reporting.py",
+      "v2/src/settlement.py",
+      "v2/src/splits.py",
+      "v2/src/study_store.py",
+      "v2/src/timebase.py",
+      "v2/src/validate.py"
     ],
     "modelFiles": [
       "models/model1.py",

@@ -1,0 +1,20 @@
+[
+  {
+    "label_delay_minutes": 0,
+    "same_origin_keys": true,
+    "identical_settled_features": true,
+    "identical_fold_membership": true
+  },
+  {
+    "label_delay_minutes": 5,
+    "same_origin_keys": true,
+    "identical_settled_features": true,
+    "identical_fold_membership": true
+  },
+  {
+    "label_delay_minutes": 15,
+    "same_origin_keys": true,
+    "identical_settled_features": true,
+    "identical_fold_membership": true
+  }
+]
